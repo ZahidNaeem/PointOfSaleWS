@@ -20,7 +20,6 @@ public class ItemRestController {
 
     @GetMapping("all")
     public List<Item> getAllItems() {
-        LOG.info("getAllItems Called");
         final List<Item> items = itemService.getItems();
         return items;
     }

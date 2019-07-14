@@ -1,7 +1,6 @@
 package org.zahid.apps.web.pos.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -14,6 +13,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "XXIM_ITEM_STOCK")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.UUIDGenerator.class, property = "@id")
 @NamedQueries({
         @NamedQuery(name = "ItemStock.findAll", query = "SELECT i FROM ItemStock i"),
         @NamedQuery(name = "ItemStock.findAllByItem", query = "SELECT i FROM ItemStock i where i.item = ?1"),
@@ -49,8 +49,9 @@ public class ItemStock implements Serializable {
     private String remarks;
 
     // bi-directional many-to-one association to Item
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "ITEM_CODE")
+    @JsonManagedReference
     private Item item;
 
     public ItemStock() {

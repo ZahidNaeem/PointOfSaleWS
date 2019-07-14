@@ -14,9 +14,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "XXIM_VOUCHER_HEADER")
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "headerId")
+@JsonIdentityInfo(generator = ObjectIdGenerators.UUIDGenerator.class, property = "@id")
 //@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @NamedQuery(name = "VoucherHeader.findAll", query = "SELECT v FROM VoucherHeader v")
 public class VoucherHeader implements Serializable {

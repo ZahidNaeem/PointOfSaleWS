@@ -1,7 +1,6 @@
 package org.zahid.apps.web.pos.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,6 +12,7 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name = "XXIM_INVOICE_DTL")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.UUIDGenerator.class, property = "@id")
 @NamedQuery(name = "InvoiceDtl.findAll", query = "SELECT i FROM InvoiceDtl i")
 public class InvoiceDtl implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -46,8 +46,9 @@ public class InvoiceDtl implements Serializable {
     private InvoiceMain invoiceMain;
 
     // bi-directional many-to-one association to Item
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "ITEM_CODE")
+    @JsonManagedReference
     private Item item;
 
     public InvoiceDtl() {

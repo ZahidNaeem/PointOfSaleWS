@@ -2,7 +2,6 @@ package org.zahid.apps.web.pos.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
@@ -17,10 +16,11 @@ import java.util.List;
  */
 @Entity
 @Table(name = "XXIM_ITEMS")
-@JsonIdentityInfo(
+/*@JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "itemCode")
+        property = "itemCode")*/
 //@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+//@JsonIdentityInfo(generator = ObjectIdGenerators.UUIDGenerator.class, property = "@id")
 @NamedQueries({
         @NamedQuery(name = "Item.findAll", query = "SELECT i FROM Item i"),
         @NamedQuery(name = "Item.generateID", query = "SELECT coalesce(max(itemCode), 0) + 1 FROM Item i"),
@@ -81,10 +81,12 @@ public class Item implements Serializable {
 
     // bi-directional many-to-one association to InvoiceDtl
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "item")
+    @JsonBackReference
     private List<InvoiceDtl> invoiceDtls;
 
     // bi-directional many-to-one association to ItemStock
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "item")
+    @JsonBackReference
     private List<ItemStock> itemStocks;
 
     public Item() {
