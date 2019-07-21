@@ -14,7 +14,6 @@ import org.zahid.apps.web.pos.repo.ItemRepo;
 import org.zahid.apps.web.pos.service.ItemService;
 import org.zahid.apps.web.pos.utils.Miscellaneous;
 
-import javax.persistence.EntityNotFoundException;
 import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.List;

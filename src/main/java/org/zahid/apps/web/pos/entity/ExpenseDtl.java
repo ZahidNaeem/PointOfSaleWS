@@ -1,5 +1,8 @@
 package org.zahid.apps.web.pos.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -7,10 +10,11 @@ import java.sql.Timestamp;
 
 /**
  * The persistent class for the XXIM_EXPENSE_DTL database table.
- * 
+ *
  */
 @Entity
 @Table(name = "XXIM_EXPENSE_DTL")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "expDtlId")
 @NamedQuery(name = "ExpenseDtl.findAll", query = "SELECT e FROM ExpenseDtl e")
 public class ExpenseDtl implements Serializable {
 	private static final long serialVersionUID = 1L;

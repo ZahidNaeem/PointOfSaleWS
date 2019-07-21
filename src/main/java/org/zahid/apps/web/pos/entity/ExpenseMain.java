@@ -14,7 +14,8 @@ import java.util.List;
  */
 @Entity
 @Table(name = "XXIM_EXPENSE_MAIN")
-@JsonIdentityInfo(generator = ObjectIdGenerators.UUIDGenerator.class, property = "@id")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.UUIDGenerator.class, property = "@id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "expMainId")
 //@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @NamedQuery(name = "ExpenseMain.findAll", query = "SELECT e FROM ExpenseMain e")
 public class ExpenseMain implements Serializable {

@@ -1,5 +1,8 @@
 package org.zahid.apps.web.pos.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -11,6 +14,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "XXIM_VOUCHER_LINE")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "lineId")
 @NamedQuery(name = "VoucherLine.findAll", query = "SELECT v FROM VoucherLine v")
 public class VoucherLine implements Serializable {
     private static final long serialVersionUID = 1L;

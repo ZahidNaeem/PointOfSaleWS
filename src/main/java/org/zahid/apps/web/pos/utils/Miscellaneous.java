@@ -81,7 +81,7 @@ public class Miscellaneous {
         try {
             String sql = "BEGIN :CNT := XXIM_RECORD_EXISTS (:PTABLE,:PCOLUMN,:PID); END;";
 //            System.out.println("SF Result: " + sessionFactory.getCurrentSession().createSQLQuery(sql).setParameter("PTABLE", table).setParameter("PCOLUMN", column).setParameter("PID", id).getSingleResult());
-            Connection conn = DB.getInstance("zahid", "1521", "pdborcl01", "xxim", "x").getConnection();
+            Connection conn = DB.getInstance("localhost", "3306", "xxim", "root", "1234").getConnection();
             CallableStatement stmt = conn.prepareCall(sql);
             stmt.registerOutParameter("CNT", Types.INTEGER);
             stmt.setString("PTABLE", table);

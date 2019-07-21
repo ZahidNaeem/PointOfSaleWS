@@ -11,12 +11,12 @@ public class DB {
     private static Connection connection = null;
 
     private DB(String server, String port, String service, String username, String password) throws SQLException, ClassNotFoundException {
-        Class.forName("oracle.jdbc.driver.OracleDriver");
+        Class.forName("com.mysql.jdbc.Driver");
         Properties connectionProps = new Properties();
         connectionProps.put("user", username);
         connectionProps.put("password", password);
         connection = DriverManager.getConnection(
-                "jdbc:oracle:thin:@" + server + ":" + port + "/" + service, connectionProps);
+                "jdbc:mysql://" + server + ":" + port + "/" + service + "?useSSL=false", connectionProps);
     }
 
     public Connection getConnection() throws SQLException {
