@@ -3,10 +3,7 @@ package org.zahid.apps.web.pos.controller;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.zahid.apps.web.pos.dto.ItemDTO;
 import org.zahid.apps.web.pos.entity.Item;
 import org.zahid.apps.web.pos.entity.NavigationDtl;
@@ -101,8 +98,30 @@ public class ItemRestController {
     }
 
     @GetMapping("{id}")
-    public Item getItemById(@PathVariable("id") Long id) {
+    public Item getItemById(@PathVariable("id") final Long id) {
         return itemService.findById(id);
+    }
+
+    @PostMapping(path = "/", consumes = "application/json", produces = "application/json")
+    public Item saveItem(@RequestBody final Item item) {
+        item.setItemCode(itemService.generateID() >= (getAllItems().size() + 1) ? itemService.generateID() : (getAllItems().size() + 1));
+        return itemService.save(item);
+    }
+
+    @PutMapping(path = "/", consumes = "application/json", produces = "application/json")
+    public Item updateItem(@RequestBody final Item item) {
+        return itemService.save(item);
+    }
+
+    @DeleteMapping("{id}")
+    public boolean deleteItem(@PathVariable("id") Long id) {
+        try {
+            itemService.deleteById(id);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     private NavigationDtl resetNavigation() {

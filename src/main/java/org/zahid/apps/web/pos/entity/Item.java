@@ -28,6 +28,7 @@ public class Item implements Serializable {
     @Id
 //    @SequenceGenerator(name = "XXIM_ITEMS_ITEMCODE_GENERATOR", sequenceName = "XXIM_ITEMS_ITEMCODE_GENERATOR", allocationSize = 1)
 //    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "XXIM_ITEMS_ITEMCODE_GENERATOR")
+//    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ITEM_CODE")
     private Long itemCode;
 

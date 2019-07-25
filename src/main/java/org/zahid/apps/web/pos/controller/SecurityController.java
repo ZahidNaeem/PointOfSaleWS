@@ -14,7 +14,7 @@ public class SecurityController {
     public String username;
 
     public String getUsername() {
-        String user = SecurityContextHolder.getContext().getAuthentication().getName();
+        String user = "Zahid"; //SecurityContextHolder.getContext().getAuthentication().getName();
         return user;
     }
 
