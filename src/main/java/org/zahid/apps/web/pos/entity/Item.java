@@ -16,7 +16,7 @@ import java.util.List;
 @Entity
 @Table(name = "XXIM_ITEMS")
 //@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "itemCode")
+@JsonIdentityInfo(scope = Item.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "itemCode")
 @NamedQueries({
         @NamedQuery(name = "Item.findAll", query = "SELECT i FROM Item i"),
         @NamedQuery(name = "Item.generateID", query = "SELECT coalesce(max(itemCode), 0) + 1 FROM Item i"),

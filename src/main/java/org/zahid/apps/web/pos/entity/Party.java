@@ -14,7 +14,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "XXIM_PARTIES")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "partyCode")
+@JsonIdentityInfo(scope = Party.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "partyCode")
 //@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @NamedQueries({
         @NamedQuery(name = "Party.findAll", query = "SELECT p FROM Party p"),

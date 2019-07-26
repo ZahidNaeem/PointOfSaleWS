@@ -14,7 +14,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "XXIM_VOUCHER_LINE")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "lineId")
+@JsonIdentityInfo(scope = VoucherLine.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "lineId")
 @NamedQuery(name = "VoucherLine.findAll", query = "SELECT v FROM VoucherLine v")
 public class VoucherLine implements Serializable {
     private static final long serialVersionUID = 1L;

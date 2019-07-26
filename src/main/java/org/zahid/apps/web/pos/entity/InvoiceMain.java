@@ -15,7 +15,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "XXIM_INVOICE_MAIN")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "invNum")
+@JsonIdentityInfo(scope = InvoiceMain.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "invNum")
 //@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @NamedQuery(name = "InvoiceMain.findAll", query = "SELECT i FROM InvoiceMain i")
 public class InvoiceMain implements Serializable {

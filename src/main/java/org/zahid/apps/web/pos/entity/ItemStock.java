@@ -15,7 +15,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "XXIM_ITEM_STOCK")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "itemStockId")
+@JsonIdentityInfo(scope = ItemStock.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "itemStockId")
 @NamedQueries({
         @NamedQuery(name = "ItemStock.findAll", query = "SELECT i FROM ItemStock i"),
         @NamedQuery(name = "ItemStock.findAllByItem", query = "SELECT i FROM ItemStock i where i.item = ?1"),
