@@ -20,7 +20,7 @@ public interface ItemStockService {
 
     List<ItemStock> getItemStockListFromDB(Item item);
 
-    ItemStock getStockById(Long id);
+    ItemStock findById(Long id);
 
     List<ItemStock> addStockToStockList(ItemStock stock);
 

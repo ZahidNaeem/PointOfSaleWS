@@ -1,5 +1,9 @@
 package org.zahid.apps.web.pos.service.impl;
 
+import java.sql.Timestamp;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -9,12 +13,9 @@ import org.springframework.stereotype.Service;
 import org.zahid.apps.web.pos.controller.SecurityController;
 import org.zahid.apps.web.pos.entity.Item;
 import org.zahid.apps.web.pos.entity.ItemStock;
+import org.zahid.apps.web.pos.exception.ItemStockNotFoundException;
 import org.zahid.apps.web.pos.repo.ItemStockRepo;
 import org.zahid.apps.web.pos.service.ItemStockService;
-
-import java.sql.Timestamp;
-import java.util.List;
-import java.util.Set;
 
 @Service
 public class ItemStockServiceImpl implements ItemStockService {
@@ -56,8 +57,12 @@ public class ItemStockServiceImpl implements ItemStockService {
     }
 
     @Override
-    public ItemStock getStockById(Long id) {
-        return itemStockRepo.getOne(id);
+    public ItemStock findById(Long id) {
+        final Optional<ItemStock> stock = itemStockRepo.findById(id);
+        if (stock.isPresent()) {
+            return stock.get();
+        }
+        throw new ItemStockNotFoundException("Item stock with id " + id + " not found");
     }
 
     //	@Override

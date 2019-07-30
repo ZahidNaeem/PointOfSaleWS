@@ -19,7 +19,7 @@ public class ItemRestController {
 
     private static final Logger LOG = LogManager.getLogger(ItemRestController.class);
     @Autowired
-    ItemService itemService;
+    private ItemService itemService;
 
     private final int[] indx = {-1};
 
