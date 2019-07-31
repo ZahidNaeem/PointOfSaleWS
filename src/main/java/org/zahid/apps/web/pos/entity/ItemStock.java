@@ -1,6 +1,7 @@
 package org.zahid.apps.web.pos.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -16,6 +17,7 @@ import java.util.Date;
 @Entity
 @Table(name = "XXIM_ITEM_STOCK")
 @JsonIdentityInfo(scope = ItemStock.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "itemStockId")
+//@JsonIdentityInfo(scope = ItemStock.class, generator = ObjectIdGenerators.UUIDGenerator.class, property = "@id")
 @NamedQueries({
         @NamedQuery(name = "ItemStock.findAll", query = "SELECT i FROM ItemStock i"),
         @NamedQuery(name = "ItemStock.findAllByItem", query = "SELECT i FROM ItemStock i where i.item = ?1"),
@@ -27,6 +29,7 @@ public class ItemStock implements Serializable {
     @Id
 //    @SequenceGenerator(name = "XXIM_ITEM_STOCK_ITEMSTOCKID_GENERATOR")
 //    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "XXIM_ITEM_STOCK_ITEMSTOCKID_GENERATOR")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ITEM_STOCK_ID")
     private Long itemStockId;
 
@@ -53,6 +56,7 @@ public class ItemStock implements Serializable {
     // bi-directional many-to-one association to Item
     @ManyToOne
     @JoinColumn(name = "ITEM_CODE")
+    @JsonIdentityReference
     private Item item;
 
     public ItemStock() {

@@ -22,8 +22,9 @@ public class InvoiceMain implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @SequenceGenerator(name = "XXIM_INVOICE_MAIN_INVNUM_GENERATOR")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "XXIM_INVOICE_MAIN_INVNUM_GENERATOR")
+    /*@SequenceGenerator(name = "XXIM_INVOICE_MAIN_INVNUM_GENERATOR")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "XXIM_INVOICE_MAIN_INVNUM_GENERATOR")*/
+//    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "INV_NUM")
     private Long invNum;
 

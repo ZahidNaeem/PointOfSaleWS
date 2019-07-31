@@ -16,8 +16,9 @@ public class Groupmember implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @SequenceGenerator(name = "XXUM_GROUPMEMBERS_GMID_GENERATOR")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "XXUM_GROUPMEMBERS_GMID_GENERATOR")
+    /*@SequenceGenerator(name = "XXUM_GROUPMEMBERS_GMID_GENERATOR")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "XXUM_GROUPMEMBERS_GMID_GENERATOR")*/
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "GM_ID")
     private Long gmId;
 

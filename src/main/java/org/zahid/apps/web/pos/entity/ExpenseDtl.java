@@ -10,7 +10,6 @@ import java.sql.Timestamp;
 
 /**
  * The persistent class for the XXIM_EXPENSE_DTL database table.
- *
  */
 @Entity
 @Table(name = "XXIM_EXPENSE_DTL")
@@ -21,8 +20,9 @@ public class ExpenseDtl implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @SequenceGenerator(name = "XXIM_EXPENSE_DTL_EXPDTLID_GENERATOR")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "XXIM_EXPENSE_DTL_EXPDTLID_GENERATOR")
+/*    @SequenceGenerator(name = "XXIM_EXPENSE_DTL_EXPDTLID_GENERATOR")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "XXIM_EXPENSE_DTL_EXPDTLID_GENERATOR")*/
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "EXP_DTL_ID")
     private Long expDtlId;
 

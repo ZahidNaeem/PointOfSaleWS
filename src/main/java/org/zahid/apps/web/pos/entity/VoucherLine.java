@@ -20,8 +20,9 @@ public class VoucherLine implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @SequenceGenerator(name = "XXIM_VOUCHER_LINE_LINEID_GENERATOR")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "XXIM_VOUCHER_LINE_LINEID_GENERATOR")
+    /*@SequenceGenerator(name = "XXIM_VOUCHER_LINE_LINEID_GENERATOR")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "XXIM_VOUCHER_LINE_LINEID_GENERATOR")*/
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "LINE_ID")
     private Long lineId;
 

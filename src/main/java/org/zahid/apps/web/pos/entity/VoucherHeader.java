@@ -21,8 +21,9 @@ public class VoucherHeader implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @SequenceGenerator(name = "XXIM_VOUCHER_HEADER_HEADERID_GENERATOR")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "XXIM_VOUCHER_HEADER_HEADERID_GENERATOR")
+    /*@SequenceGenerator(name = "XXIM_VOUCHER_HEADER_HEADERID_GENERATOR")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "XXIM_VOUCHER_HEADER_HEADERID_GENERATOR")*/
+//    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "HEADER_ID")
     private Long headerId;
 

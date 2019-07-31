@@ -1,6 +1,7 @@
 package org.zahid.apps.web.pos.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
@@ -17,6 +18,7 @@ import java.util.List;
 @Table(name = "XXIM_ITEMS")
 //@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @JsonIdentityInfo(scope = Item.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "itemCode")
+//@JsonIdentityInfo(scope = Item.class, generator = ObjectIdGenerators.UUIDGenerator.class, property = "@id")
 @NamedQueries({
         @NamedQuery(name = "Item.findAll", query = "SELECT i FROM Item i"),
         @NamedQuery(name = "Item.generateID", query = "SELECT coalesce(max(itemCode), 0) + 1 FROM Item i"),
@@ -28,7 +30,7 @@ public class Item implements Serializable {
     @Id
 //    @SequenceGenerator(name = "XXIM_ITEMS_ITEMCODE_GENERATOR", sequenceName = "XXIM_ITEMS_ITEMCODE_GENERATOR", allocationSize = 1)
 //    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "XXIM_ITEMS_ITEMCODE_GENERATOR")
-//    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ITEM_CODE")
     private Long itemCode;
 
@@ -82,6 +84,7 @@ public class Item implements Serializable {
 
     // bi-directional many-to-one association to ItemStock
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "item")
+    @JsonIdentityReference
     private List<ItemStock> itemStocks;
 
     public Item() {

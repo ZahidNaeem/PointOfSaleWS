@@ -14,8 +14,9 @@ public class User implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @SequenceGenerator(name = "XXUM_USERS_UID_GENERATOR")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "XXUM_USERS_UID_GENERATOR")
+    /*@SequenceGenerator(name = "XXUM_USERS_UID_GENERATOR")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "XXUM_USERS_UID_GENERATOR")*/
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "U_ID")
     private Long uId;
 

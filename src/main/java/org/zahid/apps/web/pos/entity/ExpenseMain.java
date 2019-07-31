@@ -22,8 +22,9 @@ public class ExpenseMain implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @SequenceGenerator(name = "XXIM_EXPENSE_MAIN_EXPMAINID_GENERATOR")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "XXIM_EXPENSE_MAIN_EXPMAINID_GENERATOR")
+    /*@SequenceGenerator(name = "XXIM_EXPENSE_MAIN_EXPMAINID_GENERATOR")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "XXIM_EXPENSE_MAIN_EXPMAINID_GENERATOR")*/
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "EXP_MAIN_ID")
     private Long expMainId;
 

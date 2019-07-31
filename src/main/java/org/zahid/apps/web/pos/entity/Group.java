@@ -14,8 +14,9 @@ public class Group implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @SequenceGenerator(name = "XXUM_GROUPS_GID_GENERATOR")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "XXUM_GROUPS_GID_GENERATOR")
+    /*@SequenceGenerator(name = "XXUM_GROUPS_GID_GENERATOR")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "XXUM_GROUPS_GID_GENERATOR")*/
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "G_ID")
     private Long gId;
 

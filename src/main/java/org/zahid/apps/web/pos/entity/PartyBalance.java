@@ -25,6 +25,7 @@ public class PartyBalance implements Serializable {
     @Id
 //    @SequenceGenerator(name = "XXIM_PARTY_BALANCE_PARTYBALANCEID_GENERATOR")
 //    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "XXIM_PARTY_BALANCE_PARTYBALANCEID_GENERATOR")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "PARTY_BALANCE_ID")
     private Long partyBalanceId;
 

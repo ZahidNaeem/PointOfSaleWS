@@ -21,8 +21,9 @@ public class InvoiceDtl implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @SequenceGenerator(name = "XXIM_INVOICE_DTL_INVDTLNUM_GENERATOR")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "XXIM_INVOICE_DTL_INVDTLNUM_GENERATOR")
+    /*@SequenceGenerator(name = "XXIM_INVOICE_DTL_INVDTLNUM_GENERATOR")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "XXIM_INVOICE_DTL_INVDTLNUM_GENERATOR")*/
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "INV_DTL_NUM")
     private Long invDtlNum;
 
