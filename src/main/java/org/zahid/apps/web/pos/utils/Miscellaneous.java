@@ -79,17 +79,17 @@ public class Miscellaneous {
     public static int exists(String table, String column, Long id) {
         int result = 0;
         try {
-            String sql = "BEGIN :CNT := XXIM_RECORD_EXISTS (:PTABLE,:PCOLUMN,:PID); END;";
+            String sql = "{CALL XXIM_RECORD_EXISTS (?,?,?,?)}";
 //            System.out.println("SF Result: " + sessionFactory.getCurrentSession().createSQLQuery(sql).setParameter("PTABLE", table).setParameter("PCOLUMN", column).setParameter("PID", id).getSingleResult());
             Connection conn = DB.getInstance("localhost", "3306", "xxim", "root", "1234").getConnection();
             CallableStatement stmt = conn.prepareCall(sql);
-            stmt.registerOutParameter("CNT", Types.INTEGER);
-            stmt.setString("PTABLE", table);
-            stmt.setString("PCOLUMN", column);
-            stmt.setLong("PID", id);
+            stmt.registerOutParameter(4, Types.INTEGER);
+            stmt.setString(1, table);
+            stmt.setString(2, column);
+            stmt.setLong(3, id);
             stmt.execute();
-            result = stmt.getInt("CNT");
-            System.out.println("Result: " + result);
+            result = stmt.getInt(4);
+            LOG.info("Result: ", result);
             conn.close();
         } catch (SQLException e) {
             e.printStackTrace();

@@ -16,12 +16,13 @@ public class ItemStockMapper {
     final ItemStock stock = new ItemStock();
     stock.setItemStockId(dto.getItemStockId());
     stock.setItem(itemService.findById(dto.getItem()));
+    stock.setItemStockDate(dto.getItemStockDate());
+    stock.setQnty(dto.getQnty());
+    stock.setRemarks(dto.getRemarks());
     stock.setCreatedBy(dto.getCreatedBy());
     stock.setCreationDate(dto.getCreationDate());
     stock.setLastUpdatedBy(dto.getLastUpdatedBy());
     stock.setLastUpdateDate(dto.getLastUpdateDate());
-    stock.setQnty(dto.getQnty());
-    stock.setRemarks(dto.getRemarks());
     return stock;
   }
 

@@ -1,6 +1,7 @@
 package org.zahid.apps.web.pos.controller;
 
 import java.util.HashSet;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,17 +21,17 @@ import java.util.Set;
 @RequestMapping("stock")
 public class ItemStockRestController {
 
-  private static final Logger LOG = LogManager.getLogger(ItemRestController.class);
-  @Autowired
-  private ItemStockService stockService;
+    private static final Logger LOG = LogManager.getLogger(ItemRestController.class);
+    @Autowired
+    private ItemStockService stockService;
 
-  @Autowired
-  private ItemStockMapper stockMapper;
+    @Autowired
+    private ItemStockMapper stockMapper;
 
-  @GetMapping("all")
-  public List<ItemStock> findAll() {
-    return stockService.getItemStockList();
-  }
+    @GetMapping("all")
+    public List<ItemStock> findAll() {
+        return stockService.getItemStockList();
+    }
 
   /*@GetMapping("first")
   public ItemDTO first() {
@@ -60,55 +61,58 @@ public class ItemStockRestController {
     return getItemDTO(findAll(), indx[0]);
   }*/
 
-  @GetMapping("{id}")
-  public ItemStock findById(@PathVariable("id") final Long id) {
-    return stockService.findById(id);
-  }
+    @GetMapping("{id}")
+    public ItemStock findById(@PathVariable("id") final Long id) {
+        return stockService.findById(id);
+    }
 
-  @PostMapping(path = "save", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public ItemStock save(@RequestBody final ItemStock stock) {
+    @PostMapping(path = "save", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ItemStock save(@RequestBody final ItemStock stock) {
         /*if (null == stock.getItemStockId()) {
             stock.setItemStockId(stockService.generateID() >= (findAll().size() + 1) ? stockService.generateID() : (findAll().size() + 1));
         }*/
-    return stockService.save(stock);
-  }
-
-  @PostMapping(path = "saveAll", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public List<ItemStock> saveAll(@RequestBody final Set<ItemStockDTO> stockDTO) {
-    final Set<ItemStock> stocks = new HashSet<>();
-    stockDTO.forEach(dto -> {
-      stocks.add(stockMapper.fromItemStockDTO(dto));
-    });
-    return stockService.save(stocks);
-  }
-
-  @DeleteMapping("delete/{id}")
-  public boolean deleteById(@PathVariable("id") final Long id) {
-    if (!stockService.exists(id)) {
-      throw new IllegalArgumentException("Item stock with id: " + id + " does not exist");
-    } else {
-      try {
-        stockService.deleteById(id);
-        return true;
-      } catch (Exception e) {
-        e.printStackTrace();
-        return false;
-      }
+        return stockService.save(stock);
     }
-  }
 
-  @DeleteMapping(path = "delete", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public boolean delete(@RequestBody final ItemStock stock) {
-    if (null == stock || null == stock.getItemStockId() || !stockService.exists(stock.getItemStockId())) {
-      throw new IllegalArgumentException("Item stock does not exist");
-    } else {
-      try {
-        stockService.delete(stock);
-        return true;
-      } catch (Exception e) {
-        e.printStackTrace();
-        return false;
-      }
+    @PostMapping(path = "saveAll", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<ItemStock> saveAll(@RequestBody final Set<ItemStockDTO> stockDTO) {
+        final Set<ItemStock> stocks = new HashSet<>();
+        stockDTO.forEach(dto -> {
+            final ItemStock stock = stockMapper.fromItemStockDTO(dto);
+            LOG.info("Stock Date: ", stock.getItemStockDate());
+            LOG.info("DTO Stock Date: ", stock.getItemStockDate());
+            stocks.add(stock);
+        });
+        return stockService.save(stocks);
     }
-  }
+
+    @DeleteMapping("delete/{id}")
+    public boolean deleteById(@PathVariable("id") final Long id) {
+        if (!stockService.exists(id)) {
+            throw new IllegalArgumentException("Item stock with id: " + id + " does not exist");
+        } else {
+            try {
+                stockService.deleteById(id);
+                return true;
+            } catch (Exception e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
+    }
+
+    @DeleteMapping(path = "delete", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public boolean delete(@RequestBody final ItemStock stock) {
+        if (null == stock || null == stock.getItemStockId() || !stockService.exists(stock.getItemStockId())) {
+            throw new IllegalArgumentException("Item stock does not exist");
+        } else {
+            try {
+                stockService.delete(stock);
+                return true;
+            } catch (Exception e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
+    }
 }
