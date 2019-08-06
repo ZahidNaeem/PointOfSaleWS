@@ -79,8 +79,6 @@ public class ItemStockRestController {
         final Set<ItemStock> stocks = new HashSet<>();
         stockDTO.forEach(dto -> {
             final ItemStock stock = stockMapper.fromItemStockDTO(dto);
-            LOG.info("Stock Date: ", stock.getItemStockDate());
-            LOG.info("DTO Stock Date: ", stock.getItemStockDate());
             stocks.add(stock);
         });
         return stockService.save(stocks);
