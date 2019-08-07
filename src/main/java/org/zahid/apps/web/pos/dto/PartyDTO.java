@@ -1,15 +1,15 @@
 package org.zahid.apps.web.pos.dto;
 
-import org.zahid.apps.web.pos.entity.Item;
 import org.zahid.apps.web.pos.entity.NavigationDtl;
+import org.zahid.apps.web.pos.entity.Party;
 
 import java.io.Serializable;
 
-public class ItemDTO implements Serializable {
+public class PartyDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private NavigationDtl navigationDtl;
-    private Item item;
+    private Party party;
 
     public NavigationDtl getNavigationDtl() {
         return navigationDtl;
@@ -19,11 +19,11 @@ public class ItemDTO implements Serializable {
         this.navigationDtl = navigationDtl;
     }
 
-    public Item getItem() {
-        return item;
+    public Party getParty() {
+        return party;
     }
 
-    public void setItem(Item item) {
-        this.item = item;
+    public void setParty(Party party) {
+        this.party = party;
     }
 }

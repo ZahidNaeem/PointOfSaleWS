@@ -1,10 +1,12 @@
 package org.zahid.apps.web.pos.dto;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Date;
 
-public class ItemStockDTO {
+public class ItemStockDTO implements Serializable {
+  private static final long serialVersionUID = 1L;
 
   private Long itemStockId;
 
@@ -94,5 +96,29 @@ public class ItemStockDTO {
 
   public void setItem(Long item) {
     this.item = item;
+  }
+
+  @Override
+  public int hashCode() {
+    int hash = 0;
+    hash += (itemStockId != null ? itemStockId.hashCode() : 0);
+    return hash;
+  }
+
+  @Override
+  public boolean equals(Object object) {
+    if (!(object instanceof ItemStockDTO)) {
+      return false;
+    }
+    ItemStockDTO other = (ItemStockDTO) object;
+    if ((this.itemStockId == null && other.itemStockId != null) || (this.itemStockId != null && !this.itemStockId.equals(other.itemStockId))) {
+      return false;
+    }
+    return true;
+  }
+
+  @Override
+  public String toString() {
+    return "org.zahid.apps.web.pos.dto.ItemStockDTO[ itemStockId=" + itemStockId + " ]";
   }
 }

@@ -33,34 +33,6 @@ public class ItemStockRestController {
         return stockService.getItemStockList();
     }
 
-  /*@GetMapping("first")
-  public ItemDTO first() {
-    indx[0] = 0;
-    LOG.info("Index in first(): {}", indx[0]);
-    return getItemDTO(findAll(), indx[0]);
-  }
-
-  @GetMapping("previous")
-  public ItemDTO previousItem() {
-    indx[0]--;
-    LOG.info("Index in previous(): {}", indx[0]);
-    return getItemDTO(findAll(), indx[0]);
-  }
-
-  @GetMapping("next")
-  public ItemDTO nextItem() {
-    indx[0]++;
-    LOG.info("Index in next(): {}", indx[0]);
-    return getItemDTO(findAll(), indx[0]);
-  }
-
-  @GetMapping("last")
-  public ItemDTO lastItem() {
-    indx[0] = findAll().size() - 1;
-    LOG.info("Index in last(): {}", indx[0]);
-    return getItemDTO(findAll(), indx[0]);
-  }*/
-
     @GetMapping("{id}")
     public ItemStock findById(@PathVariable("id") final Long id) {
         return stockService.findById(id);

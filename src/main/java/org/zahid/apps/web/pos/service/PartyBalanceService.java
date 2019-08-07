@@ -20,7 +20,7 @@ public interface PartyBalanceService {
 
     List<PartyBalance> getPartyBalanceListFromDB(Party party);
 
-    PartyBalance getBalanceById(Long id);
+    PartyBalance findById(Long id);
 
     List<PartyBalance> addBalanceToBalanceList(PartyBalance balance);
 
