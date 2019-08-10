@@ -63,6 +63,16 @@ public class ItemRestController {
         return getItemDTO(findAll(), indx[0]);
     }
 
+    @GetMapping("cats")
+    public Set<String> findAllCategories() {
+        return itemService.getItemCategories();
+    }
+
+    @GetMapping("uoms")
+    public Set<String> findAllUOMs() {
+        return itemService.getItemUOM();
+    }
+
     @PostMapping(path = "save", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ItemDTO save(@RequestBody final Item item) {
         /*if (null == item.getItemCode()) {
