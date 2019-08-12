@@ -31,8 +31,11 @@ public class PartyRestController {
     }
 
     @GetMapping("{id}")
-    public Party findById(@PathVariable("id") final Long id) {
-        return partyService.findById(id);
+    public PartyDTO findById(@PathVariable("id") final Long id) {
+        final Party party = partyService.findById(id);
+        indx[0] = findAll().indexOf(party);
+        LOG.info("Index in findById(): {}", indx[0]);
+        return getPartyDTO(findAll(), indx[0]);
     }
 
     @GetMapping("first")

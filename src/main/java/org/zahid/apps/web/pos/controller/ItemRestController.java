@@ -31,8 +31,11 @@ public class ItemRestController {
     }
 
     @GetMapping("{id}")
-    public Item findById(@PathVariable("id") final Long id) {
-        return itemService.findById(id);
+    public ItemDTO findById(@PathVariable("id") final Long id) {
+        final Item item = itemService.findById(id);
+        indx[0] = findAll().indexOf(item);
+        LOG.info("Index in findById(): {}", indx[0]);
+        return getItemDTO(findAll(), indx[0]);
     }
 
     @GetMapping("first")
