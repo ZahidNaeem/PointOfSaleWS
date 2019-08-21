@@ -50,7 +50,7 @@ public class PartyBalanceRestController {
     public List<PartyBalance> saveAll(@RequestBody final Set<PartyBalanceDTO> partyBalanceDTO) {
         final Set<PartyBalance> partyBalances = new HashSet<>();
         partyBalanceDTO.forEach(dto -> {
-            final PartyBalance partyBalance = partyBalanceMapper.fromPartyBalanceDTO(dto);
+            final PartyBalance partyBalance = partyBalanceMapper.partyBalanceDTOToPartyBalance(dto);
             partyBalances.add(partyBalance);
         });
         return partyBalanceService.save(partyBalances);
