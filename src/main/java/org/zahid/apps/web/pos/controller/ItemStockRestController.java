@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.zahid.apps.web.pos.dto.ItemStockDTO;
 import org.zahid.apps.web.pos.entity.ItemStock;
 import org.zahid.apps.web.pos.mapper.ItemStockMapper;
+import org.zahid.apps.web.pos.service.ItemService;
 import org.zahid.apps.web.pos.service.ItemStockService;
 
 
@@ -26,8 +27,12 @@ import org.zahid.apps.web.pos.service.ItemStockService;
 public class ItemStockRestController {
 
   private static final Logger LOG = LogManager.getLogger(ItemRestController.class);
+
   @Autowired
   private ItemStockService stockService;
+
+  @Autowired
+  private ItemService itemService;
 
   @Autowired
   private ItemStockMapper stockMapper;
@@ -54,7 +59,7 @@ public class ItemStockRestController {
   public List<ItemStock> saveAll(@RequestBody final Set<ItemStockDTO> stockDTO) {
     final Set<ItemStock> stocks = new HashSet<>();
     stockDTO.forEach(dto -> {
-      final ItemStock stock = stockMapper.ItemStockDTOToItemStock(dto);
+      final ItemStock stock = stockMapper.ItemStockDTOToItemStock(dto, itemService);
       stocks.add(stock);
     });
     return stockService.save(stocks);

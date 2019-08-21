@@ -1,28 +1,17 @@
 package org.zahid.apps.web.pos.mapper;
 
 import org.mapstruct.Mapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.mapstruct.Mapping;
 import org.zahid.apps.web.pos.dto.PartyBalanceDTO;
-import org.zahid.apps.web.pos.entity.Party;
 import org.zahid.apps.web.pos.entity.PartyBalance;
 import org.zahid.apps.web.pos.service.PartyService;
 
 @Mapper(componentModel = "spring")
-public abstract class PartyBalanceMapper {
+public interface PartyBalanceMapper {
 
-  @Autowired
-  private PartyService partyService;
+  @Mapping(target = "party", expression = "java(partyService.findById(dto.getParty()))")
+  PartyBalance partyBalanceDTOToPartyBalance(final PartyBalanceDTO dto, final PartyService partyService);
 
-  public abstract PartyBalance partyBalanceDTOToPartyBalance(final PartyBalanceDTO dto);
-
-  public abstract PartyBalanceDTO partyBalanceToPartyBalanceDTO(final PartyBalance partyBalance);
-
-  public Party map(final Long partyCode) {
-    return partyService.findById(partyCode);
-  }
-
-  public Long map(final Party party) {
-    return party.getPartyCode();
-  }
+  @Mapping(target = "party", expression = "java(partyBalance.getParty().getPartyCode())")
+  PartyBalanceDTO partyBalanceToPartyBalanceDTO(final PartyBalance partyBalance);
 }

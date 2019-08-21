@@ -14,6 +14,7 @@ import org.zahid.apps.web.pos.service.PartyBalanceService;
 
 import java.util.List;
 import java.util.Set;
+import org.zahid.apps.web.pos.service.PartyService;
 
 
 //@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
@@ -21,68 +22,71 @@ import java.util.Set;
 @RequestMapping("balance")
 public class PartyBalanceRestController {
 
-    private static final Logger LOG = LogManager.getLogger(ItemRestController.class);
-    @Autowired
-    private PartyBalanceService partyBalanceService;
+  private static final Logger LOG = LogManager.getLogger(ItemRestController.class);
+  @Autowired
+  private PartyBalanceService partyBalanceService;
 
-    @Autowired
-    private PartyBalanceMapper partyBalanceMapper;
+  @Autowired
+  private PartyService partyService;
 
-    @GetMapping("all")
-    public List<PartyBalance> findAll() {
-        return partyBalanceService.getPartyBalanceList();
-    }
+  @Autowired
+  private PartyBalanceMapper partyBalanceMapper;
 
-    @GetMapping("{id}")
-    public PartyBalance findById(@PathVariable("id") final Long id) {
-        return partyBalanceService.findById(id);
-    }
+  @GetMapping("all")
+  public List<PartyBalance> findAll() {
+    return partyBalanceService.getPartyBalanceList();
+  }
 
-    @PostMapping(path = "save", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public PartyBalance save(@RequestBody final PartyBalance partyBalance) {
+  @GetMapping("{id}")
+  public PartyBalance findById(@PathVariable("id") final Long id) {
+    return partyBalanceService.findById(id);
+  }
+
+  @PostMapping(path = "save", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+  public PartyBalance save(@RequestBody final PartyBalance partyBalance) {
         /*if (null == partyBalance.getPartyBalanceId()) {
             partyBalance.setPartyBalanceId(partyBalanceService.generateID() >= (findAll().size() + 1) ? partyBalanceService.generateID() : (findAll().size() + 1));
         }*/
-        return partyBalanceService.save(partyBalance);
-    }
+    return partyBalanceService.save(partyBalance);
+  }
 
-    @PostMapping(path = "saveAll", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<PartyBalance> saveAll(@RequestBody final Set<PartyBalanceDTO> partyBalanceDTO) {
-        final Set<PartyBalance> partyBalances = new HashSet<>();
-        partyBalanceDTO.forEach(dto -> {
-            final PartyBalance partyBalance = partyBalanceMapper.partyBalanceDTOToPartyBalance(dto);
-            partyBalances.add(partyBalance);
-        });
-        return partyBalanceService.save(partyBalances);
-    }
+  @PostMapping(path = "saveAll", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+  public List<PartyBalance> saveAll(@RequestBody final Set<PartyBalanceDTO> partyBalanceDTO) {
+    final Set<PartyBalance> partyBalances = new HashSet<>();
+    partyBalanceDTO.forEach(dto -> {
+      final PartyBalance partyBalance = partyBalanceMapper.partyBalanceDTOToPartyBalance(dto, partyService);
+      partyBalances.add(partyBalance);
+    });
+    return partyBalanceService.save(partyBalances);
+  }
 
-    @DeleteMapping("delete/{id}")
-    public boolean deleteById(@PathVariable("id") final Long id) {
-        if (!partyBalanceService.exists(id)) {
-            throw new IllegalArgumentException("Item partyBalance with id: " + id + " does not exist");
-        } else {
-            try {
-                partyBalanceService.deleteById(id);
-                return true;
-            } catch (Exception e) {
-                e.printStackTrace();
-                return false;
-            }
-        }
+  @DeleteMapping("delete/{id}")
+  public boolean deleteById(@PathVariable("id") final Long id) {
+    if (!partyBalanceService.exists(id)) {
+      throw new IllegalArgumentException("Item partyBalance with id: " + id + " does not exist");
+    } else {
+      try {
+        partyBalanceService.deleteById(id);
+        return true;
+      } catch (Exception e) {
+        e.printStackTrace();
+        return false;
+      }
     }
+  }
 
-    @DeleteMapping(path = "delete", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public boolean delete(@RequestBody final PartyBalance partyBalance) {
-        if (null == partyBalance || null == partyBalance.getPartyBalanceId() || !partyBalanceService.exists(partyBalance.getPartyBalanceId())) {
-            throw new IllegalArgumentException("Item partyBalance does not exist");
-        } else {
-            try {
-                partyBalanceService.delete(partyBalance);
-                return true;
-            } catch (Exception e) {
-                e.printStackTrace();
-                return false;
-            }
-        }
+  @DeleteMapping(path = "delete", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+  public boolean delete(@RequestBody final PartyBalance partyBalance) {
+    if (null == partyBalance || null == partyBalance.getPartyBalanceId() || !partyBalanceService.exists(partyBalance.getPartyBalanceId())) {
+      throw new IllegalArgumentException("Item partyBalance does not exist");
+    } else {
+      try {
+        partyBalanceService.delete(partyBalance);
+        return true;
+      } catch (Exception e) {
+        e.printStackTrace();
+        return false;
+      }
     }
+  }
 }
