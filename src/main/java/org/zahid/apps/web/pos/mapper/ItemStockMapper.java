@@ -9,22 +9,22 @@ import org.zahid.apps.web.pos.service.ItemService;
 @Mapper(componentModel = "spring")
 public interface ItemStockMapper {
 
-  @Mapping(target = "item", expression = "java(itemService.findById(dto.getItem()))")
-  ItemStock ItemStockDTOToItemStock(final ItemStockDTO dto, final ItemService itemService);
+    @Mapping(target = "item", expression = "java(itemStock.getItem().getItemCode())")
+    ItemStockDTO fromItemStock(final ItemStock itemStock);
 
-  @Mapping(target = "item", expression = "java(itemStock.getItem().getItemCode())")
-  ItemStockDTO ItemStockToItemStockDTO(final ItemStock itemStock);
+    @Mapping(target = "item", expression = "java(itemService.findById(dto.getItem()))")
+    ItemStock toItemStock(final ItemStockDTO dto, final ItemService itemService);
 
-  // Below commented code was added to test how multiple custom mappings with same datatypes will be performed
+    // Below commented code was added to test how multiple custom mappings with same datatypes will be performed
 
   /*
   @Mapping(target = "item2", source = "dto.item2", qualifiedByName = "diItem2")
   @Mapping(target = "item3", source = "dto.item3", qualifiedByName = "diItem3")
-  ItemStock ItemStockDTOToItemStock(final ItemStockDTO dto, final ItemService itemService);
+  ItemStock toItemStock(final ItemStockDTO dto, final ItemService itemService);
 
   @Mapping(target = "item2", source = "itemStock.item2", qualifiedByName = "idItem2")
   @Mapping(target = "item3", source = "itemStock.item3", qualifiedByName = "idItem3")
-  ItemStockDTO ItemStockToItemStockDTO(final ItemStock itemStock);
+  ItemStockDTO fromItemStock(final ItemStock itemStock);
 
   @Named("diItem2")
   default Item mapItem2(Long value) {

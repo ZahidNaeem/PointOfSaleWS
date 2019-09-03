@@ -59,7 +59,7 @@ public class ItemStockRestController {
   public List<ItemStock> saveAll(@RequestBody final Set<ItemStockDTO> stockDTO) {
     final Set<ItemStock> stocks = new HashSet<>();
     stockDTO.forEach(dto -> {
-      final ItemStock stock = stockMapper.ItemStockDTOToItemStock(dto, itemService);
+      final ItemStock stock = stockMapper.toItemStock(dto, itemService);
       stocks.add(stock);
     });
     return stockService.save(stocks);

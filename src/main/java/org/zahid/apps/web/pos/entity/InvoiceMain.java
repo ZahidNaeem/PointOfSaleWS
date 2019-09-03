@@ -2,6 +2,7 @@ package org.zahid.apps.web.pos.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -25,6 +26,8 @@ public class InvoiceMain implements Serializable {
     /*@SequenceGenerator(name = "XXIM_INVOICE_MAIN_INVNUM_GENERATOR")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "XXIM_INVOICE_MAIN_INVNUM_GENERATOR")*/
 //    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GenericGenerator(name = "sequence_inv_main", strategy = "org.zahid.apps.web.pos.entity.idgenerator.InvoiceIdGenerator")
+    @GeneratedValue(generator = "sequence_inv_main")
     @Column(name = "INV_NUM")
     private Long invNum;
 
@@ -61,10 +64,10 @@ public class InvoiceMain implements Serializable {
     // bi-directional many-to-one association to InvoiceMain
     @ManyToOne
     @JoinColumn(name = "REF_NUM")
-    private InvoiceMain invoiceMain;
+    private InvoiceMain refInvoice;
 
     // bi-directional many-to-one association to InvoiceMain
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "invoiceMain")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "refInvoice")
     private List<InvoiceMain> invoiceMains;
 
     // bi-directional many-to-one association to Party
@@ -163,12 +166,12 @@ public class InvoiceMain implements Serializable {
         this.invoiceDtls = invoiceDtls;
     }
 
-    public InvoiceMain getInvoiceMain() {
-        return invoiceMain;
+    public InvoiceMain getRefInvoice() {
+        return refInvoice;
     }
 
-    public void setInvoiceMain(InvoiceMain invoiceMain) {
-        this.invoiceMain = invoiceMain;
+    public void setRefInvoice(InvoiceMain refInvoice) {
+        this.refInvoice = refInvoice;
     }
 
     public List<InvoiceMain> getInvoiceMains() {

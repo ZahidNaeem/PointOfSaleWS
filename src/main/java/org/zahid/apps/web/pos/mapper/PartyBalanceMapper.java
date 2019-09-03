@@ -9,9 +9,9 @@ import org.zahid.apps.web.pos.service.PartyService;
 @Mapper(componentModel = "spring")
 public interface PartyBalanceMapper {
 
-  @Mapping(target = "party", expression = "java(partyService.findById(dto.getParty()))")
-  PartyBalance partyBalanceDTOToPartyBalance(final PartyBalanceDTO dto, final PartyService partyService);
+    @Mapping(target = "party", expression = "java(partyBalance.getParty().getPartyCode())")
+    PartyBalanceDTO fromPartyBalance(final PartyBalance partyBalance);
 
-  @Mapping(target = "party", expression = "java(partyBalance.getParty().getPartyCode())")
-  PartyBalanceDTO partyBalanceToPartyBalanceDTO(final PartyBalance partyBalance);
+    @Mapping(target = "party", expression = "java(partyService.findById(dto.getParty()))")
+    PartyBalance toPartyBalance(final PartyBalanceDTO dto, final PartyService partyService);
 }

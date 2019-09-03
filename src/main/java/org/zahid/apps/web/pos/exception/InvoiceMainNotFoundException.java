@@ -4,8 +4,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.NOT_FOUND)
-public class PartyNotFoundException extends RuntimeException {
-    public PartyNotFoundException(final String message) {
+public class InvoiceMainNotFoundException extends RuntimeException {
+    public InvoiceMainNotFoundException(final String message) {
         super(message);
     }
 }
