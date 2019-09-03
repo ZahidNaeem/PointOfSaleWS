@@ -5,11 +5,8 @@ import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.id.IdentifierGenerator;
-import org.springframework.stereotype.Component;
 import org.zahid.apps.web.pos.entity.InvoiceMain;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.io.Serializable;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -18,13 +15,9 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
-@Component
 public class InvoiceIdGenerator implements IdentifierGenerator {
 
     private static final Logger LOG = LogManager.getLogger(InvoiceIdGenerator.class);
-
-    @PersistenceContext
-    private EntityManager em;
 
     @Override
     public Serializable generate(SharedSessionContractImplementor session, Object object) throws HibernateException {
