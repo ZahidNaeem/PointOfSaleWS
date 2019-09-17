@@ -22,7 +22,7 @@ public class InvoiceIdGenerator implements IdentifierGenerator {
     @Override
     public Serializable generate(SharedSessionContractImplementor session, Object object) throws HibernateException {
         if (object instanceof InvoiceMain) {
-            final DateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+            final DateFormat sdf = new SimpleDateFormat("yyMMdd");
             final InvoiceMain invoiceMain = (InvoiceMain) object;
             final String invDate = sdf.format(invoiceMain.getInvDate());
             final String invType = invoiceMain.getInvType();

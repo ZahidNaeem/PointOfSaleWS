@@ -18,7 +18,15 @@ import java.util.List;
 @Table(name = "XXIM_INVOICE_MAIN")
 @JsonIdentityInfo(scope = InvoiceMain.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "invNum")
 //@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@NamedQuery(name = "InvoiceMain.findAll", query = "SELECT i FROM InvoiceMain i")
+@NamedQueries({
+        @NamedQuery(name = "InvoiceMain.findAll", query = "SELECT i FROM InvoiceMain i"),
+        @NamedQuery(name = "InvoiceMain.findAllPO", query = "SELECT i FROM InvoiceMain i where i.invType = 'PO'"),
+        @NamedQuery(name = "InvoiceMain.findAllPI", query = "SELECT i FROM InvoiceMain i where i.invType = 'PURCHASE'"),
+        @NamedQuery(name = "InvoiceMain.findAllPRI", query = "SELECT i FROM InvoiceMain i where i.invType = 'PURCHASE RETURN'"),
+        @NamedQuery(name = "InvoiceMain.findAllSO", query = "SELECT i FROM InvoiceMain i where i.invType = 'SO'"),
+        @NamedQuery(name = "InvoiceMain.findAllSI", query = "SELECT i FROM InvoiceMain i where i.invType = 'SALE'"),
+        @NamedQuery(name = "InvoiceMain.findAllSRI", query = "SELECT i FROM InvoiceMain i where i.invType = 'SALE RETURN'")
+})
 public class InvoiceMain implements Serializable {
     private static final long serialVersionUID = 1L;
 

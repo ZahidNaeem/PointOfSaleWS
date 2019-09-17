@@ -2,10 +2,13 @@ package org.zahid.apps.web.pos;
 
 //import org.assertj.core.api.Java6Assertions;
 
+import static java.util.Arrays.asList;
 import static junit.framework.TestCase.assertTrue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.samePropertyValuesAs;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.unitils.reflectionassert.ReflectionAssert.assertReflectionEquals;
 
 //import org.assertj.core.api.Assertions;
@@ -20,33 +23,55 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
 import org.zahid.apps.web.pos.entity.Item;
+import org.zahid.apps.web.pos.entity.ItemStock;
 import org.zahid.apps.web.pos.service.ItemService;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 public class ItemServiceTest {
 
-  @Autowired
-  private ItemService itemService;
+    @Autowired
+    private ItemService itemService;
 
-  @DisplayName("Testing item service")
-  @Test
-  void testGetItem() {
-    Item expected = itemService.findById(1L);
-    expected.setInvoiceDtls(null);
-    expected.setItemStocks(null);
-    expected.setItemDesc("abc");
-    Item actual = itemService.findById(1L);
-    actual.setInvoiceDtls(null);
-    actual.setItemStocks(null);
+    @DisplayName("Testing item service")
+    @Test
+    void testGetItem() {
+        Item expected = itemService.findById(1L);
+    /*expected.setInvoiceDtls(null);
+    expected.setItemStocks(null);*/
+//        expected.setItemDesc("abc");
+        Item actual = itemService.findById(1L);
+        List<ItemStock> expectedStocks = new ArrayList<>();
+        List<ItemStock> actualStocks = new ArrayList<>();
+        ItemStock stock = actual.getItemStocks().get(0);
+        expectedStocks.add(stock);
+        stock.setItemStockId(55L);
+        actualStocks.add(stock);
+        /*asList(actual.getClass().getDeclaredFields()).forEach(field -> {
+            field.setAccessible(true);
+            try {
+                System.out.println("Name: " + field.getName() + " - Value: " + field.get(actual));
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        });*/
+    /*actual.setInvoiceDtls(null);
+    actual.setItemStocks(null);*/
 //    assertThat(actual, Matchers.arrayContaining(expected));
-//    assertReflectionEquals(expected, actual);
+//        assertReflectionEquals(expected, actual);
 //    assertReflectionEquals(expected, actual, ReflectionComparatorMode.IGNORE_DEFAULTS);
 //    Assertions.assertThat(actual).isEqualToComparingFieldByField(expected);
-    assertThat(actual, is(samePropertyValuesAs(expected)));
+//        assertThat(actual, is(samePropertyValuesAs(expected)));
 //    assertThat(expected, samePropertyValuesAs(actual));
-//    assertEquals(item, itemService.findById(1L));
+//        assertEquals(expected, actual);
 //    assertTrue(EqualsBuilder.reflectionEquals(item, itemService.findById(1L)));
 //    assertTrue(EqualsBuilder.reflectionEquals(expected, actual));
-  }
+//        assertArrayEquals(new List[]{expectedStocks}, new List[]{actualStocks});
+//        assertTrue(actualStocks.equals(expectedStocks));
+//        assertThat(actualStocks, is(expectedStocks));
+    }
 }

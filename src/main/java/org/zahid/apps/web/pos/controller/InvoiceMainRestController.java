@@ -40,6 +40,36 @@ public class InvoiceMainRestController {
         return invoiceMainService.getInvoices();
     }
 
+    @GetMapping("all/po")
+    public List<InvoiceMain> findAllPOs() {
+        return invoiceMainService.findAllPOs();
+    }
+
+    @GetMapping("all/pi")
+    public List<InvoiceMain> findAllPurchaseInvoices() {
+        return invoiceMainService.findAllPurchaseInvoices();
+    }
+
+    @GetMapping("all/pri")
+    public List<InvoiceMain> findAllPurchaseReturnInvoices() {
+        return invoiceMainService.findAllPurchaseReturnInvoices();
+    }
+
+    @GetMapping("all/so")
+    public List<InvoiceMain> findAllSOs() {
+        return invoiceMainService.findAllSOs();
+    }
+
+    @GetMapping("all/si")
+    public List<InvoiceMain> findAllSaleInvoices() {
+        return invoiceMainService.findAllSaleInvoices();
+    }
+
+    @GetMapping("all/sri")
+    public List<InvoiceMain> findAllSaleReturnInvoices() {
+        return invoiceMainService.findAllSaleReturnInvoices();
+    }
+
     @GetMapping("{id}")
     public InvoiceMainDTO findById(@PathVariable("id") final Long id) {
         final InvoiceMain invoiceMain = invoiceMainService.findById(id);

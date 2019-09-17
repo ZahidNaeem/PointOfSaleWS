@@ -7,6 +7,18 @@ import java.util.Set;
 
 public interface InvoiceMainService {
 
+    List<InvoiceMain> findAllPOs();
+
+    List<InvoiceMain> findAllPurchaseInvoices();
+
+    List<InvoiceMain> findAllPurchaseReturnInvoices();
+
+    List<InvoiceMain> findAllSOs();
+
+    List<InvoiceMain> findAllSaleInvoices();
+
+    List<InvoiceMain> findAllSaleReturnInvoices();
+
     boolean exists(Long id);
 
     InvoiceMain findById(Long id);
