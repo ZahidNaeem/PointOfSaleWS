@@ -18,6 +18,36 @@ public class InvoiceMainServiceImpl implements InvoiceMainService {
     private InvoiceMainRepo invoiceMainRepo;
 
     @Override
+    public List<InvoiceMain> findAllPOs() {
+        return invoiceMainRepo.findAllPO();
+    }
+
+    @Override
+    public List<InvoiceMain> findAllPurchaseInvoices() {
+        return invoiceMainRepo.findAllPI();
+    }
+
+    @Override
+    public List<InvoiceMain> findAllPurchaseReturnInvoices() {
+        return invoiceMainRepo.findAllPRI();
+    }
+
+    @Override
+    public List<InvoiceMain> findAllSOs() {
+        return invoiceMainRepo.findAllSO();
+    }
+
+    @Override
+    public List<InvoiceMain> findAllSaleInvoices() {
+        return invoiceMainRepo.findAllSI();
+    }
+
+    @Override
+    public List<InvoiceMain> findAllSaleReturnInvoices() {
+        return invoiceMainRepo.findAllSRI();
+    }
+
+    @Override
     public boolean exists(Long id) {
         return invoiceMainRepo.existsById(id);
     }
