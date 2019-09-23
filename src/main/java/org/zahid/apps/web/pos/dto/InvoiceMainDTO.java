@@ -162,4 +162,28 @@ public class InvoiceMainDTO implements Serializable {
     public void setParty(Long party) {
         this.party = party;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (invNum != null ? invNum.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (!(object instanceof InvoiceMainDTO)) {
+            return false;
+        }
+        InvoiceMainDTO other = (InvoiceMainDTO) object;
+        if ((this.invNum == null && other.invNum != null) || (this.invNum != null && !this.invNum.equals(other.invNum))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "org.zahid.apps.web.pos.dto.InvoiceMainDTO[ invNum=" + invNum + " ]";
+    }
 }

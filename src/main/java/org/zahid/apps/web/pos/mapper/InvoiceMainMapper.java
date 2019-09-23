@@ -11,7 +11,7 @@ import org.zahid.apps.web.pos.service.PartyService;
 public interface InvoiceMainMapper {
 
     @Mapping(target = "party", expression = "java(invoiceMain.getParty().getPartyCode())")
-    @Mapping(target = "refInvoice", expression = "java(invoiceMain.getRefInvoice().getInvNum())")
+    @Mapping(target = "refInvoice", expression = "java(invoiceMain.getRefInvoice() != null ? invoiceMain.getRefInvoice().getInvNum() : null)")
     InvoiceMainDTO fromInvoiceMain(final InvoiceMain invoiceMain);
 
     @Mapping(target = "party", expression = "java(partyService.findById(dto.getParty()))")

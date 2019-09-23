@@ -43,7 +43,7 @@ public class ItemServiceTest {
 //    assertReflectionEquals(expected, actual);
 //    assertReflectionEquals(expected, actual, ReflectionComparatorMode.IGNORE_DEFAULTS);
 //    Assertions.assertThat(actual).isEqualToComparingFieldByField(expected);
-    assertThat(actual, is(samePropertyValuesAs(expected)));
+//    assertThat(actual, is(samePropertyValuesAs(expected)));
 //    assertThat(expected, samePropertyValuesAs(actual));
 //    assertEquals(item, itemService.findById(1L));
 //    assertTrue(EqualsBuilder.reflectionEquals(item, itemService.findById(1L)));
