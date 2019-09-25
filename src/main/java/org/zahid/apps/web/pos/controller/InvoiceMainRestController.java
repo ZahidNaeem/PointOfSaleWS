@@ -45,32 +45,32 @@ public class InvoiceMainRestController {
     return invoiceMainService.getInvoices();
   }
 
-  @GetMapping("all/po")
+  @GetMapping("po/all")
   public List<InvoiceMain> findAllPOs() {
     return invoiceMainService.findAllPOs();
   }
 
-  @GetMapping("all/pi")
+  @GetMapping("pi/all")
   public List<InvoiceMain> findAllPurchaseInvoices() {
     return invoiceMainService.findAllPurchaseInvoices();
   }
 
-  @GetMapping("all/pri")
+  @GetMapping("pri/all")
   public List<InvoiceMain> findAllPurchaseReturnInvoices() {
     return invoiceMainService.findAllPurchaseReturnInvoices();
   }
 
-  @GetMapping("all/so")
+  @GetMapping("so/all")
   public List<InvoiceMain> findAllSOs() {
     return invoiceMainService.findAllSOs();
   }
 
-  @GetMapping("all/si")
+  @GetMapping("si/all")
   public List<InvoiceMain> findAllSaleInvoices() {
     return invoiceMainService.findAllSaleInvoices();
   }
 
-  @GetMapping("all/sri")
+  @GetMapping("sri/all")
   public List<InvoiceMain> findAllSaleReturnInvoices() {
     return invoiceMainService.findAllSaleReturnInvoices();
   }
@@ -304,8 +304,9 @@ public class InvoiceMainRestController {
         /*if (null == dto.getInvoiceMainCode()) {
             dto.setInvoiceMainCode(invoiceMainService.generateID() >= (findAll().size() + 1) ? invoiceMainService.generateID() : (findAll().size() + 1));
         }*/
+
     final InvoiceMain invoiceMainSaved = invoiceMainService
-        .save(mapper.toInvoiceMain(dto, partyService, invoiceMainService));
+        .save(mapper.toInvoiceMain(dto.getInvoice(), partyService, invoiceMainService));
     poIndx[0] = this.findAllPOs().indexOf(invoiceMainSaved);
     LOG.info("Index in saveInvoiceMain(): {}", poIndx[0]);
     return getInvoiceMainDTO(findAllPOs(), poIndx[0]);
@@ -317,7 +318,7 @@ public class InvoiceMainRestController {
             dto.setInvoiceMainCode(invoiceMainService.generateID() >= (findAll().size() + 1) ? invoiceMainService.generateID() : (findAll().size() + 1));
         }*/
     final InvoiceMain invoiceMainSaved = invoiceMainService
-        .save(mapper.toInvoiceMain(dto, partyService, invoiceMainService));
+        .save(mapper.toInvoiceMain(dto.getInvoice(), partyService, invoiceMainService));
     piIndx[0] = this.findAllPurchaseInvoices().indexOf(invoiceMainSaved);
     LOG.info("Index in saveInvoiceMain(): {}", piIndx[0]);
     return getInvoiceMainDTO(findAllPurchaseInvoices(), piIndx[0]);
@@ -329,7 +330,7 @@ public class InvoiceMainRestController {
             dto.setInvoiceMainCode(invoiceMainService.generateID() >= (findAll().size() + 1) ? invoiceMainService.generateID() : (findAll().size() + 1));
         }*/
     final InvoiceMain invoiceMainSaved = invoiceMainService
-        .save(mapper.toInvoiceMain(dto, partyService, invoiceMainService));
+        .save(mapper.toInvoiceMain(dto.getInvoice(), partyService, invoiceMainService));
     priIndx[0] = this.findAllPurchaseReturnInvoices().indexOf(invoiceMainSaved);
     LOG.info("Index in saveInvoiceMain(): {}", priIndx[0]);
     return getInvoiceMainDTO(findAllPurchaseReturnInvoices(), priIndx[0]);
@@ -341,7 +342,7 @@ public class InvoiceMainRestController {
             dto.setInvoiceMainCode(invoiceMainService.generateID() >= (findAll().size() + 1) ? invoiceMainService.generateID() : (findAll().size() + 1));
         }*/
     final InvoiceMain invoiceMainSaved = invoiceMainService
-        .save(mapper.toInvoiceMain(dto, partyService, invoiceMainService));
+        .save(mapper.toInvoiceMain(dto.getInvoice(), partyService, invoiceMainService));
     soIndx[0] = this.findAllSOs().indexOf(invoiceMainSaved);
     LOG.info("Index in saveInvoiceMain(): {}", soIndx[0]);
     return getInvoiceMainDTO(findAllSOs(), soIndx[0]);
@@ -353,7 +354,7 @@ public class InvoiceMainRestController {
             dto.setInvoiceMainCode(invoiceMainService.generateID() >= (findAll().size() + 1) ? invoiceMainService.generateID() : (findAll().size() + 1));
         }*/
     final InvoiceMain invoiceMainSaved = invoiceMainService
-        .save(mapper.toInvoiceMain(dto, partyService, invoiceMainService));
+        .save(mapper.toInvoiceMain(dto.getInvoice(), partyService, invoiceMainService));
     siIndx[0] = this.findAllSaleInvoices().indexOf(invoiceMainSaved);
     LOG.info("Index in saveInvoiceMain(): {}", siIndx[0]);
     return getInvoiceMainDTO(findAllSaleInvoices(), siIndx[0]);
@@ -365,7 +366,7 @@ public class InvoiceMainRestController {
             dto.setInvoiceMainCode(invoiceMainService.generateID() >= (findAll().srize() + 1) ? invoiceMainService.generateID() : (findAll().srize() + 1));
         }*/
     final InvoiceMain invoiceMainSaved = invoiceMainService
-        .save(mapper.toInvoiceMain(dto, partyService, invoiceMainService));
+        .save(mapper.toInvoiceMain(dto.getInvoice(), partyService, invoiceMainService));
     sriIndx[0] = this.findAllSaleReturnInvoices().indexOf(invoiceMainSaved);
     LOG.info("Index in saveInvoiceMain(): {}", sriIndx[0]);
     return getInvoiceMainDTO(findAllSaleReturnInvoices(), sriIndx[0]);
@@ -375,7 +376,7 @@ public class InvoiceMainRestController {
   public List<InvoiceMain> saveAll(@RequestBody final Set<InvoiceMainDTO> dtos) {
     final Set<InvoiceMain> invoices = new HashSet<>();
     dtos.forEach(dto -> {
-      invoices.add(mapper.toInvoiceMain(dto, partyService, invoiceMainService));
+      invoices.add(mapper.toInvoiceMain(dto.getInvoice(), partyService, invoiceMainService));
     });
     return invoiceMainService.save(invoices);
   }
@@ -400,11 +401,14 @@ public class InvoiceMainRestController {
   @DeleteMapping(path = "delete/po", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
   public InvoiceMainDTO deletePO(@RequestBody final InvoiceMainDTO dto) {
     LOG.info("Index: {}", poIndx[0]);
-    if (null == dto || null == dto.getInvNum() || !invoiceMainService.exists(dto.getInvNum())) {
-      throw new IllegalArgumentException("Invoice with id: " + dto.getInvNum() + " does not exist");
+    if (null == dto || null == dto.getInvoice().getInvNum() || !invoiceMainService
+        .exists(dto.getInvoice().getInvNum())) {
+      throw new IllegalArgumentException(
+          "Invoice with id: " + dto.getInvoice().getInvNum() + " does not exist");
     } else {
       try {
-        invoiceMainService.delete(mapper.toInvoiceMain(dto, partyService, invoiceMainService));
+        invoiceMainService
+            .delete(mapper.toInvoiceMain(dto.getInvoice(), partyService, invoiceMainService));
         poIndx[0]--;
         LOG.info("Index in deleteInvoiceMain(): {}", poIndx[0]);
         return getInvoiceMainDTO(findAllPOs(), poIndx[0]);
@@ -435,11 +439,14 @@ public class InvoiceMainRestController {
   @DeleteMapping(path = "delete/pi", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
   public InvoiceMainDTO deletePI(@RequestBody final InvoiceMainDTO dto) {
     LOG.info("Index: {}", piIndx[0]);
-    if (null == dto || null == dto.getInvNum() || !invoiceMainService.exists(dto.getInvNum())) {
-      throw new IllegalArgumentException("Invoice with id: " + dto.getInvNum() + " does not exist");
+    if (null == dto || null == dto.getInvoice().getInvNum() || !invoiceMainService
+        .exists(dto.getInvoice().getInvNum())) {
+      throw new IllegalArgumentException(
+          "Invoice with id: " + dto.getInvoice().getInvNum() + " does not exist");
     } else {
       try {
-        invoiceMainService.delete(mapper.toInvoiceMain(dto, partyService, invoiceMainService));
+        invoiceMainService
+            .delete(mapper.toInvoiceMain(dto.getInvoice(), partyService, invoiceMainService));
         piIndx[0]--;
         LOG.info("Index in deleteInvoiceMain(): {}", piIndx[0]);
         return getInvoiceMainDTO(findAllPurchaseInvoices(), piIndx[0]);
@@ -470,11 +477,14 @@ public class InvoiceMainRestController {
   @DeleteMapping(path = "delete/pri", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
   public InvoiceMainDTO deletePRI(@RequestBody final InvoiceMainDTO dto) {
     LOG.info("Index: {}", priIndx[0]);
-    if (null == dto || null == dto.getInvNum() || !invoiceMainService.exists(dto.getInvNum())) {
-      throw new IllegalArgumentException("Invoice with id: " + dto.getInvNum() + " does not exist");
+    if (null == dto || null == dto.getInvoice().getInvNum() || !invoiceMainService
+        .exists(dto.getInvoice().getInvNum())) {
+      throw new IllegalArgumentException(
+          "Invoice with id: " + dto.getInvoice().getInvNum() + " does not exist");
     } else {
       try {
-        invoiceMainService.delete(mapper.toInvoiceMain(dto, partyService, invoiceMainService));
+        invoiceMainService
+            .delete(mapper.toInvoiceMain(dto.getInvoice(), partyService, invoiceMainService));
         priIndx[0]--;
         LOG.info("Index in deleteInvoiceMain(): {}", priIndx[0]);
         return getInvoiceMainDTO(findAllPurchaseReturnInvoices(), priIndx[0]);
@@ -505,11 +515,14 @@ public class InvoiceMainRestController {
   @DeleteMapping(path = "delete/so", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
   public InvoiceMainDTO deleteSO(@RequestBody final InvoiceMainDTO dto) {
     LOG.info("Index: {}", soIndx[0]);
-    if (null == dto || null == dto.getInvNum() || !invoiceMainService.exists(dto.getInvNum())) {
-      throw new IllegalArgumentException("Invoice with id: " + dto.getInvNum() + " does not exist");
+    if (null == dto || null == dto.getInvoice().getInvNum() || !invoiceMainService
+        .exists(dto.getInvoice().getInvNum())) {
+      throw new IllegalArgumentException(
+          "Invoice with id: " + dto.getInvoice().getInvNum() + " does not exist");
     } else {
       try {
-        invoiceMainService.delete(mapper.toInvoiceMain(dto, partyService, invoiceMainService));
+        invoiceMainService
+            .delete(mapper.toInvoiceMain(dto.getInvoice(), partyService, invoiceMainService));
         soIndx[0]--;
         LOG.info("Index in deleteInvoiceMain(): {}", soIndx[0]);
         return getInvoiceMainDTO(findAllSOs(), soIndx[0]);
@@ -540,11 +553,14 @@ public class InvoiceMainRestController {
   @DeleteMapping(path = "delete/si", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
   public InvoiceMainDTO deleteSI(@RequestBody final InvoiceMainDTO dto) {
     LOG.info("Index: {}", siIndx[0]);
-    if (null == dto || null == dto.getInvNum() || !invoiceMainService.exists(dto.getInvNum())) {
-      throw new IllegalArgumentException("Invoice with id: " + dto.getInvNum() + " does not exist");
+    if (null == dto || null == dto.getInvoice().getInvNum() || !invoiceMainService
+        .exists(dto.getInvoice().getInvNum())) {
+      throw new IllegalArgumentException(
+          "Invoice with id: " + dto.getInvoice().getInvNum() + " does not exist");
     } else {
       try {
-        invoiceMainService.delete(mapper.toInvoiceMain(dto, partyService, invoiceMainService));
+        invoiceMainService
+            .delete(mapper.toInvoiceMain(dto.getInvoice(), partyService, invoiceMainService));
         siIndx[0]--;
         LOG.info("Index in deleteInvoiceMain(): {}", siIndx[0]);
         return getInvoiceMainDTO(findAllSaleInvoices(), siIndx[0]);
@@ -575,11 +591,14 @@ public class InvoiceMainRestController {
   @DeleteMapping(path = "delete/sri", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
   public InvoiceMainDTO deleteSRI(@RequestBody final InvoiceMainDTO dto) {
     LOG.info("Index: {}", sriIndx[0]);
-    if (null == dto || null == dto.getInvNum() || !invoiceMainService.exists(dto.getInvNum())) {
-      throw new IllegalArgumentException("Invoice with id: " + dto.getInvNum() + " does not exist");
+    if (null == dto || null == dto.getInvoice().getInvNum() || !invoiceMainService
+        .exists(dto.getInvoice().getInvNum())) {
+      throw new IllegalArgumentException(
+          "Invoice with id: " + dto.getInvoice().getInvNum() + " does not exist");
     } else {
       try {
-        invoiceMainService.delete(mapper.toInvoiceMain(dto, partyService, invoiceMainService));
+        invoiceMainService
+            .delete(mapper.toInvoiceMain(dto.getInvoice(), partyService, invoiceMainService));
         sriIndx[0]--;
         LOG.info("Index in deleteInvoiceMain(): {}", sriIndx[0]);
         return getInvoiceMainDTO(findAllSaleReturnInvoices(), sriIndx[0]);
@@ -604,7 +623,8 @@ public class InvoiceMainRestController {
     } else {
       final NavigationDtl dtl = resetNavigation();
       final InvoiceMain invoiceMain = invoices.get(indx);
-      final InvoiceMainDTO invoiceMainDTO = mapper.fromInvoiceMain(invoiceMain);
+      final InvoiceMainDTO invoiceMainDTO = new InvoiceMainDTO();
+      invoiceMainDTO.setInvoice(mapper.fromInvoiceMain(invoiceMain));
       if (indx > 0) {
         dtl.setFirst(false);
       }
