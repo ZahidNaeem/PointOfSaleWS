@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.zahid.apps.web.pos.dto.PartyDTO;
-import org.zahid.apps.web.pos.entity.Party;
 import org.zahid.apps.web.pos.entity.NavigationDtl;
+import org.zahid.apps.web.pos.entity.Party;
 import org.zahid.apps.web.pos.service.PartyService;
 
 import java.util.List;
@@ -124,7 +124,7 @@ public class PartyRestController {
         return dtl;
     }
 
-    private static final PartyDTO getPartyDTO(List<Party> parties, int indx) {
+    private final PartyDTO getPartyDTO(List<Party> parties, int indx) {
         if (indx < 0 || indx > parties.size() - 1) {
             LOG.info("Index in getPartyDTO(): {}", indx);
             throw new IndexOutOfBoundsException();

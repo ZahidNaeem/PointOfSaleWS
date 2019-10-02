@@ -1,6 +1,7 @@
 package org.zahid.apps.web.pos.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
@@ -81,6 +82,7 @@ public class Party implements Serializable {
 
     // bi-directional many-to-one association to InvoiceMain
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "party")
+    @JsonIgnore
     private List<InvoiceMain> invoiceMains;
 
     // bi-directional many-to-one association to PartyBalance

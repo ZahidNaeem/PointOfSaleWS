@@ -1,4 +1,4 @@
-package org.zahid.apps.web.pos.controller.model;
+package org.zahid.apps.web.pos.model;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
