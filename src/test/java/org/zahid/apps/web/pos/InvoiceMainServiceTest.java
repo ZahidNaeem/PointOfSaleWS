@@ -16,9 +16,12 @@ public class InvoiceMainServiceTest {
 
     @DisplayName("Testing item service")
     @Test
-    void testPO() {
-        invoiceMainService.findAllPOs().forEach(po -> {
+    void test() {
+        /*invoiceMainService.findAllPOs().forEach(po -> {
             System.out.println(po.toString());
-        });
+        });*/
+        /*invoiceMainService.findParties().forEach(party -> {
+            System.out.println(party.toString());
+        });*/
     }
 }

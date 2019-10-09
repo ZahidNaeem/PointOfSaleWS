@@ -26,7 +26,7 @@ import org.zahid.apps.web.pos.service.ItemStockService;
 @RequestMapping("stock")
 public class ItemStockRestController {
 
-  private static final Logger LOG = LogManager.getLogger(ItemRestController.class);
+  private static final Logger LOG = LogManager.getLogger(ItemStockRestController.class);
 
   @Autowired
   private ItemStockService stockService;

@@ -1,6 +1,6 @@
 package org.zahid.apps.web.pos.dto;
 
-import org.zahid.apps.web.pos.controller.model.InvoiceMainModel;
+import org.zahid.apps.web.pos.model.InvoiceMainModel;
 import org.zahid.apps.web.pos.entity.NavigationDtl;
 
 import java.io.Serializable;
