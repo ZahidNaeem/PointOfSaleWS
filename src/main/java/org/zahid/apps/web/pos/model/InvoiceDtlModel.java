@@ -1,10 +1,10 @@
-package org.zahid.apps.web.pos.dto;
+package org.zahid.apps.web.pos.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
-public class InvoiceDtlDTO implements Serializable {
+public class InvoiceDtlModel implements Serializable {
     private static final long serialVersionUID = 1L;
     private Long invDtlNum;
 
@@ -24,7 +24,7 @@ public class InvoiceDtlDTO implements Serializable {
 
     private Long item;
 
-    public InvoiceDtlDTO() {
+    public InvoiceDtlModel() {
     }
 
     public Long getInvDtlNum() {
@@ -106,11 +106,11 @@ public class InvoiceDtlDTO implements Serializable {
     }
 
     public boolean equals(Object object) {
-        if (!(object instanceof InvoiceDtlDTO)) {
+        if (!(object instanceof InvoiceDtlModel)) {
             return false;
         }
 
-        InvoiceDtlDTO other = (InvoiceDtlDTO) object;
+        InvoiceDtlModel other = (InvoiceDtlModel) object;
 
         if ((this.invDtlNum == null && other.invDtlNum != null) || (this.invDtlNum != null && !this.invDtlNum.equals(other.invDtlNum))) {
             return false;
@@ -121,7 +121,7 @@ public class InvoiceDtlDTO implements Serializable {
     }
 
     public String toString() {
-        return "org.zahid.apps.web.pos.dto.InvoiceDtlDTO[ invDtlNum=" + invDtlNum + " ]";
+        return "org.zahid.apps.web.pos.model.InvoiceDtlModel[ invDtlNum=" + invDtlNum + " ]";
 
     }
 

@@ -13,7 +13,7 @@ public interface PartyService {
 
     Party findById(Long id);
 
-    List<Party> getParties();
+    List<Party> findAll();
 
     Party save(Party party);
 

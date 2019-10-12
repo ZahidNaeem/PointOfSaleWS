@@ -50,7 +50,7 @@ public class PartyServiceImpl implements PartyService {
   }
 
   @Override
-  public List<Party> getParties() {
+  public List<Party> findAll() {
     return partyRepo.findAll(orderBy("partyCode"));
   }
 

@@ -8,7 +8,10 @@ import java.util.List;
 
 @Repository
 public interface ItemRepo extends JpaRepository<Item, Long> {
-    Long generateID();
 
-    List<String> getCategories();
+  Long generateID();
+
+  List<String> getCategories();
+
+  String getItemDesc(Long itemCode);
 }

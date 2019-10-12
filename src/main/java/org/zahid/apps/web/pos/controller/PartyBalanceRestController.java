@@ -7,14 +7,13 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import org.zahid.apps.web.pos.dto.PartyBalanceDTO;
+import org.zahid.apps.web.pos.model.PartyBalanceModel;
 import org.zahid.apps.web.pos.entity.PartyBalance;
 import org.zahid.apps.web.pos.mapper.PartyBalanceMapper;
 import org.zahid.apps.web.pos.service.PartyBalanceService;
 
 import java.util.List;
 import java.util.Set;
-import org.zahid.apps.web.pos.service.PartyService;
 
 
 //@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
@@ -27,34 +26,32 @@ public class PartyBalanceRestController {
   private PartyBalanceService partyBalanceService;
 
   @Autowired
-  private PartyService partyService;
-
-  @Autowired
-  private PartyBalanceMapper partyBalanceMapper;
+  private PartyBalanceMapper mapper;
 
   @GetMapping("all")
-  public List<PartyBalance> findAll() {
-    return partyBalanceService.getPartyBalanceList();
+  public List<PartyBalanceModel> findAll() {
+    return mapper.mapBalancesToBalanceModels(partyBalanceService.getPartyBalanceList());
   }
 
   @GetMapping("{id}")
-  public PartyBalance findById(@PathVariable("id") final Long id) {
-    return partyBalanceService.findById(id);
+  public PartyBalanceModel findById(@PathVariable("id") final Long id) {
+    return mapper.fromPartyBalance(partyBalanceService.findById(id));
   }
 
   @PostMapping(path = "save", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public PartyBalance save(@RequestBody final PartyBalance partyBalance) {
+  public PartyBalanceModel save(@RequestBody final PartyBalanceModel model) {
         /*if (null == partyBalance.getPartyBalanceId()) {
             partyBalance.setPartyBalanceId(partyBalanceService.generateID() >= (findAll().size() + 1) ? partyBalanceService.generateID() : (findAll().size() + 1));
         }*/
-    return partyBalanceService.save(partyBalance);
+    final PartyBalance balanceSaed = partyBalanceService.save(mapper.toPartyBalance(model));
+    return mapper.fromPartyBalance(balanceSaed);
   }
 
   @PostMapping(path = "saveAll", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public List<PartyBalance> saveAll(@RequestBody final Set<PartyBalanceDTO> partyBalanceDTO) {
+  public List<PartyBalance> saveAll(@RequestBody final Set<PartyBalanceModel> partyBalanceModel) {
     final Set<PartyBalance> partyBalances = new HashSet<>();
-    partyBalanceDTO.forEach(dto -> {
-      final PartyBalance partyBalance = partyBalanceMapper.toPartyBalance(dto, partyService);
+    partyBalanceModel.forEach(model -> {
+      final PartyBalance partyBalance = mapper.toPartyBalance(model);
       partyBalances.add(partyBalance);
     });
     return partyBalanceService.save(partyBalances);
@@ -76,12 +73,13 @@ public class PartyBalanceRestController {
   }
 
   @DeleteMapping(path = "delete", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public boolean delete(@RequestBody final PartyBalance partyBalance) {
-    if (null == partyBalance || null == partyBalance.getPartyBalanceId() || !partyBalanceService.exists(partyBalance.getPartyBalanceId())) {
+  public boolean delete(@RequestBody final PartyBalanceModel model) {
+    if (null == model || null == model.getPartyBalanceId() || !partyBalanceService
+        .exists(model.getPartyBalanceId())) {
       throw new IllegalArgumentException("Item partyBalance does not exist");
     } else {
       try {
-        partyBalanceService.delete(partyBalance);
+        partyBalanceService.delete(mapper.toPartyBalance(model));
         return true;
       } catch (Exception e) {
         e.printStackTrace();

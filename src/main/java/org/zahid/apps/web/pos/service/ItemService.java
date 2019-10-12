@@ -13,11 +13,13 @@ public interface ItemService {
 
     Item findById(Long id);
 
-    List<Item> getItems();
+    List<Item> findAll();
 
     Set<String> getItemCategories();
 
     Set<String> getItemUOM();
+
+    String getItemDesc(Long itemCode);
 
     Item save(Item item);
 

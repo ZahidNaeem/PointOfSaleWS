@@ -50,7 +50,7 @@ public class ItemServiceImpl implements ItemService {
   }
 
   @Override
-  public List<Item> getItems() {
+  public List<Item> findAll() {
     return itemRepo.findAll(orderBy("itemCode"));
   }
 
@@ -132,6 +132,11 @@ public class ItemServiceImpl implements ItemService {
     return uoms;
   }
 
+  @Override
+  public String getItemDesc(Long itemCode) {
+    return itemRepo.getItemDesc(itemCode);
+  }
+
   private void updateWhoColumns(Item item) {
     String user = (new SecurityController()).getUsername();
     Timestamp currTime = new Timestamp(System.currentTimeMillis());
@@ -143,7 +148,8 @@ public class ItemServiceImpl implements ItemService {
     item.setLastUpdateDate(currTime);
     if (CollectionUtils.isNotEmpty(item.getItemStocks())) {
       item.getItemStocks().forEach(itemStock -> {
-        int result = Miscellaneous.exists("XXIM_ITEM_STOCK", "ITEM_STOCK_ID", itemStock.getItemStockId());
+        int result = Miscellaneous
+            .exists("XXIM_ITEM_STOCK", "ITEM_STOCK_ID", itemStock.getItemStockId());
         LOG.log(Level.INFO, "Record: " + itemStock.getItemStockId());
         LOG.log(Level.INFO, "Result: " + result);
         if (result < 1) {

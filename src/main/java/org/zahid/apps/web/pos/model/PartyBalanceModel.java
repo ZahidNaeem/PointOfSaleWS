@@ -1,14 +1,11 @@
-package org.zahid.apps.web.pos.dto;
+package org.zahid.apps.web.pos.model;
 
-import org.zahid.apps.web.pos.entity.Party;
-
-import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Date;
 
-public class PartyBalanceDTO implements Serializable {
+public class PartyBalanceModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Long partyBalanceId;
@@ -110,10 +107,10 @@ public class PartyBalanceDTO implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        if (!(object instanceof PartyBalanceDTO)) {
+        if (!(object instanceof PartyBalanceModel)) {
             return false;
         }
-        PartyBalanceDTO other = (PartyBalanceDTO) object;
+        PartyBalanceModel other = (PartyBalanceModel) object;
         if ((this.partyBalanceId == null && other.partyBalanceId != null) || (this.partyBalanceId != null && !this.partyBalanceId.equals(other.partyBalanceId))) {
             return false;
         }
@@ -122,6 +119,6 @@ public class PartyBalanceDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "org.zahid.apps.web.pos.dto.PartyBalanceDTO[ partyBalanceId=" + partyBalanceId + " ]";
+        return "org.zahid.apps.web.pos.model.PartyBalanceModel[ partyBalanceId=" + partyBalanceId + " ]";
     }
 }

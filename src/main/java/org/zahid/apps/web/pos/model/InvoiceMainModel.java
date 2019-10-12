@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
-import org.zahid.apps.web.pos.entity.InvoiceDtl;
 import org.zahid.apps.web.pos.entity.InvoiceMain;
 
 public class InvoiceMainModel {
@@ -33,7 +32,7 @@ public class InvoiceMainModel {
 
   private Timestamp lastUpdateDate;
 
-  private List<InvoiceDtl> invoiceDtls;
+  private List<InvoiceDtlModel> invoiceDtls;
 
   private Long party;
 
@@ -133,11 +132,11 @@ public class InvoiceMainModel {
     this.lastUpdateDate = lastUpdateDate;
   }
 
-  public List<InvoiceDtl> getInvoiceDtls() {
+  public List<InvoiceDtlModel> getInvoiceDtls() {
     return invoiceDtls;
   }
 
-  public void setInvoiceDtls(List<InvoiceDtl> invoiceDtls) {
+  public void setInvoiceDtls(List<InvoiceDtlModel> invoiceDtls) {
     this.invoiceDtls = invoiceDtls;
   }
 
@@ -171,6 +170,6 @@ public class InvoiceMainModel {
 
   @Override
   public String toString() {
-    return "org.zahid.apps.web.pos.dto.InvoiceMainModel[ invNum=" + invNum + " ]";
+    return "org.zahid.apps.web.pos.model.InvoiceMainModel[ invNum=" + invNum + " ]";
   }
 }
