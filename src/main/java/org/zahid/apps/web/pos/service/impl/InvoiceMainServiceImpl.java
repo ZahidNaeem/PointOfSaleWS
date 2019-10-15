@@ -19,6 +19,11 @@ public class InvoiceMainServiceImpl implements InvoiceMainService {
     private InvoiceMainRepo invoiceMainRepo;
 
     @Override
+    public List<InvoiceMain> findAll() {
+        return invoiceMainRepo.findAll();
+    }
+
+    @Override
     public List<InvoiceMain> findAllPOs() {
         return invoiceMainRepo.findAllPO();
     }
@@ -60,11 +65,6 @@ public class InvoiceMainServiceImpl implements InvoiceMainService {
             return invoice.get();
         }
         throw new InvoiceMainNotFoundException("Invoice with id " + id + " not found");
-    }
-
-    @Override
-    public List<InvoiceMain> getInvoices() {
-        return invoiceMainRepo.findAll();
     }
 
     @Override

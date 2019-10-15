@@ -16,7 +16,10 @@ import java.sql.Timestamp;
 @Table(name = "XXIM_INVOICE_DTL")
 //@JsonIdentityInfo(generator = ObjectIdGenerators.UUIDGenerator.class, property = "@id")
 @JsonIdentityInfo(scope = InvoiceDtl.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "invDtlNum")
-@NamedQuery(name = "InvoiceDtl.findAll", query = "SELECT i FROM InvoiceDtl i")
+@NamedQueries({
+    @NamedQuery(name = "InvoiceDtl.findAll", query = "SELECT i FROM InvoiceDtl i"),
+    @NamedQuery(name = "InvoiceDtl.findByInvoice", query = "SELECT i FROM InvoiceDtl i where i.invoiceMain.invNum = ?1")
+})
 public class InvoiceDtl implements Serializable {
     private static final long serialVersionUID = 1L;
 

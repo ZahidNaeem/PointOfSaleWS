@@ -8,6 +8,8 @@ import java.util.Set;
 
 public interface InvoiceMainService {
 
+    List<InvoiceMain> findAll();
+
     List<InvoiceMain> findAllPOs();
 
     List<InvoiceMain> findAllPurchaseInvoices();
@@ -23,8 +25,6 @@ public interface InvoiceMainService {
     boolean exists(Long id);
 
     InvoiceMain findById(Long id);
-
-    List<InvoiceMain> getInvoices();
 
     InvoiceMain save(InvoiceMain invoiceMain);
 

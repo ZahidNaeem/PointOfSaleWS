@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.zahid.apps.web.pos.dto.ItemStockDTO;
+import org.zahid.apps.web.pos.model.ItemStockModel;
 import org.zahid.apps.web.pos.entity.ItemStock;
 import org.zahid.apps.web.pos.mapper.ItemStockMapper;
 import org.zahid.apps.web.pos.service.ItemService;
@@ -32,34 +32,37 @@ public class ItemStockRestController {
   private ItemStockService stockService;
 
   @Autowired
-  private ItemService itemService;
-
-  @Autowired
-  private ItemStockMapper stockMapper;
+  private ItemStockMapper mapper;
 
   @GetMapping("all")
-  public List<ItemStock> findAll() {
-    return stockService.getItemStockList();
+  public List<ItemStockModel> findAll() {
+    return mapper.mapItemStocksToItemStockModels(stockService.findAll());
   }
 
   @GetMapping("{id}")
-  public ItemStock findById(@PathVariable("id") final Long id) {
-    return stockService.findById(id);
+  public ItemStockModel findById(@PathVariable("id") final Long id) {
+    return mapper.fromItemStock(stockService.findById(id));
+  }
+
+  @GetMapping("item/{itemCode}")
+  public List<ItemStockModel> findByItemCode(@PathVariable("itemCode") final Long itemCode) {
+    return mapper.mapItemStocksToItemStockModels(stockService.findAllByItem(itemCode));
   }
 
   @PostMapping(path = "save", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public ItemStock save(@RequestBody final ItemStock stock) {
+  public ItemStockModel save(@RequestBody final ItemStockModel model) {
         /*if (null == stock.getItemStockId()) {
             stock.setItemStockId(stockService.generateID() >= (findAll().size() + 1) ? stockService.generateID() : (findAll().size() + 1));
         }*/
-    return stockService.save(stock);
+    final ItemStock savedStock = stockService.save(mapper.toItemStock(model));
+    return mapper.fromItemStock(savedStock);
   }
 
   @PostMapping(path = "saveAll", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public List<ItemStock> saveAll(@RequestBody final Set<ItemStockDTO> stockDTO) {
+  public List<ItemStock> saveAll(@RequestBody final Set<ItemStockModel> stockModel) {
     final Set<ItemStock> stocks = new HashSet<>();
-    stockDTO.forEach(dto -> {
-      final ItemStock stock = stockMapper.toItemStock(dto, itemService);
+    stockModel.forEach(model -> {
+      final ItemStock stock = mapper.toItemStock(model);
       stocks.add(stock);
     });
     return stockService.save(stocks);
@@ -81,12 +84,13 @@ public class ItemStockRestController {
   }
 
   @DeleteMapping(path = "delete", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public boolean delete(@RequestBody final ItemStock stock) {
-    if (null == stock || null == stock.getItemStockId() || !stockService.exists(stock.getItemStockId())) {
+  public boolean delete(@RequestBody final ItemStockModel model) {
+    if (null == model || null == model.getItemStockId() || !stockService
+        .exists(model.getItemStockId())) {
       throw new IllegalArgumentException("Item stock does not exist");
     } else {
       try {
-        stockService.delete(stock);
+        stockService.delete(mapper.toItemStock(model));
         return true;
       } catch (Exception e) {
         e.printStackTrace();

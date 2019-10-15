@@ -1,94 +1,33 @@
-package org.zahid.apps.web.pos.entity;
+package org.zahid.apps.web.pos.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
-import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
-/**
- * The persistent class for the XXIM_ITEMS database table.
- */
-@Entity
-@Table(name = "XXIM_ITEMS")
-//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@JsonIdentityInfo(scope = Item.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "itemCode")
-//@JsonIdentityInfo(scope = Item.class, generator = ObjectIdGenerators.UUIDGenerator.class, property = "@id")
-@NamedQueries({
-    @NamedQuery(name = "Item.findAll", query = "SELECT i FROM Item i"),
-    @NamedQuery(name = "Item.generateID", query = "SELECT coalesce(max(itemCode), 0) + 1 FROM Item i"),
-    @NamedQuery(name = "Item.getCategories", query = "SELECT distinct i.itemCategory FROM Item i where i.itemCategory is not null"),
-    @NamedQuery(name = "Item.getItemDesc", query = "SELECT i.itemDesc FROM Item i where i.itemCode = :itemCode")
-})
-public class Item implements Serializable {
+public class ItemModel implements Serializable {
 
   private static final long serialVersionUID = 1L;
-
-  @Id
-//    @SequenceGenerator(name = "XXIM_ITEMS_ITEMCODE_GENERATOR", sequenceName = "XXIM_ITEMS_ITEMCODE_GENERATOR", allocationSize = 1)
-//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "XXIM_ITEMS_ITEMCODE_GENERATOR")
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column(name = "ITEM_CODE")
   private Long itemCode;
-
-  @Column(name = "CREATED_BY")
   private String createdBy;
-
-  @Column(name = "CREATION_DATE")
   private Timestamp creationDate;
-
-  @Temporal(TemporalType.DATE)
-  @Column(name = "EFFECTIVE_END_DATE")
   private Date effectiveEndDate;
-
-  @Temporal(TemporalType.DATE)
-  @Column(name = "EFFECTIVE_START_DATE")
   private Date effectiveStartDate;
-
-  @Column(name = "ITEM_BARCODE")
   private String itemBarcode;
-
-  @Column(name = "ITEM_CATEGORY")
   private String itemCategory;
-
-  @Column(name = "ITEM_DESC", unique = true)
   private String itemDesc;
-
-  @Column(name = "ITEM_UOM")
   private String itemUom;
-
-  @Column(name = "LAST_UPDATE_DATE")
   private Timestamp lastUpdateDate;
-
-  @Column(name = "LAST_UPDATED_BY")
   private String lastUpdatedBy;
-
-  @Column(name = "MAX_STOCK")
   private BigDecimal maxStock;
-
-  @Column(name = "MIN_STOCK")
   private BigDecimal minStock;
-
-  @Column(name = "PURCHASE_PRICE")
   private BigDecimal purchasePrice;
-
-  @Column(name = "SALE_PRICE")
   private BigDecimal salePrice;
+  private List<InvoiceDtlModel> invoiceDtls;
+  private List<ItemStockModel> itemStocks;
 
-  // bi-directional many-to-one association to InvoiceDtl
-  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "item")
-  private List<InvoiceDtl> invoiceDtls;
-
-  // bi-directional many-to-one association to ItemStock
-  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "item")
-//    @JsonIdentityReference
-  private List<ItemStock> itemStocks;
-
-  public Item() {
+  public ItemModel() {
   }
 
   public Long getItemCode() {
@@ -211,35 +150,33 @@ public class Item implements Serializable {
     this.salePrice = salePrice;
   }
 
-  public List<InvoiceDtl> getInvoiceDtls() {
+  public List<InvoiceDtlModel> getInvoiceDtls() {
     return invoiceDtls;
   }
 
-  public void setInvoiceDtls(List<InvoiceDtl> invoiceDtls) {
+  public void setInvoiceDtls(List<InvoiceDtlModel> invoiceDtls) {
     this.invoiceDtls = invoiceDtls;
   }
 
-  public List<ItemStock> getItemStocks() {
+  public List<ItemStockModel> getItemStocks() {
     return itemStocks;
   }
 
-  public void setItemStocks(List<ItemStock> itemStocks) {
+  public void setItemStocks(List<ItemStockModel> itemStocks) {
     this.itemStocks = itemStocks;
   }
 
-  @Override
   public int hashCode() {
     int hash = 0;
     hash += (itemCode != null ? itemCode.hashCode() : 0);
     return hash;
   }
 
-  @Override
   public boolean equals(Object object) {
-    if (!(object instanceof Item)) {
+    if (!(object instanceof ItemModel)) {
       return false;
     }
-    Item other = (Item) object;
+    ItemModel other = (ItemModel) object;
     if ((this.itemCode == null && other.itemCode != null) || (this.itemCode != null
         && !this.itemCode.equals(other.itemCode))) {
       return false;
@@ -247,9 +184,9 @@ public class Item implements Serializable {
     return true;
   }
 
-  @Override
   public String toString() {
-    return "org.zahid.apps.web.pos.entity.Item[ itemCode=" + itemCode + " & itemDesc=" + itemDesc
+    return "org.zahid.apps.web.pos.entity.ItemModel[ itemCode=" + itemCode + " & itemDesc="
+        + itemDesc
         + " ]";
   }
 }

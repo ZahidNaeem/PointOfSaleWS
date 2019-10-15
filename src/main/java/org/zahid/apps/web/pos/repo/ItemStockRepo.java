@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface ItemStockRepo extends JpaRepository<ItemStock, Long> {
 
-    List<ItemStock> findAllByItem(Item item);
+    List<ItemStock> findAllByItem(Long itemCode);
 
     Long generateID();
 }

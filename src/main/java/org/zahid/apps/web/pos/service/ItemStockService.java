@@ -12,27 +12,13 @@ public interface ItemStockService {
 
     boolean exists(Long id);
 
-    List<ItemStock> getItemStockList();
+    List<ItemStock> findAll();
 
     List<ItemStock> getCurrentItemStockList();
 
-    List<ItemStock> getCurrentItemStockListFromDB();
-
-    List<ItemStock> getItemStockListFromDB(Item item);
-
     ItemStock findById(Long id);
 
-    List<ItemStock> addStockToStockList(ItemStock stock);
-
-    Item getCurrentItem();
-
-    ItemStock attachStockWithItem(ItemStock stock);
-
-//    List<ItemStock> attachStockWithItem(List<ItemStock> stocks);
-
-//    List<ItemStock> findAllByItem(Item item);
-
-    // ItemStock prepareCreate();
+    List<ItemStock> findAllByItem(Long itemCode);
 
     ItemStock save(ItemStock itemStock);
 

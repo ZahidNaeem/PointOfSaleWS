@@ -13,6 +13,8 @@ public interface InvoiceDtlService {
 
     InvoiceDtl findById(Long id);
 
+    List<InvoiceDtl> findByInvoice(Long invNum);
+
     InvoiceDtl save(InvoiceDtl invoiceDtl);
 
     List<InvoiceDtl> save(Set<InvoiceDtl> invoiceDtls);

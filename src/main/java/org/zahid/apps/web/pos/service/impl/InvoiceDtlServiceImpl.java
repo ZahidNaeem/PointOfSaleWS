@@ -37,6 +37,11 @@ public class InvoiceDtlServiceImpl implements InvoiceDtlService {
     }
 
     @Override
+    public List<InvoiceDtl> findByInvoice(Long invNum) {
+        return repo.findByInvoice(invNum);
+    }
+
+    @Override
     public InvoiceDtl save(InvoiceDtl invoiceDtl) {
         return repo.save(invoiceDtl);
     }
