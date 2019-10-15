@@ -1,5 +1,6 @@
 package org.zahid.apps.web.pos.entity.idgenerator;
 
+import java.sql.Types;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
@@ -37,8 +38,11 @@ public class InvoiceIdGenerator implements IdentifierGenerator {
 
         try {
             CallableStatement stmt = connection.prepareCall("{? = call XXIM_GENERATE_INV_NUM(?, ?)}");
-            stmt.setString("INV_TYPE", invType);
-            stmt.setString("DATED", invDate);
+            stmt.registerOutParameter(1, Types.BIGINT);
+            stmt.setString(2, invType);
+            stmt.setString(3, invDate);
+            stmt.execute();
+            stmt.getLong(1);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 return rs.getLong(1);
