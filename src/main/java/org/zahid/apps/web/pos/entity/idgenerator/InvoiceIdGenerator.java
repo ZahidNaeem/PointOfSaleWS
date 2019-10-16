@@ -41,8 +41,6 @@ public class InvoiceIdGenerator implements IdentifierGenerator {
             stmt.registerOutParameter(1, Types.BIGINT);
             stmt.setString(2, invType);
             stmt.setString(3, invDate);
-            stmt.execute();
-            stmt.getLong(1);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 return rs.getLong(1);

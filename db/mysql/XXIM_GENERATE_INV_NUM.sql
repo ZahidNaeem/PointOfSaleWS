@@ -1,7 +1,14 @@
-CREATE FUNCTION XXIM_GENERATE_INV_NUM(INV_TYPE    VARCHAR(50),
-                                      DATED       VARCHAR(20))
-   RETURNS LONG
+DROP FUNCTION IF EXISTS xxim.`XXIM_GENERATE_INV_NUM`;
+
+CREATE DEFINER = `root` @`localhost`
+FUNCTION xxim.`XXIM_GENERATE_INV_NUM`(
+   `INV_TYPE`   VARCHAR(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+   `DATED`      VARCHAR(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci)
+   RETURNS MEDIUMTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci
+   LANGUAGE SQL
    DETERMINISTIC
+   CONTAINS SQL
+   SQL SECURITY DEFINER
 BEGIN
    DECLARE V_VALUE   LONG;
 
@@ -14,14 +21,13 @@ BEGIN
                 WHEN 'SALE RETURN' THEN '22'
                 ELSE '50'
              END,
-             DATE_FORMAT(DATED, '%Y%m%d'),
+             DATE_FORMAT(DATED, '%y%m%d'),
              LPAD(COALESCE(MAX(SUBSTR(INV_NUM, LENGTH(INV_NUM) - 2)), 0) + 1,
                   3,
-                  '0'))
-             VALUE
+                  '0')) VALUE
      INTO V_VALUE
      FROM XXIM_INVOICE_MAIN
-    WHERE     DATE(INV_DATE) = STR_TO_DATE(DATED, '%Y%m%d')
+    WHERE     DATE(INV_DATE) = STR_TO_DATE(DATED, '%y%m%d')
           AND INV_TYPE = INV_TYPE;
 
    RETURN V_VALUE;
