@@ -24,7 +24,7 @@ import java.util.List;
     @NamedQuery(name = "Item.getCategories", query = "SELECT distinct i.itemCategory FROM Item i where i.itemCategory is not null"),
     @NamedQuery(name = "Item.getItemDesc", query = "SELECT i.itemDesc FROM Item i where i.itemCode = :itemCode")
 })
-public class Item implements Serializable {
+public class Item extends Auditable<String> implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
@@ -34,12 +34,6 @@ public class Item implements Serializable {
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "ITEM_CODE")
   private Long itemCode;
-
-  @Column(name = "CREATED_BY")
-  private String createdBy;
-
-  @Column(name = "CREATION_DATE")
-  private Timestamp creationDate;
 
   @Temporal(TemporalType.DATE)
   @Column(name = "EFFECTIVE_END_DATE")
@@ -60,12 +54,6 @@ public class Item implements Serializable {
 
   @Column(name = "ITEM_UOM")
   private String itemUom;
-
-  @Column(name = "LAST_UPDATE_DATE")
-  private Timestamp lastUpdateDate;
-
-  @Column(name = "LAST_UPDATED_BY")
-  private String lastUpdatedBy;
 
   @Column(name = "MAX_STOCK")
   private BigDecimal maxStock;
@@ -97,22 +85,6 @@ public class Item implements Serializable {
 
   public void setItemCode(Long itemCode) {
     this.itemCode = itemCode;
-  }
-
-  public String getCreatedBy() {
-    return createdBy;
-  }
-
-  public void setCreatedBy(String createdBy) {
-    this.createdBy = createdBy;
-  }
-
-  public Timestamp getCreationDate() {
-    return creationDate;
-  }
-
-  public void setCreationDate(Timestamp creationDate) {
-    this.creationDate = creationDate;
   }
 
   public Date getEffectiveEndDate() {
@@ -161,22 +133,6 @@ public class Item implements Serializable {
 
   public void setItemUom(String itemUom) {
     this.itemUom = itemUom;
-  }
-
-  public Timestamp getLastUpdateDate() {
-    return lastUpdateDate;
-  }
-
-  public void setLastUpdateDate(Timestamp lastUpdateDate) {
-    this.lastUpdateDate = lastUpdateDate;
-  }
-
-  public String getLastUpdatedBy() {
-    return lastUpdatedBy;
-  }
-
-  public void setLastUpdatedBy(String lastUpdatedBy) {
-    this.lastUpdatedBy = lastUpdatedBy;
   }
 
   public BigDecimal getMaxStock() {

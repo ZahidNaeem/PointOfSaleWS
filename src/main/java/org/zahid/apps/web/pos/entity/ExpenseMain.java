@@ -18,7 +18,7 @@ import java.util.List;
 @JsonIdentityInfo(scope = ExpenseMain.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "expMainId")
 //@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @NamedQuery(name = "ExpenseMain.findAll", query = "SELECT e FROM ExpenseMain e")
-public class ExpenseMain implements Serializable {
+public class ExpenseMain extends Auditable<String> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -28,21 +28,9 @@ public class ExpenseMain implements Serializable {
     @Column(name = "EXP_MAIN_ID")
     private Long expMainId;
 
-    @Column(name = "CREATED_BY")
-    private String createdBy;
-
-    @Column(name = "CREATION_DATE")
-    private Timestamp creationDate;
-
     @Temporal(TemporalType.DATE)
     @Column(name = "EXP_DATE")
     private Date expDate;
-
-    @Column(name = "LAST_UPDATE_DATE")
-    private Timestamp lastUpdateDate;
-
-    @Column(name = "LAST_UPDATED_BY")
-    private String lastUpdatedBy;
 
     private String remarks;
 
@@ -61,44 +49,12 @@ public class ExpenseMain implements Serializable {
         this.expMainId = expMainId;
     }
 
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public Timestamp getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(Timestamp creationDate) {
-        this.creationDate = creationDate;
-    }
-
     public Date getExpDate() {
         return expDate;
     }
 
     public void setExpDate(Date expDate) {
         this.expDate = expDate;
-    }
-
-    public Timestamp getLastUpdateDate() {
-        return lastUpdateDate;
-    }
-
-    public void setLastUpdateDate(Timestamp lastUpdateDate) {
-        this.lastUpdateDate = lastUpdateDate;
-    }
-
-    public String getLastUpdatedBy() {
-        return lastUpdatedBy;
-    }
-
-    public void setLastUpdatedBy(String lastUpdatedBy) {
-        this.lastUpdatedBy = lastUpdatedBy;
     }
 
     public String getRemarks() {

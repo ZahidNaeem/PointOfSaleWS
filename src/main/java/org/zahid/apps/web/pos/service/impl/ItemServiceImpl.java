@@ -69,16 +69,12 @@ public class ItemServiceImpl implements ItemService {
 
   @Override
   public Item save(Item item) throws DataIntegrityViolationException {
-    updateWhoColumns(item);
     return itemRepo.save(item);
   }
 
   @Override
   public List<Item> save(Set<Item> items) throws DataIntegrityViolationException {
 
-    items.forEach(item -> {
-      updateWhoColumns(item);
-    });
     List<Item> returnItems = itemRepo.saveAll(items);
     return returnItems;
   }
@@ -135,30 +131,5 @@ public class ItemServiceImpl implements ItemService {
   @Override
   public String getItemDesc(Long itemCode) {
     return itemRepo.getItemDesc(itemCode);
-  }
-
-  private void updateWhoColumns(Item item) {
-    String user = (new SecurityController()).getUsername();
-    Timestamp currTime = new Timestamp(System.currentTimeMillis());
-    if (item.getItemCode() == null || !itemRepo.existsById(item.getItemCode())) {
-      item.setCreatedBy(user);
-      item.setCreationDate(currTime);
-    }
-    item.setLastUpdatedBy(user);
-    item.setLastUpdateDate(currTime);
-    if (CollectionUtils.isNotEmpty(item.getItemStocks())) {
-      item.getItemStocks().forEach(itemStock -> {
-        int result = Miscellaneous
-            .exists("XXIM_ITEM_STOCK", "ITEM_STOCK_ID", itemStock.getItemStockId());
-        LOG.log(Level.INFO, "Record: " + itemStock.getItemStockId());
-        LOG.log(Level.INFO, "Result: " + result);
-        if (result < 1) {
-          itemStock.setCreatedBy(user);
-          itemStock.setCreationDate(currTime);
-        }
-        itemStock.setLastUpdatedBy(user);
-        itemStock.setLastUpdateDate(currTime);
-      });
-    }
   }
 }

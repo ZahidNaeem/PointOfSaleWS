@@ -29,7 +29,7 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "PartyBalance.findAll", query = "SELECT p FROM PartyBalance p"),
     @NamedQuery(name = "PartyBalance.generateID", query = "SELECT coalesce(max(partyBalanceId), 0) + 1 FROM PartyBalance p")
 })
-public class PartyBalance implements Serializable {
+public class PartyBalance extends Auditable<String> implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
@@ -42,18 +42,6 @@ public class PartyBalance implements Serializable {
 
   @Column(name = "AMOUNT")
   private BigDecimal amount;
-
-  @Column(name = "CREATED_BY")
-  private String createdBy;
-
-  @Column(name = "CREATION_DATE")
-  private Timestamp creationDate;
-
-  @Column(name = "LAST_UPDATE_DATE")
-  private Timestamp lastUpdateDate;
-
-  @Column(name = "LAST_UPDATED_BY")
-  private String lastUpdatedBy;
 
   @Temporal(TemporalType.DATE)
   @Column(name = "PARTY_BALANCE_DATE")
@@ -84,38 +72,6 @@ public class PartyBalance implements Serializable {
 
   public void setAmount(BigDecimal amount) {
     this.amount = amount;
-  }
-
-  public String getCreatedBy() {
-    return createdBy;
-  }
-
-  public void setCreatedBy(String createdBy) {
-    this.createdBy = createdBy;
-  }
-
-  public Timestamp getCreationDate() {
-    return creationDate;
-  }
-
-  public void setCreationDate(Timestamp creationDate) {
-    this.creationDate = creationDate;
-  }
-
-  public Timestamp getLastUpdateDate() {
-    return lastUpdateDate;
-  }
-
-  public void setLastUpdateDate(Timestamp lastUpdateDate) {
-    this.lastUpdateDate = lastUpdateDate;
-  }
-
-  public String getLastUpdatedBy() {
-    return lastUpdatedBy;
-  }
-
-  public void setLastUpdatedBy(String lastUpdatedBy) {
-    this.lastUpdatedBy = lastUpdatedBy;
   }
 
   public Date getPartyBalanceDate() {

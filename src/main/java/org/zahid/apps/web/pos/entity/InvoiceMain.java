@@ -39,7 +39,7 @@ import org.hibernate.annotations.GenericGenerator;
         @NamedQuery(name = "InvoiceMain.findAllSI", query = "SELECT i FROM InvoiceMain i where i.invType = 'SALE'"),
         @NamedQuery(name = "InvoiceMain.findAllSRI", query = "SELECT i FROM InvoiceMain i where i.invType = 'SALE RETURN'")
 })
-public class InvoiceMain implements Serializable {
+public class InvoiceMain extends Auditable<String> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -51,24 +51,12 @@ public class InvoiceMain implements Serializable {
     @Column(name = "INV_NUM")
     private Long invNum;
 
-    @Column(name = "CREATED_BY")
-    private String createdBy;
-
-    @Column(name = "CREATION_DATE")
-    private Timestamp creationDate;
-
     @Temporal(TemporalType.DATE)
     @Column(name = "INV_DATE")
     private Date invDate;
 
     @Column(name = "INV_TYPE")
     private String invType;
-
-    @Column(name = "LAST_UPDATE_DATE")
-    private Timestamp lastUpdateDate;
-
-    @Column(name = "LAST_UPDATED_BY")
-    private String lastUpdatedBy;
 
     @Column(name = "PAID_AMT")
     private BigDecimal paidAmt;
@@ -106,22 +94,6 @@ public class InvoiceMain implements Serializable {
         this.invNum = invNum;
     }
 
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public Timestamp getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(Timestamp creationDate) {
-        this.creationDate = creationDate;
-    }
-
     public Date getInvDate() {
         return invDate;
     }
@@ -136,22 +108,6 @@ public class InvoiceMain implements Serializable {
 
     public void setInvType(String invType) {
         this.invType = invType;
-    }
-
-    public Timestamp getLastUpdateDate() {
-        return lastUpdateDate;
-    }
-
-    public void setLastUpdateDate(Timestamp lastUpdateDate) {
-        this.lastUpdateDate = lastUpdateDate;
-    }
-
-    public String getLastUpdatedBy() {
-        return lastUpdatedBy;
-    }
-
-    public void setLastUpdatedBy(String lastUpdatedBy) {
-        this.lastUpdatedBy = lastUpdatedBy;
     }
 
     public BigDecimal getPaidAmt() {

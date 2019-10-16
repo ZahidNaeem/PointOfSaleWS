@@ -10,7 +10,7 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "XXUM_USERS")
 @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
-public class User implements Serializable {
+public class User extends Auditable<String> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -19,18 +19,6 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "U_ID")
     private Long uId;
-
-    @Column(name = "CREATED_BY")
-    private String createdBy;
-
-    @Column(name = "CREATION_DATE")
-    private Timestamp creationDate;
-
-    @Column(name = "LAST_UPDATE_DATE")
-    private Timestamp lastUpdateDate;
-
-    @Column(name = "LAST_UPDATED_BY")
-    private String lastUpdatedBy;
 
     @Column(name = "U_DESCRIPTION")
     private String uDescription;
@@ -50,38 +38,6 @@ public class User implements Serializable {
 
     public void setuId(Long uId) {
         this.uId = uId;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public Timestamp getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(Timestamp creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    public Timestamp getLastUpdateDate() {
-        return lastUpdateDate;
-    }
-
-    public void setLastUpdateDate(Timestamp lastUpdateDate) {
-        this.lastUpdateDate = lastUpdateDate;
-    }
-
-    public String getLastUpdatedBy() {
-        return lastUpdatedBy;
-    }
-
-    public void setLastUpdatedBy(String lastUpdatedBy) {
-        this.lastUpdatedBy = lastUpdatedBy;
     }
 
     public String getuDescription() {

@@ -32,7 +32,7 @@ import javax.validation.constraints.NotNull;
     @NamedQuery(name = "ItemStock.findAllByItem", query = "SELECT i FROM ItemStock i where i.item.itemCode = ?1"),
     @NamedQuery(name = "ItemStock.generateID", query = "SELECT coalesce(max(itemStockId), 0) + 1 FROM ItemStock i")
 })
-public class ItemStock implements Serializable {
+public class ItemStock extends Auditable<String> implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
@@ -43,21 +43,9 @@ public class ItemStock implements Serializable {
   @Column(name = "ITEM_STOCK_ID")
   private Long itemStockId;
 
-  @Column(name = "CREATED_BY")
-  private String createdBy;
-
-  @Column(name = "CREATION_DATE")
-  private Timestamp creationDate;
-
   @Temporal(TemporalType.DATE)
   @Column(name = "ITEM_STOCK_DATE")
   private Date itemStockDate;
-
-  @Column(name = "LAST_UPDATE_DATE")
-  private Timestamp lastUpdateDate;
-
-  @Column(name = "LAST_UPDATED_BY")
-  private String lastUpdatedBy;
 
   private BigDecimal qnty;
 
@@ -81,44 +69,12 @@ public class ItemStock implements Serializable {
     this.itemStockId = itemStockId;
   }
 
-  public String getCreatedBy() {
-    return createdBy;
-  }
-
-  public void setCreatedBy(String createdBy) {
-    this.createdBy = createdBy;
-  }
-
-  public Timestamp getCreationDate() {
-    return creationDate;
-  }
-
-  public void setCreationDate(Timestamp creationDate) {
-    this.creationDate = creationDate;
-  }
-
   public Date getItemStockDate() {
     return itemStockDate;
   }
 
   public void setItemStockDate(Date itemStockDate) {
     this.itemStockDate = itemStockDate;
-  }
-
-  public Timestamp getLastUpdateDate() {
-    return lastUpdateDate;
-  }
-
-  public void setLastUpdateDate(Timestamp lastUpdateDate) {
-    this.lastUpdateDate = lastUpdateDate;
-  }
-
-  public String getLastUpdatedBy() {
-    return lastUpdatedBy;
-  }
-
-  public void setLastUpdatedBy(String lastUpdatedBy) {
-    this.lastUpdatedBy = lastUpdatedBy;
   }
 
   public BigDecimal getQnty() {

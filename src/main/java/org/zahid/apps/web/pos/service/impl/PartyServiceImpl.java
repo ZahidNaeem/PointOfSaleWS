@@ -69,13 +69,11 @@ public class PartyServiceImpl implements PartyService {
 
   @Override
   public Party save(Party party) throws DataIntegrityViolationException {
-    updateWhoColumns(party);
     return partyRepo.save(party);
   }
 
   @Override
   public List<Party> save(Set<Party> parties) throws DataIntegrityViolationException {
-    parties.forEach(party -> updateWhoColumns(party));
     List<Party> returnParties = partyRepo.saveAll(parties);
     return returnParties;
   }
@@ -108,29 +106,5 @@ public class PartyServiceImpl implements PartyService {
   @Override
   public void deleteInBatch(Set<Party> parties) throws DataIntegrityViolationException {
     partyRepo.deleteInBatch(parties);
-  }
-
-  private void updateWhoColumns(Party party) {
-    String user = (new SecurityController()).getUsername();
-    Timestamp currTime = new Timestamp(System.currentTimeMillis());
-    if (party.getPartyCode() == null || !partyRepo.existsById(party.getPartyCode())) {
-      party.setCreatedBy(user);
-      party.setCreationDate(currTime);
-    }
-    party.setLastUpdatedBy(user);
-    party.setLastUpdateDate(currTime);
-    if (CollectionUtils.isNotEmpty(party.getPartyBalances())) {
-      party.getPartyBalances().forEach(partyBalance -> {
-        int result = Miscellaneous.exists("XXIM_PARTY_BALANCE", "PARTY_BALANCE_ID", partyBalance.getPartyBalanceId());
-        LOG.log(Level.INFO, "Record: " + partyBalance.getPartyBalanceId());
-        LOG.log(Level.INFO, "Result: " + result);
-        if (result < 1) {
-          partyBalance.setCreatedBy(user);
-          partyBalance.setCreationDate(currTime);
-        }
-        partyBalance.setLastUpdatedBy(user);
-        partyBalance.setLastUpdateDate(currTime);
-      });
-    }
   }
 }

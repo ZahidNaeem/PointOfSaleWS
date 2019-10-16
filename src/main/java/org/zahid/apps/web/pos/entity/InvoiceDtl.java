@@ -20,7 +20,7 @@ import java.sql.Timestamp;
     @NamedQuery(name = "InvoiceDtl.findAll", query = "SELECT i FROM InvoiceDtl i"),
     @NamedQuery(name = "InvoiceDtl.findByInvoice", query = "SELECT i FROM InvoiceDtl i where i.invoiceMain.invNum = ?1")
 })
-public class InvoiceDtl implements Serializable {
+public class InvoiceDtl extends Auditable<String> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -30,20 +30,8 @@ public class InvoiceDtl implements Serializable {
     @Column(name = "INV_DTL_NUM")
     private Long invDtlNum;
 
-    @Column(name = "CREATED_BY")
-    private String createdBy;
-
-    @Column(name = "CREATION_DATE")
-    private Timestamp creationDate;
-
     @Column(name = "ITEM_PRICE")
     private BigDecimal itemPrice;
-
-    @Column(name = "LAST_UPDATE_DATE")
-    private Timestamp lastUpdateDate;
-
-    @Column(name = "LAST_UPDATED_BY")
-    private String lastUpdatedBy;
 
     private BigDecimal qnty;
 
@@ -68,44 +56,12 @@ public class InvoiceDtl implements Serializable {
         this.invDtlNum = invDtlNum;
     }
 
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public Timestamp getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(Timestamp creationDate) {
-        this.creationDate = creationDate;
-    }
-
     public BigDecimal getItemPrice() {
         return itemPrice;
     }
 
     public void setItemPrice(BigDecimal itemPrice) {
         this.itemPrice = itemPrice;
-    }
-
-    public Timestamp getLastUpdateDate() {
-        return lastUpdateDate;
-    }
-
-    public void setLastUpdateDate(Timestamp lastUpdateDate) {
-        this.lastUpdateDate = lastUpdateDate;
-    }
-
-    public String getLastUpdatedBy() {
-        return lastUpdatedBy;
-    }
-
-    public void setLastUpdatedBy(String lastUpdatedBy) {
-        this.lastUpdatedBy = lastUpdatedBy;
     }
 
     public BigDecimal getQnty() {

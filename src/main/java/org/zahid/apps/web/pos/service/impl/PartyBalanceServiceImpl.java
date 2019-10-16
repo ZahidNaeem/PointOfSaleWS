@@ -106,15 +106,6 @@ public class PartyBalanceServiceImpl implements PartyBalanceService {
 //	}
     @Override
     public PartyBalance save(PartyBalance partyBalance) {
-        String user = (new SecurityController()).getUsername();
-        LOG.log(Level.INFO, "User: {0}", user);
-        Timestamp currTime = new Timestamp(System.currentTimeMillis());
-        if (!partyBalanceRepo.existsById(partyBalance.getPartyBalanceId())) {
-            partyBalance.setCreatedBy(user);
-            partyBalance.setCreationDate(currTime);
-        }
-        partyBalance.setLastUpdatedBy(user);
-        partyBalance.setLastUpdateDate(currTime);
         return partyBalanceRepo.save(partyBalance);
     }
 
@@ -124,16 +115,6 @@ public class PartyBalanceServiceImpl implements PartyBalanceService {
 //            LOG("Parties: " + partyController.getDmlRecords().size());
             partyController.save();
         }*/
-        for (PartyBalance partyBalance : partyBalances) {
-            String user = (new SecurityController()).getUsername();
-            Timestamp currTime = new Timestamp(System.currentTimeMillis());
-            if (partyBalance.getPartyBalanceId() == null || !partyBalanceRepo.existsById(partyBalance.getPartyBalanceId())) {
-                partyBalance.setCreatedBy(user);
-                partyBalance.setCreationDate(currTime);
-            }
-            partyBalance.setLastUpdatedBy(user);
-            partyBalance.setLastUpdateDate(currTime);
-        }
         return partyBalanceRepo.saveAll(partyBalances);
     }
 

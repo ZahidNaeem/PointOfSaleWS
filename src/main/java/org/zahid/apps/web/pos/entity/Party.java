@@ -20,7 +20,7 @@ import java.util.List;
         @NamedQuery(name = "Party.findAll", query = "SELECT p FROM Party p"),
         @NamedQuery(name = "Party.generateID", query = "SELECT coalesce(max(partyCode), 0) + 1 FROM Party p")
 })
-public class Party implements Serializable {
+public class Party extends Auditable<String> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -38,12 +38,6 @@ public class Party implements Serializable {
     @Column(name = "CONTACT_PERSON")
     private String contactPerson;
 
-    @Column(name = "CREATED_BY")
-    private String createdBy;
-
-    @Column(name = "CREATION_DATE")
-    private Timestamp creationDate;
-
     @Temporal(TemporalType.DATE)
     @Column(name = "EFFECTIVE_END_DATE")
     private Date effectiveEndDate;
@@ -55,12 +49,6 @@ public class Party implements Serializable {
     private String email;
 
     private String fax;
-
-    @Column(name = "LAST_UPDATE_DATE")
-    private Timestamp lastUpdateDate;
-
-    @Column(name = "LAST_UPDATED_BY")
-    private String lastUpdatedBy;
 
     private String ntn;
 
@@ -126,22 +114,6 @@ public class Party implements Serializable {
         this.contactPerson = contactPerson;
     }
 
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public Timestamp getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(Timestamp creationDate) {
-        this.creationDate = creationDate;
-    }
-
     public Date getEffectiveEndDate() {
         return effectiveEndDate;
     }
@@ -172,22 +144,6 @@ public class Party implements Serializable {
 
     public void setFax(String fax) {
         this.fax = fax;
-    }
-
-    public Timestamp getLastUpdateDate() {
-        return lastUpdateDate;
-    }
-
-    public void setLastUpdateDate(Timestamp lastUpdateDate) {
-        this.lastUpdateDate = lastUpdateDate;
-    }
-
-    public String getLastUpdatedBy() {
-        return lastUpdatedBy;
-    }
-
-    public void setLastUpdatedBy(String lastUpdatedBy) {
-        this.lastUpdatedBy = lastUpdatedBy;
     }
 
     public String getNtn() {

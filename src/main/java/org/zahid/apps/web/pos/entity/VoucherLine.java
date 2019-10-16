@@ -16,7 +16,7 @@ import java.util.Date;
 @Table(name = "XXIM_VOUCHER_LINE")
 @JsonIdentityInfo(scope = VoucherLine.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "lineId")
 @NamedQuery(name = "VoucherLine.findAll", query = "SELECT v FROM VoucherLine v")
-public class VoucherLine implements Serializable {
+public class VoucherLine extends Auditable<String> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -37,18 +37,6 @@ public class VoucherLine implements Serializable {
 
     @Column(name = "CHEQUE_NUM")
     private String chequeNum;
-
-    @Column(name = "CREATED_BY")
-    private String createdBy;
-
-    @Column(name = "CREATION_DATE")
-    private Timestamp creationDate;
-
-    @Column(name = "LAST_UPDATE_DATE")
-    private Timestamp lastUpdateDate;
-
-    @Column(name = "LAST_UPDATED_BY")
-    private String lastUpdatedBy;
 
     private String remarks;
 
@@ -98,38 +86,6 @@ public class VoucherLine implements Serializable {
 
     public void setChequeNum(String chequeNum) {
         this.chequeNum = chequeNum;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public Timestamp getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(Timestamp creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    public Timestamp getLastUpdateDate() {
-        return lastUpdateDate;
-    }
-
-    public void setLastUpdateDate(Timestamp lastUpdateDate) {
-        this.lastUpdateDate = lastUpdateDate;
-    }
-
-    public String getLastUpdatedBy() {
-        return lastUpdatedBy;
-    }
-
-    public void setLastUpdatedBy(String lastUpdatedBy) {
-        this.lastUpdatedBy = lastUpdatedBy;
     }
 
     public String getRemarks() {

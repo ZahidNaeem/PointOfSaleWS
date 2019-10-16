@@ -17,7 +17,7 @@ import java.util.List;
 @JsonIdentityInfo(scope = VoucherHeader.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "headerId")
 //@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @NamedQuery(name = "VoucherHeader.findAll", query = "SELECT v FROM VoucherHeader v")
-public class VoucherHeader implements Serializable {
+public class VoucherHeader extends Auditable<String> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -26,18 +26,6 @@ public class VoucherHeader implements Serializable {
 //    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "HEADER_ID")
     private Long headerId;
-
-    @Column(name = "CREATED_BY")
-    private String createdBy;
-
-    @Column(name = "CREATION_DATE")
-    private Timestamp creationDate;
-
-    @Column(name = "LAST_UPDATE_DATE")
-    private Timestamp lastUpdateDate;
-
-    @Column(name = "LAST_UPDATED_BY")
-    private String lastUpdatedBy;
 
     private String remarks;
 
@@ -66,38 +54,6 @@ public class VoucherHeader implements Serializable {
 
     public void setHeaderId(Long headerId) {
         this.headerId = headerId;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public Timestamp getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(Timestamp creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    public Timestamp getLastUpdateDate() {
-        return lastUpdateDate;
-    }
-
-    public void setLastUpdateDate(Timestamp lastUpdateDate) {
-        this.lastUpdateDate = lastUpdateDate;
-    }
-
-    public String getLastUpdatedBy() {
-        return lastUpdatedBy;
-    }
-
-    public void setLastUpdatedBy(String lastUpdatedBy) {
-        this.lastUpdatedBy = lastUpdatedBy;
     }
 
     public String getRemarks() {

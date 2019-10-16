@@ -74,31 +74,11 @@ public class ItemStockServiceImpl implements ItemStockService {
 //	}
   @Override
   public ItemStock save(ItemStock itemStock) {
-    String user = (new SecurityController()).getUsername();
-    LOG.log(Level.INFO, "User: {0}", user);
-    Timestamp currTime = new Timestamp(System.currentTimeMillis());
-    if (!itemStockRepo.existsById(itemStock.getItemStockId())) {
-      itemStock.setCreatedBy(user);
-      itemStock.setCreationDate(currTime);
-    }
-    itemStock.setLastUpdatedBy(user);
-    itemStock.setLastUpdateDate(currTime);
     return itemStockRepo.save(itemStock);
   }
 
   @Override
   public List<ItemStock> save(Set<ItemStock> itemStocks) {
-    for (ItemStock itemStock : itemStocks) {
-      String user = (new SecurityController()).getUsername();
-      Timestamp currTime = new Timestamp(System.currentTimeMillis());
-      if (itemStock.getItemStockId() == null || !itemStockRepo
-          .existsById(itemStock.getItemStockId())) {
-        itemStock.setCreatedBy(user);
-        itemStock.setCreationDate(currTime);
-      }
-      itemStock.setLastUpdatedBy(user);
-      itemStock.setLastUpdateDate(currTime);
-    }
     return itemStockRepo.saveAll(itemStocks);
   }
 
