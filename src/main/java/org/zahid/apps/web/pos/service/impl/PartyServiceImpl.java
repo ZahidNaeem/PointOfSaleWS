@@ -36,7 +36,7 @@ public class PartyServiceImpl implements PartyService {
   }
 
   private Sort orderBy(String column) {
-    return new Sort(Sort.Direction.ASC, column);
+    return Sort.by(Sort.Direction.ASC, column);
   }
 
   @Override

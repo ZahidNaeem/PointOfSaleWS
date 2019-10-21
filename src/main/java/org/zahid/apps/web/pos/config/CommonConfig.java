@@ -10,7 +10,7 @@ import org.zahid.apps.web.pos.service.impl.AuditorAwareImpl;
 
 @Configuration
 @EnableJpaAuditing(auditorAwareRef = "auditorAware")
-public class Config {
+public class CommonConfig {
 
     @Bean
     public WebMvcConfigurer corsConfigurer() {

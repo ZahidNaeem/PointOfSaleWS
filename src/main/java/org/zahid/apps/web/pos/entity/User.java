@@ -1,90 +1,116 @@
 package org.zahid.apps.web.pos.entity;
 
-import javax.persistence.*;
-import java.io.Serializable;
-import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
-/**
- * The persistent class for the XXUM_USERS database table.
- */
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.NaturalId;
+
 @Entity
-@Table(name = "XXUM_USERS")
-@NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
-public class User extends Auditable<String> implements Serializable {
-    private static final long serialVersionUID = 1L;
+@Table(name = "XXIM_USERS", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {
+        "username"
+    }),
+    @UniqueConstraint(columnNames = {
+        "email"
+    })
+})
+public class User{
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @Id
-    /*@SequenceGenerator(name = "XXUM_USERS_UID_GENERATOR")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "XXUM_USERS_UID_GENERATOR")*/
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "U_ID")
-    private Long uId;
+  @NotBlank
+  @Size(min=3, max = 50)
+  private String name;
 
-    @Column(name = "U_DESCRIPTION")
-    private String uDescription;
+  @NotBlank
+  @Size(min=3, max = 50)
+  private String username;
 
-    @Column(name = "U_NAME")
-    private String uName;
+  @NaturalId
+  @NotBlank
+  @Size(max = 50)
+  @Email
+  private String email;
 
-    @Column(name = "U_PASSWORD")
-    private String uPassword;
+  @NotBlank
+  @Size(min=6, max = 100)
+  private String password;
 
-    public User() {
-    }
+  @ManyToMany(fetch = FetchType.LAZY)
+  @JoinTable(name = "XXIM_USER_ROLES",
+      joinColumns = @JoinColumn(name = "user_id"),
+      inverseJoinColumns = @JoinColumn(name = "role_id"))
+  private Set<Role> roles = new HashSet<>();
 
-    public Long getuId() {
-        return uId;
-    }
+  public User() {}
 
-    public void setuId(Long uId) {
-        this.uId = uId;
-    }
+  public User(String name, String username, String email, String password) {
+    this.name = name;
+    this.username = username;
+    this.email = email;
+    this.password = password;
+  }
 
-    public String getuDescription() {
-        return uDescription;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public void setuDescription(String uDescription) {
-        this.uDescription = uDescription;
-    }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public String getuName() {
-        return uName;
-    }
+  public String getUsername() {
+    return username;
+  }
 
-    public void setuName(String uName) {
-        this.uName = uName;
-    }
+  public void setUsername(String username) {
+    this.username = username;
+  }
 
-    public String getuPassword() {
-        return uPassword;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public void setuPassword(String uPassword) {
-        this.uPassword = uPassword;
-    }
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (uId != null ? uId.hashCode() : 0);
-        return hash;
-    }
+  public String getEmail() {
+    return email;
+  }
 
-    @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof User)) {
-            return false;
-        }
-        User other = (User) object;
-        if ((this.uId == null && other.uId != null) || (this.uId != null && !this.uId.equals(other.uId))) {
-            return false;
-        }
-        return true;
-    }
+  public void setEmail(String email) {
+    this.email = email;
+  }
 
-    @Override
-    public String toString() {
-        return "org.zahid.apps.web.pos.entity.User[ uId=" + uId + " ]";
-    }
+  public String getPassword() {
+    return password;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
+  }
+
+  public Set<Role> getRoles() {
+    return roles;
+  }
+
+  public void setRoles(Set<Role> roles) {
+    this.roles = roles;
+  }
 }

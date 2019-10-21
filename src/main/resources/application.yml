@@ -9,7 +9,7 @@ spring:
 #    url: jdbc:mysql://localhost:3306/xxim?useSSL=false&allowPublicKeyRetrieval=true
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect
