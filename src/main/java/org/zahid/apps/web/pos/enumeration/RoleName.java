@@ -4,9 +4,9 @@ import java.util.Arrays;
 import org.zahid.apps.web.pos.exception.RoleNameNotFoundException;
 
 public enum RoleName {
-  ROLE_USER("roleUser"),
-  ROLE_PM("rolePm"),
-  ROLE_ADMIN("roleAdmin");
+  ROLE_USER("user"),
+  ROLE_PM("pm"),
+  ROLE_ADMIN("admin");
 
   private String value;
 

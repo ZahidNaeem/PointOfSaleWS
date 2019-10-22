@@ -16,7 +16,7 @@ public class PointOfSaleApplication {
   public static void main(String[] args) {
     SpringApplication.run(PointOfSaleApplication.class, args);
     LOG.debug("==============================================Debug===========================================");
-    LOG.info("==============================================info===========================================");
+    LOG.info("==============================================info============================================");
   }
 
 }

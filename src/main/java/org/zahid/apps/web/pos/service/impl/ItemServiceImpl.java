@@ -1,24 +1,19 @@
 package org.zahid.apps.web.pos.service.impl;
 
-import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.zahid.apps.web.pos.controller.SecurityController;
 import org.zahid.apps.web.pos.entity.Item;
 import org.zahid.apps.web.pos.exception.ItemNotFoundException;
 import org.zahid.apps.web.pos.repo.ItemRepo;
 import org.zahid.apps.web.pos.service.ItemService;
-import org.zahid.apps.web.pos.utils.Miscellaneous;
 
 @Service
 public class ItemServiceImpl implements ItemService {

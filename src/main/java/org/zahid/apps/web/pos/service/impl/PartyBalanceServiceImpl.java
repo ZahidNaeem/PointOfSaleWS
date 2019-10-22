@@ -1,19 +1,16 @@
 package org.zahid.apps.web.pos.service.impl;
 
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
-import org.zahid.apps.web.pos.controller.SecurityController;
 import org.zahid.apps.web.pos.entity.Party;
 import org.zahid.apps.web.pos.entity.PartyBalance;
 import org.zahid.apps.web.pos.exception.PartyBalanceNotFoundException;
 import org.zahid.apps.web.pos.repo.PartyBalanceRepo;
 import org.zahid.apps.web.pos.service.PartyBalanceService;
 
-import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;

@@ -5,8 +5,8 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,7 +23,7 @@ public class JwtAuthTokenFilter extends OncePerRequestFilter {
   @Autowired
   private UserDetailsServiceImpl userDetailsService;
 
-  private static final Logger logger = LoggerFactory.getLogger(JwtAuthTokenFilter.class);
+  private static final Logger LOG = LogManager.getLogger(JwtAuthTokenFilter.class);
 
   @Override
   protected void doFilterInternal(HttpServletRequest request,
@@ -44,7 +44,7 @@ public class JwtAuthTokenFilter extends OncePerRequestFilter {
         SecurityContextHolder.getContext().setAuthentication(authentication);
       }
     } catch (Exception e) {
-      logger.error("Can NOT set user authentication -> Message: {}", e);
+      LOG.error("Can NOT set user authentication -> Message: {}", e);
     }
 
     filterChain.doFilter(request, response);
