@@ -77,6 +77,16 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-security</artifactId>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-devtools</artifactId>
+    </dependency>
+    <!--    logging-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-log4j2</artifactId>
+    </dependency>
     <!--unitils-->
     <dependency>
       <groupId>org.unitils</groupId>
@@ -104,12 +114,12 @@
       <version>${junit-jupiter.version}</version>
       <scope>test</scope>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
+    <!--&lt;!&ndash; https://mvnrepository.com/artifact/org.springframework.security/spring-security-core &ndash;&gt;
     <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-core</artifactId>
       <version>5.1.5.RELEASE</version>
-    </dependency>
+    </dependency>-->
     <!-- https://mvnrepository.com/artifact/org.springframework/spring-support -->
     <dependency>
       <groupId>org.springframework</groupId>
@@ -148,20 +158,10 @@
       <artifactId>jasperreports</artifactId>
       <version>6.6.0</version>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools -->
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-devtools</artifactId>
-    </dependency>
     <dependency>
       <groupId>org.mapstruct</groupId>
       <artifactId>mapstruct</artifactId>
       <version>${mapstruct.version}</version>
-    </dependency>
-    <!--    logging-->
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-log4j2</artifactId>
     </dependency>
     <!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->
     <dependency>

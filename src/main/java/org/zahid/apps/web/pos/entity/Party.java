@@ -13,7 +13,9 @@ import java.util.List;
  * The persistent class for the XXIM_PARTIES database table.
  */
 @Entity
-@Table(name = "XXIM_PARTIES")
+@Table(name = "XXIM_PARTIES", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"PARTY_NAME"})
+})
 @JsonIdentityInfo(scope = Party.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "partyCode")
 //@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @NamedQueries({

@@ -14,7 +14,9 @@ import java.util.List;
  * The persistent class for the XXIM_ITEMS database table.
  */
 @Entity
-@Table(name = "XXIM_ITEMS")
+@Table(name = "XXIM_ITEMS", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"ITEM_DESC"})
+})
 //@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @JsonIdentityInfo(scope = Item.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "itemCode")
 //@JsonIdentityInfo(scope = Item.class, generator = ObjectIdGenerators.UUIDGenerator.class, property = "@id")
