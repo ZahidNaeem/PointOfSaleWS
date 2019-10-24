@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,97 +35,97 @@ import org.zahid.apps.web.pos.security.payload.response.JwtAuthenticationRespons
 @RequestMapping("/api/auth")
 public class AuthController {
 
-  @Autowired
-  private AuthenticationManager authenticationManager;
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
-  @Autowired
-  private UserRepo userRepo;
+    @Autowired
+    private UserRepo userRepo;
 
-  @Autowired
-  private RoleRepo roleRepo;
+    @Autowired
+    private RoleRepo roleRepo;
 
-  @Autowired
-  private PasswordEncoder passwordEncoder;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
-  @Autowired
-  private JwtProvider tokenProvider;
+    @Autowired
+    private JwtProvider tokenProvider;
 
-  @PostMapping("/signin")
-  public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+    @PostMapping("/signin")
+    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
-    final Authentication authentication = authenticationManager.authenticate(
-        new UsernamePasswordAuthenticationToken(
-            loginRequest.getUsernameOrEmail(),
-            loginRequest.getPassword()
-        )
-    );
+        final Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        loginRequest.getUsernameOrEmail(),
+                        loginRequest.getPassword()
+                )
+        );
 
-    SecurityContextHolder.getContext().setAuthentication(authentication);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
 
-    final String jwt = tokenProvider.generateJwtToken(authentication);
-    return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
-  }
-
-  @PostMapping("/signup")
-  public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
-    if (userRepo.existsByUsername(signUpRequest.getUsername())) {
-      return new ResponseEntity(new ApiResponse(false, "Username is already taken!"),
-          HttpStatus.BAD_REQUEST);
+        final String jwt = tokenProvider.generateJwtToken(authentication);
+        return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
     }
 
-    if (userRepo.existsByEmail(signUpRequest.getEmail())) {
-      return new ResponseEntity(new ApiResponse(false, "Email Address already in use!"),
-          HttpStatus.BAD_REQUEST);
-    }
+    @PostMapping("/signup")
+    public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
+        if (userRepo.existsByUsername(signUpRequest.getUsername())) {
+            return new ResponseEntity(new ApiResponse(false, "Username is already taken!"),
+                    HttpStatus.BAD_REQUEST);
+        }
 
-    // Creating user's account
-    final User user = new User(signUpRequest.getName(), signUpRequest.getUsername(),
-        signUpRequest.getEmail(), signUpRequest.getPassword());
+        if (userRepo.existsByEmail(signUpRequest.getEmail())) {
+            return new ResponseEntity(new ApiResponse(false, "Email Address already in use!"),
+                    HttpStatus.BAD_REQUEST);
+        }
 
-    user.setPassword(passwordEncoder.encode(user.getPassword()));
-    Set<String> strRoles = signUpRequest.getRole();
-    Set<Role> roles = new HashSet<>();
+        // Creating user's account
+        final User user = new User(signUpRequest.getName(), signUpRequest.getUsername(),
+                signUpRequest.getEmail(), signUpRequest.getPassword());
 
-    strRoles.forEach(role -> {
-      switch (role) {
-        case "admin":
-          Role adminRole = roleRepo.findByName(RoleName.ROLE_ADMIN)
-              .orElseThrow(() -> new RuntimeException(
-                  "Fail! -> Cause: Role " + RoleName.ROLE_ADMIN.getValue() + " not find."));
-          roles.add(adminRole);
-          break;
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        Set<String> strRoles = signUpRequest.getRole();
+        Set<Role> roles = new HashSet<>();
 
-        case "pm":
-          Role pmRole = roleRepo.findByName(RoleName.ROLE_PM)
-              .orElseThrow(() -> new RuntimeException(
-                  "Fail! -> Cause: Role " + RoleName.ROLE_PM.getValue() + " not find."));
-          roles.add(pmRole);
-          break;
+        strRoles.forEach(role -> {
+            switch (role) {
+                case "admin":
+                    Role adminRole = roleRepo.findByName(RoleName.ROLE_ADMIN)
+                            .orElseThrow(() -> new RuntimeException(
+                                    "Fail! -> Cause: Role " + RoleName.ROLE_ADMIN.getValue() + " not find."));
+                    roles.add(adminRole);
+                    break;
 
-        case "user":
+                case "pm":
+                    Role pmRole = roleRepo.findByName(RoleName.ROLE_PM)
+                            .orElseThrow(() -> new RuntimeException(
+                                    "Fail! -> Cause: Role " + RoleName.ROLE_PM.getValue() + " not find."));
+                    roles.add(pmRole);
+                    break;
+
+        /*case "user":
           Role userRole = roleRepo.findByName(RoleName.ROLE_USER)
               .orElseThrow(() -> new RuntimeException(
                   "Fail! -> Cause: Role " + RoleName.ROLE_USER.getValue() + " not find."));
           roles.add(userRole);
-          break;
+          break;*/
 
-        /*default:
-          Role userRole = roleRepo.findByName(RoleName.ROLE_USER)
-              .orElseThrow(() -> new RuntimeException(
-                  "Fail! -> Cause: Role " + RoleName.ROLE_USER.getValue() + " not find."));
-          roles.add(userRole);*/
-      }
-    });
+                default:
+                    Role userRole = roleRepo.findByName(RoleName.ROLE_USER)
+                            .orElseThrow(() -> new RuntimeException(
+                                    "Fail! -> Cause: Role " + RoleName.ROLE_USER.getValue() + " not find."));
+                    roles.add(userRole);
+            }
+        });
 
-    user.setRoles(roles);
+        user.setRoles(roles);
 
-    final User result = userRepo.save(user);
+        final User result = userRepo.save(user);
 
-    final URI location = ServletUriComponentsBuilder
-        .fromCurrentContextPath().path("/api/users/{username}")
-        .buildAndExpand(result.getUsername()).toUri();
+        final URI location = ServletUriComponentsBuilder
+                .fromCurrentContextPath().path("/api/users/{username}")
+                .buildAndExpand(result.getUsername()).toUri();
 
-    return ResponseEntity.created(location)
-        .body(new ApiResponse(true, "User registered successfully"));
-  }
+        return ResponseEntity.created(location)
+                .body(new ApiResponse(true, "User registered successfully"));
+    }
 }
