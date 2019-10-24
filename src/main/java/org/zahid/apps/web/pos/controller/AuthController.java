@@ -2,6 +2,8 @@ package org.zahid.apps.web.pos.controller;
 
 import java.net.URI;
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -80,10 +82,41 @@ public class AuthController {
         signUpRequest.getEmail(), signUpRequest.getPassword());
 
     user.setPassword(passwordEncoder.encode(user.getPassword()));
-    Role userRole = roleRepo.findByName(RoleName.ROLE_USER)
-        .orElseThrow(() -> new AppException("User Role not set."));
+    Set<String> strRoles = signUpRequest.getRole();
+    Set<Role> roles = new HashSet<>();
 
-    user.setRoles(Collections.singleton(userRole));
+    strRoles.forEach(role -> {
+      switch (role) {
+        case "admin":
+          Role adminRole = roleRepo.findByName(RoleName.ROLE_ADMIN)
+              .orElseThrow(() -> new RuntimeException(
+                  "Fail! -> Cause: Role " + RoleName.ROLE_ADMIN.getValue() + " not find."));
+          roles.add(adminRole);
+          break;
+
+        case "pm":
+          Role pmRole = roleRepo.findByName(RoleName.ROLE_PM)
+              .orElseThrow(() -> new RuntimeException(
+                  "Fail! -> Cause: Role " + RoleName.ROLE_PM.getValue() + " not find."));
+          roles.add(pmRole);
+          break;
+
+        case "user":
+          Role userRole = roleRepo.findByName(RoleName.ROLE_USER)
+              .orElseThrow(() -> new RuntimeException(
+                  "Fail! -> Cause: Role " + RoleName.ROLE_USER.getValue() + " not find."));
+          roles.add(userRole);
+          break;
+
+        /*default:
+          Role userRole = roleRepo.findByName(RoleName.ROLE_USER)
+              .orElseThrow(() -> new RuntimeException(
+                  "Fail! -> Cause: Role " + RoleName.ROLE_USER.getValue() + " not find."));
+          roles.add(userRole);*/
+      }
+    });
+
+    user.setRoles(roles);
 
     final User result = userRepo.save(user);
 
