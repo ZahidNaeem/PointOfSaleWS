@@ -21,10 +21,10 @@ import org.zahid.apps.web.pos.mapper.InvoiceDtlMapper;
 import org.zahid.apps.web.pos.service.InvoiceDtlService;
 
 @RestController
-@RequestMapping("invoiceDtl")
-public class InvoiceDtlRestController {
+@RequestMapping("api/invoiceDtl")
+public class InvoiceDtlController {
 
-  private static final Logger LOG = LogManager.getLogger(InvoiceDtlRestController.class);
+  private static final Logger LOG = LogManager.getLogger(InvoiceDtlController.class);
 
   @Autowired
   private InvoiceDtlService invoiceDtlService;

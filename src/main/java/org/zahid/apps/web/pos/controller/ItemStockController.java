@@ -17,16 +17,15 @@ import org.springframework.web.bind.annotation.RestController;
 import org.zahid.apps.web.pos.model.ItemStockModel;
 import org.zahid.apps.web.pos.entity.ItemStock;
 import org.zahid.apps.web.pos.mapper.ItemStockMapper;
-import org.zahid.apps.web.pos.service.ItemService;
 import org.zahid.apps.web.pos.service.ItemStockService;
 
 
 //@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RestController
-@RequestMapping("stock")
-public class ItemStockRestController {
+@RequestMapping("api/stock")
+public class ItemStockController {
 
-  private static final Logger LOG = LogManager.getLogger(ItemStockRestController.class);
+  private static final Logger LOG = LogManager.getLogger(ItemStockController.class);
 
   @Autowired
   private ItemStockService stockService;

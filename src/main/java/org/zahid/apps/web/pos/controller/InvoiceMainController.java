@@ -12,7 +12,6 @@ import org.zahid.apps.web.pos.entity.NavigationDtl;
 import org.zahid.apps.web.pos.mapper.InvoiceMainMapper;
 import org.zahid.apps.web.pos.model.InvoiceMainModel;
 import org.zahid.apps.web.pos.service.InvoiceMainService;
-import org.zahid.apps.web.pos.service.PartyService;
 
 import java.util.HashSet;
 import java.util.List;
@@ -20,10 +19,10 @@ import java.util.List;
 
 //@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RestController
-@RequestMapping("invoice")
-public class InvoiceMainRestController {
+@RequestMapping("api/invoice")
+public class InvoiceMainController {
 
-  private static final Logger LOG = LogManager.getLogger(InvoiceMainRestController.class);
+  private static final Logger LOG = LogManager.getLogger(InvoiceMainController.class);
 
   @Autowired
   private InvoiceMainService invoiceMainService;

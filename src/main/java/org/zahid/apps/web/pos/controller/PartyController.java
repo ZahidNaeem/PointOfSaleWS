@@ -19,10 +19,10 @@ import java.util.List;
 
 //@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RestController
-@RequestMapping("party")
-public class PartyRestController {
+@RequestMapping("api/party")
+public class PartyController {
 
-  private static final Logger LOG = LogManager.getLogger(PartyRestController.class);
+  private static final Logger LOG = LogManager.getLogger(PartyController.class);
   @Autowired
   private PartyService partyService;
 

@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.zahid.apps.web.pos.dto.ItemDTO;
 import org.zahid.apps.web.pos.entity.Item;
-import org.zahid.apps.web.pos.entity.ItemStock;
 import org.zahid.apps.web.pos.entity.NavigationDtl;
 import org.zahid.apps.web.pos.mapper.ItemMapper;
 import org.zahid.apps.web.pos.model.ItemModel;
@@ -26,10 +25,10 @@ import org.zahid.apps.web.pos.service.ItemService;
 
 //@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RestController
-@RequestMapping("item")
-public class ItemRestController {
+@RequestMapping("api/item")
+public class ItemController {
 
-  private static final Logger LOG = LogManager.getLogger(ItemRestController.class);
+  private static final Logger LOG = LogManager.getLogger(ItemController.class);
   @Autowired
   private ItemService itemService;
 

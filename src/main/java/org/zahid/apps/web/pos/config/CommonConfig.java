@@ -1,4 +1,4 @@
-package org.zahid.apps.web.pos;
+package org.zahid.apps.web.pos.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

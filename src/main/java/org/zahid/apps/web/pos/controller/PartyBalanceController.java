@@ -18,10 +18,10 @@ import java.util.Set;
 
 //@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RestController
-@RequestMapping("balance")
-public class PartyBalanceRestController {
+@RequestMapping("api/balance")
+public class PartyBalanceController {
 
-  private static final Logger LOG = LogManager.getLogger(ItemRestController.class);
+  private static final Logger LOG = LogManager.getLogger(ItemController.class);
   @Autowired
   private PartyBalanceService partyBalanceService;
 

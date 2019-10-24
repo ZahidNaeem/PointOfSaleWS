@@ -10,7 +10,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.zahid.apps.web.pos.entity.User;
 
-public class UserPrinciple implements UserDetails {
+public class UserPrincipal implements UserDetails {
   private static final long serialVersionUID = 1L;
 
   private Long id;
@@ -26,9 +26,9 @@ public class UserPrinciple implements UserDetails {
 
   private Collection<? extends GrantedAuthority> authorities;
 
-  public UserPrinciple(Long id, String name,
-      String username, String email, String password,
-      Collection<? extends GrantedAuthority> authorities) {
+  public UserPrincipal(Long id, String name,
+                       String username, String email, String password,
+                       Collection<? extends GrantedAuthority> authorities) {
     this.id = id;
     this.name = name;
     this.username = username;
@@ -37,12 +37,12 @@ public class UserPrinciple implements UserDetails {
     this.authorities = authorities;
   }
 
-  public static UserPrinciple build(User user) {
+  public static UserPrincipal build(User user) {
     List<GrantedAuthority> authorities = user.getRoles().stream().map(role ->
         new SimpleGrantedAuthority(role.getName().name())
     ).collect(Collectors.toList());
 
-    return new UserPrinciple(
+    return new UserPrincipal(
         user.getId(),
         user.getName(),
         user.getUsername(),
@@ -104,7 +104,7 @@ public class UserPrinciple implements UserDetails {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
 
-    UserPrinciple user = (UserPrinciple) o;
+    UserPrincipal user = (UserPrincipal) o;
     return Objects.equals(id, user.id);
   }
 }
