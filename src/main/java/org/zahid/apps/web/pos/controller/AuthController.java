@@ -1,11 +1,5 @@
 package org.zahid.apps.web.pos.controller;
 
-import java.net.URI;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +16,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.zahid.apps.web.pos.entity.Role;
 import org.zahid.apps.web.pos.entity.User;
 import org.zahid.apps.web.pos.enumeration.RoleName;
-import org.zahid.apps.web.pos.exception.AppException;
 import org.zahid.apps.web.pos.repo.RoleRepo;
 import org.zahid.apps.web.pos.repo.UserRepo;
 import org.zahid.apps.web.pos.security.jwt.JwtProvider;
@@ -30,6 +23,11 @@ import org.zahid.apps.web.pos.security.payload.request.LoginRequest;
 import org.zahid.apps.web.pos.security.payload.request.SignUpRequest;
 import org.zahid.apps.web.pos.security.payload.response.ApiResponse;
 import org.zahid.apps.web.pos.security.payload.response.JwtAuthenticationResponse;
+
+import javax.validation.Valid;
+import java.net.URI;
+import java.util.HashSet;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/auth")
