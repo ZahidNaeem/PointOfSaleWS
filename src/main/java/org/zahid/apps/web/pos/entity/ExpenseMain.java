@@ -18,7 +18,7 @@ import java.util.List;
 @JsonIdentityInfo(scope = ExpenseMain.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "expMainId")
 //@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @NamedQuery(name = "ExpenseMain.findAll", query = "SELECT e FROM ExpenseMain e")
-public class ExpenseMain extends Auditable<String> implements Serializable {
+public class ExpenseMain extends Auditable<AuditorDetail> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id

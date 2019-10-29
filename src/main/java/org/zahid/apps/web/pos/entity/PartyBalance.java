@@ -29,7 +29,7 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "PartyBalance.findAll", query = "SELECT p FROM PartyBalance p"),
     @NamedQuery(name = "PartyBalance.generateID", query = "SELECT coalesce(max(partyBalanceId), 0) + 1 FROM PartyBalance p")
 })
-public class PartyBalance extends Auditable<String> implements Serializable {
+public class PartyBalance extends Auditable<AuditorDetail> implements Serializable {
 
   private static final long serialVersionUID = 1L;
 

@@ -1,25 +1,24 @@
 package org.zahid.apps.web.pos.model;
 
+import org.zahid.apps.web.pos.entity.Auditable;
+import org.zahid.apps.web.pos.entity.AuditorDetail;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
-public class ItemModel implements Serializable {
+public class ItemModel  extends Auditable<AuditorDetail> implements Serializable {
 
   private static final long serialVersionUID = 1L;
   private Long itemCode;
-  private String createdBy;
-  private Timestamp creationDate;
   private Date effectiveEndDate;
   private Date effectiveStartDate;
   private String itemBarcode;
   private String itemCategory;
   private String itemDesc;
   private String itemUom;
-  private Timestamp lastUpdateDate;
-  private String lastUpdatedBy;
   private BigDecimal maxStock;
   private BigDecimal minStock;
   private BigDecimal purchasePrice;
@@ -36,22 +35,6 @@ public class ItemModel implements Serializable {
 
   public void setItemCode(Long itemCode) {
     this.itemCode = itemCode;
-  }
-
-  public String getCreatedBy() {
-    return createdBy;
-  }
-
-  public void setCreatedBy(String createdBy) {
-    this.createdBy = createdBy;
-  }
-
-  public Timestamp getCreationDate() {
-    return creationDate;
-  }
-
-  public void setCreationDate(Timestamp creationDate) {
-    this.creationDate = creationDate;
   }
 
   public Date getEffectiveEndDate() {
@@ -100,22 +83,6 @@ public class ItemModel implements Serializable {
 
   public void setItemUom(String itemUom) {
     this.itemUom = itemUom;
-  }
-
-  public Timestamp getLastUpdateDate() {
-    return lastUpdateDate;
-  }
-
-  public void setLastUpdateDate(Timestamp lastUpdateDate) {
-    this.lastUpdateDate = lastUpdateDate;
-  }
-
-  public String getLastUpdatedBy() {
-    return lastUpdatedBy;
-  }
-
-  public void setLastUpdatedBy(String lastUpdatedBy) {
-    this.lastUpdatedBy = lastUpdatedBy;
   }
 
   public BigDecimal getMaxStock() {

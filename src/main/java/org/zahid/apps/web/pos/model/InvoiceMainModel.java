@@ -1,12 +1,18 @@
 package org.zahid.apps.web.pos.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
+
+import org.zahid.apps.web.pos.entity.Auditable;
+import org.zahid.apps.web.pos.entity.AuditorDetail;
 import org.zahid.apps.web.pos.entity.InvoiceMain;
 
-public class InvoiceMainModel {
+public class InvoiceMainModel extends Auditable<AuditorDetail> implements Serializable {
+
+private static final long serialVersionUID = 1L;
 
   private Long invNum;
 
@@ -23,14 +29,6 @@ public class InvoiceMainModel {
   private Long refInvoice;
 
   private List<InvoiceMain> invoiceMains;
-
-  private String createdBy;
-
-  private Timestamp creationDate;
-
-  private String lastUpdatedBy;
-
-  private Timestamp lastUpdateDate;
 
   private List<InvoiceDtlModel> invoiceDtls;
 
@@ -98,38 +96,6 @@ public class InvoiceMainModel {
 
   public void setInvoiceMains(List<InvoiceMain> invoiceMains) {
     this.invoiceMains = invoiceMains;
-  }
-
-  public String getCreatedBy() {
-    return createdBy;
-  }
-
-  public void setCreatedBy(String createdBy) {
-    this.createdBy = createdBy;
-  }
-
-  public Timestamp getCreationDate() {
-    return creationDate;
-  }
-
-  public void setCreationDate(Timestamp creationDate) {
-    this.creationDate = creationDate;
-  }
-
-  public String getLastUpdatedBy() {
-    return lastUpdatedBy;
-  }
-
-  public void setLastUpdatedBy(String lastUpdatedBy) {
-    this.lastUpdatedBy = lastUpdatedBy;
-  }
-
-  public Timestamp getLastUpdateDate() {
-    return lastUpdateDate;
-  }
-
-  public void setLastUpdateDate(Timestamp lastUpdateDate) {
-    this.lastUpdateDate = lastUpdateDate;
   }
 
   public List<InvoiceDtlModel> getInvoiceDtls() {

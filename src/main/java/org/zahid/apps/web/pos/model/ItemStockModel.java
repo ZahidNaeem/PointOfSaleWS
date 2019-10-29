@@ -1,24 +1,20 @@
 package org.zahid.apps.web.pos.model;
 
+import org.zahid.apps.web.pos.entity.Auditable;
+import org.zahid.apps.web.pos.entity.AuditorDetail;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Date;
 
-public class ItemStockModel implements Serializable {
+public class ItemStockModel  extends Auditable<AuditorDetail> implements Serializable {
+
   private static final long serialVersionUID = 1L;
 
   private Long itemStockId;
 
-  private String createdBy;
-
-  private Timestamp creationDate;
-
   private Date itemStockDate;
-
-  private Timestamp lastUpdateDate;
-
-  private String lastUpdatedBy;
 
   private BigDecimal qnty;
 
@@ -34,44 +30,12 @@ public class ItemStockModel implements Serializable {
     this.itemStockId = itemStockId;
   }
 
-  public String getCreatedBy() {
-    return createdBy;
-  }
-
-  public void setCreatedBy(String createdBy) {
-    this.createdBy = createdBy;
-  }
-
-  public Timestamp getCreationDate() {
-    return creationDate;
-  }
-
-  public void setCreationDate(Timestamp creationDate) {
-    this.creationDate = creationDate;
-  }
-
   public Date getItemStockDate() {
     return itemStockDate;
   }
 
   public void setItemStockDate(Date itemStockDate) {
     this.itemStockDate = itemStockDate;
-  }
-
-  public Timestamp getLastUpdateDate() {
-    return lastUpdateDate;
-  }
-
-  public void setLastUpdateDate(Timestamp lastUpdateDate) {
-    this.lastUpdateDate = lastUpdateDate;
-  }
-
-  public String getLastUpdatedBy() {
-    return lastUpdatedBy;
-  }
-
-  public void setLastUpdatedBy(String lastUpdatedBy) {
-    this.lastUpdatedBy = lastUpdatedBy;
   }
 
   public BigDecimal getQnty() {

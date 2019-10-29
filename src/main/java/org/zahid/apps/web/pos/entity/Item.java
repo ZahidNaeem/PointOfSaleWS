@@ -26,7 +26,7 @@ import java.util.List;
     @NamedQuery(name = "Item.getCategories", query = "SELECT distinct i.itemCategory FROM Item i where i.itemCategory is not null"),
     @NamedQuery(name = "Item.getItemDesc", query = "SELECT i.itemDesc FROM Item i where i.itemCode = :itemCode")
 })
-public class Item extends Auditable<String> implements Serializable {
+public class Item extends Auditable<AuditorDetail> implements Serializable {
 
   private static final long serialVersionUID = 1L;
 

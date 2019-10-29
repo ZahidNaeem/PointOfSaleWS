@@ -17,7 +17,7 @@ import java.util.List;
 @JsonIdentityInfo(scope = VoucherHeader.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "headerId")
 //@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @NamedQuery(name = "VoucherHeader.findAll", query = "SELECT v FROM VoucherHeader v")
-public class VoucherHeader extends Auditable<String> implements Serializable {
+public class VoucherHeader extends Auditable<AuditorDetail> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id

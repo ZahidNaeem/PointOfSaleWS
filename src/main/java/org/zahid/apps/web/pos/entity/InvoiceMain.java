@@ -39,7 +39,7 @@ import org.hibernate.annotations.GenericGenerator;
         @NamedQuery(name = "InvoiceMain.findAllSI", query = "SELECT i FROM InvoiceMain i where i.invType = 'SALE'"),
         @NamedQuery(name = "InvoiceMain.findAllSRI", query = "SELECT i FROM InvoiceMain i where i.invType = 'SALE RETURN'")
 })
-public class InvoiceMain extends Auditable<String> implements Serializable {
+public class InvoiceMain extends Auditable<AuditorDetail> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id

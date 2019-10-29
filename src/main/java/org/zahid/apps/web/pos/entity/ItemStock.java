@@ -32,7 +32,7 @@ import javax.validation.constraints.NotNull;
     @NamedQuery(name = "ItemStock.findAllByItem", query = "SELECT i FROM ItemStock i where i.item.itemCode = ?1"),
     @NamedQuery(name = "ItemStock.generateID", query = "SELECT coalesce(max(itemStockId), 0) + 1 FROM ItemStock i")
 })
-public class ItemStock extends Auditable<String> implements Serializable {
+public class ItemStock extends Auditable<AuditorDetail> implements Serializable {
 
   private static final long serialVersionUID = 1L;
 

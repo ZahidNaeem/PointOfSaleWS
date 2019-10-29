@@ -1,22 +1,18 @@
 package org.zahid.apps.web.pos.model;
 
+import org.zahid.apps.web.pos.entity.Auditable;
+import org.zahid.apps.web.pos.entity.AuditorDetail;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
-public class InvoiceDtlModel implements Serializable {
+public class InvoiceDtlModel extends Auditable<AuditorDetail> implements Serializable {
+
     private static final long serialVersionUID = 1L;
     private Long invDtlNum;
 
-    private String createdBy;
-
-    private Timestamp creationDate;
-
     private BigDecimal itemPrice;
-
-    private Timestamp lastUpdateDate;
-
-    private String lastUpdatedBy;
 
     private BigDecimal qnty;
 
@@ -35,44 +31,12 @@ public class InvoiceDtlModel implements Serializable {
         this.invDtlNum = invDtlNum;
     }
 
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public Timestamp getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(Timestamp creationDate) {
-        this.creationDate = creationDate;
-    }
-
     public BigDecimal getItemPrice() {
         return itemPrice;
     }
 
     public void setItemPrice(BigDecimal itemPrice) {
         this.itemPrice = itemPrice;
-    }
-
-    public Timestamp getLastUpdateDate() {
-        return lastUpdateDate;
-    }
-
-    public void setLastUpdateDate(Timestamp lastUpdateDate) {
-        this.lastUpdateDate = lastUpdateDate;
-    }
-
-    public String getLastUpdatedBy() {
-        return lastUpdatedBy;
-    }
-
-    public void setLastUpdatedBy(String lastUpdatedBy) {
-        this.lastUpdatedBy = lastUpdatedBy;
     }
 
     public BigDecimal getQnty() {

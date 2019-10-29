@@ -87,6 +87,14 @@ public class UserPrincipal implements UserDetails {
         return authorities;
     }
 
+    public Organization getOrganization() {
+        return organization;
+    }
+
+    public void setOrganization(Organization organization) {
+        this.organization = organization;
+    }
+
     @Override
     public boolean isAccountNonExpired() {
         return true;

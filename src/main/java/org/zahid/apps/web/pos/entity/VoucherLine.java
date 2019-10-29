@@ -16,7 +16,7 @@ import java.util.Date;
 @Table(name = "XXIM_VOUCHER_LINE")
 @JsonIdentityInfo(scope = VoucherLine.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "lineId")
 @NamedQuery(name = "VoucherLine.findAll", query = "SELECT v FROM VoucherLine v")
-public class VoucherLine extends Auditable<String> implements Serializable {
+public class VoucherLine extends Auditable<AuditorDetail> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id

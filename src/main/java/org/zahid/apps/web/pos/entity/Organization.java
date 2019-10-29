@@ -22,7 +22,7 @@ import java.util.List;
         @NamedQuery(name = "Organization.findAll", query = "SELECT p FROM Organization p"),
         @NamedQuery(name = "Organization.generateID", query = "SELECT coalesce(max(organizationCode), 0) + 1 FROM Organization p")
 })
-public class Organization extends Auditable<String> implements Serializable {
+public class Organization extends Auditable<AuditorDetail> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id

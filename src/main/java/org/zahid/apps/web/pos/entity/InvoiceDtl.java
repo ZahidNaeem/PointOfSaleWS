@@ -20,7 +20,7 @@ import java.sql.Timestamp;
     @NamedQuery(name = "InvoiceDtl.findAll", query = "SELECT i FROM InvoiceDtl i"),
     @NamedQuery(name = "InvoiceDtl.findByInvoice", query = "SELECT i FROM InvoiceDtl i where i.invoiceMain.invNum = ?1")
 })
-public class InvoiceDtl extends Auditable<String> implements Serializable {
+public class InvoiceDtl extends Auditable<AuditorDetail> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id

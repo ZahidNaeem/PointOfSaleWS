@@ -15,7 +15,7 @@ import java.sql.Timestamp;
 @Table(name = "XXIM_EXPENSE_DTL")
 @JsonIdentityInfo(scope = ExpenseDtl.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "expDtlId")
 @NamedQuery(name = "ExpenseDtl.findAll", query = "SELECT e FROM ExpenseDtl e")
-public class ExpenseDtl extends Auditable<String> implements Serializable {
+public class ExpenseDtl extends Auditable<AuditorDetail> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
