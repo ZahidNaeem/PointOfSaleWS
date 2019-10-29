@@ -1,5 +1,10 @@
 package org.zahid.apps.web.pos.utils;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.json.JSONObject;
+
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -8,10 +13,6 @@ import java.util.HashSet;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 import java.util.Set;
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.json.JSONObject;
 
 public class Miscellaneous {
 

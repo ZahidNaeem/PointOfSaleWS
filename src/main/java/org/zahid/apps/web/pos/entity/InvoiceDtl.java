@@ -2,18 +2,10 @@ package org.zahid.apps.web.pos.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
 
 /**
  * The persistent class for the XXIM_INVOICE_DTL database table.
@@ -26,7 +18,7 @@ import javax.persistence.Table;
     @NamedQuery(name = "InvoiceDtl.findAll", query = "SELECT i FROM InvoiceDtl i"),
     @NamedQuery(name = "InvoiceDtl.findByInvoice", query = "SELECT i FROM InvoiceDtl i where i.invoiceMain.invNum = ?1")
 })
-public class InvoiceDtl extends Auditable<User> implements Serializable {
+public class InvoiceDtl extends Auditable<String> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id

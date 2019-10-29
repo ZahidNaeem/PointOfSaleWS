@@ -1,19 +1,16 @@
 package org.zahid.apps.web.pos.entity.idgenerator;
 
-import java.io.Serializable;
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Types;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.id.IdentifierGenerator;
 import org.zahid.apps.web.pos.entity.InvoiceMain;
+
+import java.io.Serializable;
+import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 public class InvoiceIdGenerator implements IdentifierGenerator {
 

@@ -1,7 +1,8 @@
 package org.zahid.apps.web.pos.enumeration;
 
-import java.util.Arrays;
 import org.zahid.apps.web.pos.exception.PartyTypeNotFoundException;
+
+import java.util.Arrays;
 
 public enum PartyType {
   SUPPLIER("Supplier"),

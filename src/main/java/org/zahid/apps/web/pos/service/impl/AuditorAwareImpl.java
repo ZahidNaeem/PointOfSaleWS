@@ -1,18 +1,17 @@
 package org.zahid.apps.web.pos.service.impl;
 
-import java.util.Optional;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.zahid.apps.web.pos.entity.User;
 import org.zahid.apps.web.pos.security.service.UserPrincipal;
 
-public class AuditorAwareImpl implements AuditorAware<User> {
+import java.util.Optional;
+
+public class AuditorAwareImpl implements AuditorAware<String> {
 
     @Override
-    public Optional<User> getCurrentAuditor() {
+    public Optional<String> getCurrentAuditor() {
 //        return Optional.of("Zahid");
         // Can use Spring Security to return currently logged in user
         // return ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername()
@@ -26,15 +25,7 @@ public class AuditorAwareImpl implements AuditorAware<User> {
 
         final UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
 
-        final User user = new User(
-                userPrincipal.getName(),
-                userPrincipal.getUsername(),
-                userPrincipal.getEmail(),
-                userPrincipal.getPassword(),
-                userPrincipal.getOrganization()
-                );
-
-        return Optional.ofNullable(user);
+        return Optional.ofNullable(userPrincipal.getUsername() + "|" + userPrincipal.getOrganization().getOrganizationName());
     }
 }
 

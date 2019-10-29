@@ -2,21 +2,11 @@ package org.zahid.apps.web.pos.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  * The persistent class for the XXIM_ITEM_STOCK database table.
@@ -30,7 +20,7 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "ItemStock.findAllByItem", query = "SELECT i FROM ItemStock i where i.item.itemCode = ?1"),
     @NamedQuery(name = "ItemStock.generateID", query = "SELECT coalesce(max(itemStockId), 0) + 1 FROM ItemStock i")
 })
-public class ItemStock extends Auditable<User> implements Serializable {
+public class ItemStock extends Auditable<String> implements Serializable {
 
   private static final long serialVersionUID = 1L;
 

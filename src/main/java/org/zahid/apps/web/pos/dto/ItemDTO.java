@@ -1,8 +1,9 @@
 package org.zahid.apps.web.pos.dto;
 
-import java.io.Serializable;
 import org.zahid.apps.web.pos.entity.NavigationDtl;
 import org.zahid.apps.web.pos.model.ItemModel;
+
+import java.io.Serializable;
 
 public class ItemDTO implements Serializable {
     private static final long serialVersionUID = 1L;

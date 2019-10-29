@@ -1,15 +1,16 @@
 package org.zahid.apps.web.pos.security.service;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.zahid.apps.web.pos.entity.Organization;
 import org.zahid.apps.web.pos.entity.User;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class UserPrincipal implements UserDetails {
     private static final long serialVersionUID = 1L;

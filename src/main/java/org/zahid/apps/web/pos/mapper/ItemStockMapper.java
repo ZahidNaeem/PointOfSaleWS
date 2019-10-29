@@ -1,7 +1,5 @@
 package org.zahid.apps.web.pos.mapper;
 
-import java.util.ArrayList;
-import java.util.List;
 import org.apache.commons.collections.CollectionUtils;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -9,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.zahid.apps.web.pos.entity.ItemStock;
 import org.zahid.apps.web.pos.model.ItemStockModel;
 import org.zahid.apps.web.pos.service.ItemService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Mapper(componentModel = "spring")
 public abstract class ItemStockMapper {

@@ -1,7 +1,5 @@
 package org.zahid.apps.web.pos.mapper;
 
-import java.util.ArrayList;
-import java.util.List;
 import org.apache.commons.collections.CollectionUtils;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -12,6 +10,9 @@ import org.zahid.apps.web.pos.model.InvoiceDtlModel;
 import org.zahid.apps.web.pos.model.InvoiceMainModel;
 import org.zahid.apps.web.pos.service.InvoiceMainService;
 import org.zahid.apps.web.pos.service.PartyService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Mapper(componentModel = "spring")
 public abstract class InvoiceMainMapper {

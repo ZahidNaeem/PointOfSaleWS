@@ -1,9 +1,11 @@
 package org.zahid.apps.web.pos.security.payload.request;
 
-import java.util.Set;
+import org.zahid.apps.web.pos.entity.Organization;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 public class SignUpRequest {
 
@@ -25,6 +27,8 @@ public class SignUpRequest {
   @NotBlank
   @Size(min = 6, max = 40)
   private String password;
+
+  private Organization organization;
 
   public String getName() {
     return name;
@@ -64,5 +68,13 @@ public class SignUpRequest {
 
   public void setRole(Set<String> role) {
     this.role = role;
+  }
+
+  public Organization getOrganization() {
+    return organization;
+  }
+
+  public void setOrganization(Organization organization) {
+    this.organization = organization;
   }
 }

@@ -1,18 +1,13 @@
 package org.zahid.apps.web.pos.entity;
 
-import java.io.Serializable;
-import java.util.Objects;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
+import org.hibernate.annotations.Immutable;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.hibernate.annotations.Immutable;
+import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @Table(name = "XXUM_USER_DETAILS")

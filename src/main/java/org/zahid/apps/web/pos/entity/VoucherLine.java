@@ -2,20 +2,11 @@ package org.zahid.apps.web.pos.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  * The persistent class for the XXIM_VOUCHER_LINE database table.
@@ -24,7 +15,7 @@ import javax.persistence.TemporalType;
 @Table(name = "XXIM_VOUCHER_LINE")
 @JsonIdentityInfo(scope = VoucherLine.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "lineId")
 @NamedQuery(name = "VoucherLine.findAll", query = "SELECT v FROM VoucherLine v")
-public class VoucherLine extends Auditable<User> implements Serializable {
+public class VoucherLine extends Auditable<String> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id

@@ -1,12 +1,12 @@
 package org.zahid.apps.web.pos.model;
 
+import org.zahid.apps.web.pos.entity.Auditable;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-import org.zahid.apps.web.pos.entity.Auditable;
-import org.zahid.apps.web.pos.entity.User;
 
-public class PartyBalanceModel  extends Auditable<User> implements Serializable {
+public class PartyBalanceModel  extends Auditable<String> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

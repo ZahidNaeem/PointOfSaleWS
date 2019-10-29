@@ -6,7 +6,6 @@ import org.springframework.data.domain.AuditorAware;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.zahid.apps.web.pos.entity.User;
 import org.zahid.apps.web.pos.service.impl.AuditorAwareImpl;
 
 @Configuration
@@ -26,7 +25,7 @@ public class CommonConfig {
     }
 
     @Bean
-    public AuditorAware<User> auditorAware() {
+    public AuditorAware<String> auditorAware() {
         return new AuditorAwareImpl();
     }
 

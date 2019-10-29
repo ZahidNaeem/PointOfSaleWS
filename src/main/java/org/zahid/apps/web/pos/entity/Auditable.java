@@ -1,28 +1,25 @@
 package org.zahid.apps.web.pos.entity;
 
-import static javax.persistence.TemporalType.TIMESTAMP;
-
-import java.util.Date;
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.EntityListeners;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.Temporal;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import javax.persistence.Column;
+import javax.persistence.EntityListeners;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Temporal;
+import java.util.Date;
+
+import static javax.persistence.TemporalType.TIMESTAMP;
+
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public abstract class Auditable<U> {
 
     @CreatedBy
-    @ManyToOne
-    @JoinColumn(name = "CREATED_BY")
+    @Column(name = "CREATED_BY")
     protected U createdBy;
 
 
@@ -32,8 +29,7 @@ public abstract class Auditable<U> {
     protected Date creationDate;
 
     @LastModifiedBy
-    @ManyToOne
-    @JoinColumn(name = "LAST_UPDATED_BY")
+    @Column(name = "LAST_UPDATED_BY")
     protected U lastUpdatedBy;
 
     @LastModifiedDate

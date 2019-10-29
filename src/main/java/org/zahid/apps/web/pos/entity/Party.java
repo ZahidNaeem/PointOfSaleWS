@@ -2,23 +2,11 @@ package org.zahid.apps.web.pos.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.UniqueConstraint;
 
 /**
  * The persistent class for the XXIM_PARTIES database table.
@@ -33,7 +21,7 @@ import javax.persistence.UniqueConstraint;
         @NamedQuery(name = "Party.findAll", query = "SELECT p FROM Party p"),
         @NamedQuery(name = "Party.generateID", query = "SELECT coalesce(max(partyCode), 0) + 1 FROM Party p")
 })
-public class Party extends Auditable<User> implements Serializable {
+public class Party extends Auditable<String> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id

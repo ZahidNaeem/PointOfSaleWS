@@ -1,7 +1,8 @@
 package org.zahid.apps.web.pos.enumeration;
 
-import java.util.Arrays;
 import org.zahid.apps.web.pos.exception.RoleNameNotFoundException;
+
+import java.util.Arrays;
 
 public enum RoleName {
     ROLE_USER("user"),

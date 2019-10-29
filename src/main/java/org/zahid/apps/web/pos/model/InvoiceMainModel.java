@@ -1,14 +1,14 @@
 package org.zahid.apps.web.pos.model;
 
+import org.zahid.apps.web.pos.entity.Auditable;
+import org.zahid.apps.web.pos.entity.InvoiceMain;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
-import org.zahid.apps.web.pos.entity.Auditable;
-import org.zahid.apps.web.pos.entity.InvoiceMain;
-import org.zahid.apps.web.pos.entity.User;
 
-public class InvoiceMainModel extends Auditable<User> implements Serializable {
+public class InvoiceMainModel extends Auditable<String> implements Serializable {
 
 private static final long serialVersionUID = 1L;
 

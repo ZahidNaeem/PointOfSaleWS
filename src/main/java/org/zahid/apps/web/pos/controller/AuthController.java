@@ -1,9 +1,5 @@
 package org.zahid.apps.web.pos.controller;
 
-import java.net.URI;
-import java.util.HashSet;
-import java.util.Set;
-import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +23,11 @@ import org.zahid.apps.web.pos.security.payload.request.LoginRequest;
 import org.zahid.apps.web.pos.security.payload.request.SignUpRequest;
 import org.zahid.apps.web.pos.security.payload.response.ApiResponse;
 import org.zahid.apps.web.pos.security.payload.response.JwtAuthenticationResponse;
+
+import javax.validation.Valid;
+import java.net.URI;
+import java.util.HashSet;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -77,7 +78,7 @@ public class AuthController {
 
         // Creating user's account
         final User user = new User(signUpRequest.getName(), signUpRequest.getUsername(),
-                signUpRequest.getEmail(), signUpRequest.getPassword());
+                signUpRequest.getEmail(), signUpRequest.getPassword(), signUpRequest.getOrganization());
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         Set<String> strRoles = signUpRequest.getRole();

@@ -2,25 +2,13 @@ package org.zahid.apps.web.pos.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import org.hibernate.annotations.GenericGenerator;
 
 /**
  * The persistent class for the XXIM_INVOICE_MAIN database table.
@@ -38,7 +26,7 @@ import org.hibernate.annotations.GenericGenerator;
         @NamedQuery(name = "InvoiceMain.findAllSI", query = "SELECT i FROM InvoiceMain i where i.invType = 'SALE'"),
         @NamedQuery(name = "InvoiceMain.findAllSRI", query = "SELECT i FROM InvoiceMain i where i.invType = 'SALE RETURN'")
 })
-public class InvoiceMain extends Auditable<User> implements Serializable {
+public class InvoiceMain extends Auditable<String> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
