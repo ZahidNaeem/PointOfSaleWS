@@ -1,10 +1,8 @@
 package org.zahid.apps.web.pos.service;
 
-import org.zahid.apps.web.pos.entity.Item;
-import org.zahid.apps.web.pos.entity.ItemStock;
-
 import java.util.List;
 import java.util.Set;
+import org.zahid.apps.web.pos.entity.ItemStock;
 
 public interface ItemStockService {
 

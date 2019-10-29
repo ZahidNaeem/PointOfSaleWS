@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -39,7 +38,7 @@ import org.hibernate.annotations.GenericGenerator;
         @NamedQuery(name = "InvoiceMain.findAllSI", query = "SELECT i FROM InvoiceMain i where i.invType = 'SALE'"),
         @NamedQuery(name = "InvoiceMain.findAllSRI", query = "SELECT i FROM InvoiceMain i where i.invType = 'SALE RETURN'")
 })
-public class InvoiceMain extends Auditable<AuditorDetail> implements Serializable {
+public class InvoiceMain extends Auditable<User> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id

@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.zahid.apps.web.pos.model.InvoiceDtlModel;
 import org.zahid.apps.web.pos.entity.InvoiceDtl;
 import org.zahid.apps.web.pos.mapper.InvoiceDtlMapper;
+import org.zahid.apps.web.pos.model.InvoiceDtlModel;
 import org.zahid.apps.web.pos.service.InvoiceDtlService;
 
 @RestController

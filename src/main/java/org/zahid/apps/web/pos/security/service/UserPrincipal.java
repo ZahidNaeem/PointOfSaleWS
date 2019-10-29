@@ -1,12 +1,10 @@
 package org.zahid.apps.web.pos.security.service;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

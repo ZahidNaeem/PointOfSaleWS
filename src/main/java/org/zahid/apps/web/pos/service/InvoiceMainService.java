@@ -1,10 +1,8 @@
 package org.zahid.apps.web.pos.service;
 
-import org.zahid.apps.web.pos.entity.InvoiceMain;
-import org.zahid.apps.web.pos.entity.Party;
-
 import java.util.List;
 import java.util.Set;
+import org.zahid.apps.web.pos.entity.InvoiceMain;
 
 public interface InvoiceMainService {
 

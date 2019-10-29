@@ -18,7 +18,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.zahid.apps.web.pos.security.jwt.JwtAuthEntryPoint;
 import org.zahid.apps.web.pos.security.jwt.JwtAuthTokenFilter;
-import org.zahid.apps.web.pos.security.service.UserDetailsServiceImpl;
 
 @Configuration
 @EnableWebSecurity

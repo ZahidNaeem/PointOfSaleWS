@@ -2,12 +2,21 @@ package org.zahid.apps.web.pos.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
-import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * The persistent class for the XXIM_VOUCHER_HEADER database table.
@@ -17,7 +26,7 @@ import java.util.List;
 @JsonIdentityInfo(scope = VoucherHeader.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "headerId")
 //@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @NamedQuery(name = "VoucherHeader.findAll", query = "SELECT v FROM VoucherHeader v")
-public class VoucherHeader extends Auditable<AuditorDetail> implements Serializable {
+public class VoucherHeader extends Auditable<User> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id

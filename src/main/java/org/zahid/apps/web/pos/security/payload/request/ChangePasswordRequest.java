@@ -1,7 +1,6 @@
 package org.zahid.apps.web.pos.security.payload.request;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 
 public class ChangePasswordRequest {
 

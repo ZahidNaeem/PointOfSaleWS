@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.sql.Timestamp;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,7 +28,7 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "PartyBalance.findAll", query = "SELECT p FROM PartyBalance p"),
     @NamedQuery(name = "PartyBalance.generateID", query = "SELECT coalesce(max(partyBalanceId), 0) + 1 FROM PartyBalance p")
 })
-public class PartyBalance extends Auditable<AuditorDetail> implements Serializable {
+public class PartyBalance extends Auditable<User> implements Serializable {
 
   private static final long serialVersionUID = 1L;
 

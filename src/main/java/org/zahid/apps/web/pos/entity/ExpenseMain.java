@@ -2,12 +2,21 @@ package org.zahid.apps.web.pos.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
-import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * The persistent class for the XXIM_EXPENSE_MAIN database table.
@@ -18,7 +27,7 @@ import java.util.List;
 @JsonIdentityInfo(scope = ExpenseMain.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "expMainId")
 //@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @NamedQuery(name = "ExpenseMain.findAll", query = "SELECT e FROM ExpenseMain e")
-public class ExpenseMain extends Auditable<AuditorDetail> implements Serializable {
+public class ExpenseMain extends Auditable<User> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id

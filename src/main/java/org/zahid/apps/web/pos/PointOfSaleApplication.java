@@ -1,6 +1,5 @@
 package org.zahid.apps.web.pos;
 
-import org.apache.commons.logging.impl.LogKitLogger;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.boot.SpringApplication;

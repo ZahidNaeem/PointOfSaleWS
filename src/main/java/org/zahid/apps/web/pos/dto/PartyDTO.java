@@ -1,9 +1,7 @@
 package org.zahid.apps.web.pos.dto;
 
-import org.zahid.apps.web.pos.entity.Party;
-import org.zahid.apps.web.pos.entity.NavigationDtl;
-
 import java.io.Serializable;
+import org.zahid.apps.web.pos.entity.NavigationDtl;
 import org.zahid.apps.web.pos.model.PartyModel;
 
 public class PartyDTO implements Serializable {

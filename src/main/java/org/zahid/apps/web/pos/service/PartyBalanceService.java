@@ -1,10 +1,9 @@
 package org.zahid.apps.web.pos.service;
 
-import org.zahid.apps.web.pos.entity.Party;
-import org.zahid.apps.web.pos.entity.PartyBalance;
-
 import java.util.List;
 import java.util.Set;
+import org.zahid.apps.web.pos.entity.Party;
+import org.zahid.apps.web.pos.entity.PartyBalance;
 
 public interface PartyBalanceService {
 

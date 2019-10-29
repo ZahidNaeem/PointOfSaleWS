@@ -1,14 +1,12 @@
 package org.zahid.apps.web.pos.model;
 
-import org.zahid.apps.web.pos.entity.Auditable;
-import org.zahid.apps.web.pos.entity.AuditorDetail;
-
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.sql.Timestamp;
 import java.util.Date;
+import org.zahid.apps.web.pos.entity.Auditable;
+import org.zahid.apps.web.pos.entity.User;
 
-public class PartyBalanceModel  extends Auditable<AuditorDetail> implements Serializable {
+public class PartyBalanceModel  extends Auditable<User> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
