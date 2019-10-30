@@ -89,28 +89,28 @@ public class AuthController {
                 case "admin":
                     Role adminRole = roleRepo.findByName(RoleName.ROLE_ADMIN)
                             .orElseThrow(() -> new RuntimeException(
-                                    "Fail! -> Cause: Role " + RoleName.ROLE_ADMIN.getValue() + " not find."));
+                                    "Fail! -> Cause: Role " + RoleName.ROLE_ADMIN.getValue() + " not found."));
                     roles.add(adminRole);
                     break;
 
                 case "pm":
                     Role pmRole = roleRepo.findByName(RoleName.ROLE_PM)
                             .orElseThrow(() -> new RuntimeException(
-                                    "Fail! -> Cause: Role " + RoleName.ROLE_PM.getValue() + " not find."));
+                                    "Fail! -> Cause: Role " + RoleName.ROLE_PM.getValue() + " not found."));
                     roles.add(pmRole);
                     break;
 
         /*case "user":
           Role userRole = roleRepo.findByName(RoleName.ROLE_USER)
               .orElseThrow(() -> new RuntimeException(
-                  "Fail! -> Cause: Role " + RoleName.ROLE_USER.getValue() + " not find."));
+                  "Fail! -> Cause: Role " + RoleName.ROLE_USER.getValue() + " not found."));
           roles.add(userRole);
           break;*/
 
                 default:
                     Role userRole = roleRepo.findByName(RoleName.ROLE_USER)
                             .orElseThrow(() -> new RuntimeException(
-                                    "Fail! -> Cause: Role " + RoleName.ROLE_USER.getValue() + " not find."));
+                                    "Fail! -> Cause: Role " + RoleName.ROLE_USER.getValue() + " not found."));
                     roles.add(userRole);
             }
         });
