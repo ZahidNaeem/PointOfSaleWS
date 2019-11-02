@@ -4,6 +4,9 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.zahid.apps.web.pos.config.ConfigProperties;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -14,10 +17,17 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 import java.util.Set;
 
+@Component
 public class Miscellaneous {
 
     private static final Logger LOG = LogManager.getLogger(Miscellaneous.class);
     private static final String SERVLET_START = "/reportservlet?repName=";
+    private static ConfigProperties configProperties;
+
+    @Autowired
+    public Miscellaneous(final ConfigProperties configProperties) {
+        this.configProperties = configProperties;
+    }
 
     public static Exception getNestedException(Exception rootException) {
         if (rootException.getCause() == null) {
@@ -82,11 +92,19 @@ public class Miscellaneous {
 //    }
 
     public static int exists(String table, String column, Long id) {
+        final String dbServer = configProperties.getDb().get("server");
+        final String dbPort = configProperties.getDb().get("port");
+        final String dbService = configProperties.getDb().get("service");
+        final String dbUsername = configProperties.getDb().get("username");
+        final String dbPassword = configProperties.getDb().get("password");
+
+        LOG.debug("Server: {}", dbServer);
+        LOG.debug("port: {}", configProperties.getApp().get("port"));
         int result = 0;
         try {
             String sql = "{CALL XXIM_RECORD_EXISTS (?,?,?,?)}";
 //            System.out.println("SF Result: " + sessionFactory.getCurrentSession().createSQLQuery(sql).setParameter("PTABLE", table).setParameter("PCOLUMN", column).setParameter("PID", id).getSingleResult());
-            Connection conn = DB.getInstance("localhost", "3306", "xxim", "root", "1234").getConnection();
+            Connection conn = DB.getInstance(dbServer, dbPort, dbService, dbUsername, dbPassword).getConnection();
             CallableStatement stmt = conn.prepareCall(sql);
             stmt.registerOutParameter(4, Types.INTEGER);
             stmt.setString(1, table);

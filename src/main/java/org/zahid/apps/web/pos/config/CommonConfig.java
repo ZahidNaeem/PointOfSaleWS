@@ -1,5 +1,6 @@
 package org.zahid.apps.web.pos.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.AuditorAware;
@@ -12,13 +13,17 @@ import org.zahid.apps.web.pos.service.impl.AuditorAwareImpl;
 @EnableJpaAuditing(auditorAwareRef = "auditorAware")
 public class CommonConfig {
 
+    @Autowired
+    private ConfigProperties configProperties;
+
     @Bean
     public WebMvcConfigurer corsConfigurer() {
+        final String origin = "http://" + configProperties.getApp().get("server") + ":" + configProperties.getApp().get("port");
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry
-                        .addMapping("/**").allowedOrigins("http://localhost:3000")
+                        .addMapping("/**").allowedOrigins(origin)
                         .allowedMethods("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS");
             }
         };

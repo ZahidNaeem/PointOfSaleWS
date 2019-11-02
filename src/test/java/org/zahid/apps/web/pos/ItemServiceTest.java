@@ -2,6 +2,7 @@ package org.zahid.apps.web.pos;
 
 //import org.assertj.core.api.Java6Assertions;
 
+import static junit.framework.Assert.assertNotNull;
 import static junit.framework.TestCase.assertTrue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -12,6 +13,7 @@ import static org.unitils.reflectionassert.ReflectionAssert.assertReflectionEqua
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Date;
+
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.assertj.core.api.Assertions;
 import org.hamcrest.Matchers;
@@ -25,17 +27,18 @@ import org.unitils.reflectionassert.ReflectionComparatorMode;
 import org.zahid.apps.web.pos.entity.Item;
 import org.zahid.apps.web.pos.entity.ItemStock;
 import org.zahid.apps.web.pos.service.ItemService;
+import org.zahid.apps.web.pos.utils.Miscellaneous;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 public class ItemServiceTest {
 
-  @Autowired
-  private ItemService itemService;
+    @Autowired
+    private ItemService itemService;
 
-  @DisplayName("Testing item service")
-  @Test
-  void testGetItem() {
+    @DisplayName("Testing item service")
+    @Test
+    void testGetItem() {
 /*    Item expected = itemService.findById(1L);
     expected.setInvoiceDtls(null);
     expected.setItemStocks(null);
@@ -62,5 +65,6 @@ public class ItemServiceTest {
     item.setItemStocks(Arrays.asList(stock));
     final Item savedItem = itemService.save(item);
     System.out.println("Saved Item: " + savedItem);*/
-  }
+        assertNotNull(Miscellaneous.exists("xxim_items", "item_code", 1L));
+    }
 }
