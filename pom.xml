@@ -179,18 +179,18 @@
       <artifactId>jjwt</artifactId>
       <version>0.9.1</version>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/com.google.api.client/google-api-client -->
-    <dependency>
-      <groupId>com.google.api.client</groupId>
-      <artifactId>google-api-client</artifactId>
-      <version>1.4.1-beta</version>
-    </dependency>
     <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
       <version>${lombok.version}</version>
       <scope>provided</scope>
+    </dependency>
+<!--    Gmail-->
+    <dependency>
+      <groupId>com.google.apis</groupId>
+      <artifactId>google-api-services-gmail</artifactId>
+      <version>v1-rev105-1.25.0</version>
     </dependency>
   </dependencies>
 
