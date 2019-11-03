@@ -1,5 +1,6 @@
 package org.zahid.apps.web.pos.entity;
 
+import lombok.*;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -16,6 +17,9 @@ import static javax.persistence.TemporalType.TIMESTAMP;
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public abstract class Auditable<U> {
 
     @CreatedBy
@@ -36,36 +40,4 @@ public abstract class Auditable<U> {
     @Temporal(TIMESTAMP)
     @Column(name = "LAST_UPDATE_DATE")
     protected Date lastUpdateDate;
-
-    public U getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(U createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public Date getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    public U getLastUpdatedBy() {
-        return lastUpdatedBy;
-    }
-
-    public void setLastUpdatedBy(U lastUpdatedBy) {
-        this.lastUpdatedBy = lastUpdatedBy;
-    }
-
-    public Date getLastUpdateDate() {
-        return lastUpdateDate;
-    }
-
-    public void setLastUpdateDate(Date lastUpdateDate) {
-        this.lastUpdateDate = lastUpdateDate;
-    }
 }

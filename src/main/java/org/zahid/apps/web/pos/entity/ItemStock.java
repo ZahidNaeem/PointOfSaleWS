@@ -2,6 +2,7 @@ package org.zahid.apps.web.pos.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -20,6 +21,10 @@ import java.util.Date;
     @NamedQuery(name = "ItemStock.findAllByItem", query = "SELECT i FROM ItemStock i where i.item.itemCode = ?1"),
     @NamedQuery(name = "ItemStock.generateID", query = "SELECT coalesce(max(itemStockId), 0) + 1 FROM ItemStock i")
 })
+@Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ItemStock extends Auditable<String> implements Serializable {
 
   private static final long serialVersionUID = 1L;
@@ -45,72 +50,4 @@ public class ItemStock extends Auditable<String> implements Serializable {
   @JoinColumn(name = "ITEM_CODE")
 //    @JsonIdentityReference
   private Item item;
-
-  public ItemStock() {
-  }
-
-  public Long getItemStockId() {
-    return itemStockId;
-  }
-
-  public void setItemStockId(Long itemStockId) {
-    this.itemStockId = itemStockId;
-  }
-
-  public Date getItemStockDate() {
-    return itemStockDate;
-  }
-
-  public void setItemStockDate(Date itemStockDate) {
-    this.itemStockDate = itemStockDate;
-  }
-
-  public BigDecimal getQnty() {
-    return qnty;
-  }
-
-  public void setQnty(BigDecimal qnty) {
-    this.qnty = qnty;
-  }
-
-  public String getRemarks() {
-    return remarks;
-  }
-
-  public void setRemarks(String remarks) {
-    this.remarks = remarks;
-  }
-
-  public Item getItem() {
-    return item;
-  }
-
-  public void setItem(Item item) {
-    this.item = item;
-  }
-
-  @Override
-  public int hashCode() {
-    int hash = 0;
-    hash += (itemStockId != null ? itemStockId.hashCode() : 0);
-    return hash;
-  }
-
-  @Override
-  public boolean equals(Object object) {
-    if (!(object instanceof ItemStock)) {
-      return false;
-    }
-    ItemStock other = (ItemStock) object;
-    if ((this.itemStockId == null && other.itemStockId != null) || (this.itemStockId != null
-        && !this.itemStockId.equals(other.itemStockId))) {
-      return false;
-    }
-    return true;
-  }
-
-  @Override
-  public String toString() {
-    return "org.zahid.apps.web.pos.entity.ItemStock[ itemStockId=" + itemStockId + " ]";
-  }
 }

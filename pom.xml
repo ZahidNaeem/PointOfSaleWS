@@ -92,6 +92,11 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-log4j2</artifactId>
     </dependency>
+    <!-- send email -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-mail</artifactId>
+    </dependency>
     <!--unitils-->
     <dependency>
       <groupId>org.unitils</groupId>
@@ -174,6 +179,19 @@
       <artifactId>jjwt</artifactId>
       <version>0.9.1</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/com.google.api.client/google-api-client -->
+    <dependency>
+      <groupId>com.google.api.client</groupId>
+      <artifactId>google-api-client</artifactId>
+      <version>1.4.1-beta</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>${lombok.version}</version>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
 
   <build>
@@ -194,6 +212,11 @@
               <groupId>org.mapstruct</groupId>
               <artifactId>mapstruct-processor</artifactId>
               <version>${mapstruct.version}</version>
+            </path>
+            <path>
+              <groupId>org.projectlombok</groupId>
+              <artifactId>lombok</artifactId>
+              <version>${lombok.version}</version>
             </path>
           </annotationProcessorPaths>
         </configuration>

@@ -2,6 +2,7 @@ package org.zahid.apps.web.pos.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -17,6 +18,10 @@ import java.util.List;
 @JsonIdentityInfo(scope = ExpenseMain.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "expMainId")
 //@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @NamedQuery(name = "ExpenseMain.findAll", query = "SELECT e FROM ExpenseMain e")
+@Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ExpenseMain extends Auditable<String> implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -36,64 +41,4 @@ public class ExpenseMain extends Auditable<String> implements Serializable {
     // bi-directional many-to-one association to ExpenseDtl
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "expenseMain")
     private List<ExpenseDtl> expenseDtls;
-
-    public ExpenseMain() {
-    }
-
-    public Long getExpMainId() {
-        return expMainId;
-    }
-
-    public void setExpMainId(Long expMainId) {
-        this.expMainId = expMainId;
-    }
-
-    public Date getExpDate() {
-        return expDate;
-    }
-
-    public void setExpDate(Date expDate) {
-        this.expDate = expDate;
-    }
-
-    public String getRemarks() {
-        return remarks;
-    }
-
-    public void setRemarks(String remarks) {
-        this.remarks = remarks;
-    }
-
-    public List<ExpenseDtl> getExpenseDtls() {
-        return expenseDtls;
-    }
-
-    public void setExpenseDtls(List<ExpenseDtl> expenseDtls) {
-        this.expenseDtls = expenseDtls;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (expMainId != null ? expMainId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof ExpenseMain)) {
-            return false;
-        }
-        ExpenseMain other = (ExpenseMain) object;
-        if ((this.expMainId == null && other.expMainId != null) || (this.expMainId != null && !this.expMainId.equals(other.expMainId))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "org.zahid.apps.web.pos.entity.ExpenseMain[ expMainId=" + expMainId + " ]";
-    }
-
 }

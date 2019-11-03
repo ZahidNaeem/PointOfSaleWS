@@ -2,6 +2,7 @@ package org.zahid.apps.web.pos.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -18,6 +19,10 @@ import java.util.Date;
     @NamedQuery(name = "PartyBalance.findAll", query = "SELECT p FROM PartyBalance p"),
     @NamedQuery(name = "PartyBalance.generateID", query = "SELECT coalesce(max(partyBalanceId), 0) + 1 FROM PartyBalance p")
 })
+@Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class PartyBalance extends Auditable<String> implements Serializable {
 
   private static final long serialVersionUID = 1L;
@@ -43,72 +48,4 @@ public class PartyBalance extends Auditable<String> implements Serializable {
 //    @NotFound(action = NotFoundAction.IGNORE)
   @JoinColumn(name = "PARTY_CODE")
   private Party party;
-
-  public PartyBalance() {
-  }
-
-  public Long getPartyBalanceId() {
-    return partyBalanceId;
-  }
-
-  public void setPartyBalanceId(Long partyBalanceId) {
-    this.partyBalanceId = partyBalanceId;
-  }
-
-  public BigDecimal getAmount() {
-    return amount;
-  }
-
-  public void setAmount(BigDecimal amount) {
-    this.amount = amount;
-  }
-
-  public Date getPartyBalanceDate() {
-    return partyBalanceDate;
-  }
-
-  public void setPartyBalanceDate(Date partyBalanceDate) {
-    this.partyBalanceDate = partyBalanceDate;
-  }
-
-  public String getRemarks() {
-    return remarks;
-  }
-
-  public void setRemarks(String remarks) {
-    this.remarks = remarks;
-  }
-
-  public Party getParty() {
-    return party;
-  }
-
-  public void setParty(Party party) {
-    this.party = party;
-  }
-
-  @Override
-  public int hashCode() {
-    int hash = 0;
-    hash += (partyBalanceId != null ? partyBalanceId.hashCode() : 0);
-    return hash;
-  }
-
-  @Override
-  public boolean equals(Object object) {
-    if (!(object instanceof PartyBalance)) {
-      return false;
-    }
-    PartyBalance other = (PartyBalance) object;
-    if ((this.partyBalanceId == null && other.partyBalanceId != null) || (
-        this.partyBalanceId != null && !this.partyBalanceId.equals(other.partyBalanceId))) {
-      return false;
-    }
-    return true;
-  }
-
-  @Override
-  public String toString() {
-    return "org.zahid.apps.web.pos.entity.PartyBalance[ partyBalanceId=" + partyBalanceId + " ]";
-  }
 }

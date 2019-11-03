@@ -6,22 +6,19 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.zahid.apps.web.pos.repo.UserRepo;
+import org.zahid.apps.web.pos.utils.MailService;
 
-import static junit.framework.TestCase.assertTrue;
-
-//import org.assertj.core.api.Assertions;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-public class UserTest {
+public class MailServiceTest {
 
     @Autowired
-    private UserRepo userRepo;
+    private MailService mailService;
 
-    @DisplayName("User exists by email")
+    @DisplayName("Send email")
     @Test
-    void existsByEmail() {
-        assertTrue(userRepo.existsByEmail("zhd.naeem@temp.com"));
+    void sendMail(){
+//        mailService.sendEmail("Test Email", "Test", "hzahidnaeem@gmail.com");
     }
 }

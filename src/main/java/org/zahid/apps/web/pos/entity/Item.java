@@ -2,6 +2,7 @@ package org.zahid.apps.web.pos.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -25,6 +26,11 @@ import java.util.List;
     @NamedQuery(name = "Item.getCategories", query = "SELECT distinct i.itemCategory FROM Item i where i.itemCategory is not null"),
     @NamedQuery(name = "Item.getItemDesc", query = "SELECT i.itemDesc FROM Item i where i.itemCode = :itemCode")
 })
+
+@Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Item extends Auditable<String> implements Serializable {
 
   private static final long serialVersionUID = 1L;
@@ -76,137 +82,4 @@ public class Item extends Auditable<String> implements Serializable {
   @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "item")
 //    @JsonIdentityReference
   private List<ItemStock> itemStocks;
-
-  public Item() {
-  }
-
-  public Long getItemCode() {
-    return itemCode;
-  }
-
-  public void setItemCode(Long itemCode) {
-    this.itemCode = itemCode;
-  }
-
-  public Date getEffectiveEndDate() {
-    return effectiveEndDate;
-  }
-
-  public void setEffectiveEndDate(Date effectiveEndDate) {
-    this.effectiveEndDate = effectiveEndDate;
-  }
-
-  public Date getEffectiveStartDate() {
-    return effectiveStartDate;
-  }
-
-  public void setEffectiveStartDate(Date effectiveStartDate) {
-    this.effectiveStartDate = effectiveStartDate;
-  }
-
-  public String getItemBarcode() {
-    return itemBarcode;
-  }
-
-  public void setItemBarcode(String itemBarcode) {
-    this.itemBarcode = itemBarcode;
-  }
-
-  public String getItemCategory() {
-    return itemCategory;
-  }
-
-  public void setItemCategory(String itemCategory) {
-    this.itemCategory = itemCategory;
-  }
-
-  public String getItemDesc() {
-    return itemDesc;
-  }
-
-  public void setItemDesc(String itemDesc) {
-    this.itemDesc = itemDesc;
-  }
-
-  public String getItemUom() {
-    return itemUom;
-  }
-
-  public void setItemUom(String itemUom) {
-    this.itemUom = itemUom;
-  }
-
-  public BigDecimal getMaxStock() {
-    return maxStock;
-  }
-
-  public void setMaxStock(BigDecimal maxStock) {
-    this.maxStock = maxStock;
-  }
-
-  public BigDecimal getMinStock() {
-    return minStock;
-  }
-
-  public void setMinStock(BigDecimal minStock) {
-    this.minStock = minStock;
-  }
-
-  public BigDecimal getPurchasePrice() {
-    return purchasePrice;
-  }
-
-  public void setPurchasePrice(BigDecimal purchasePrice) {
-    this.purchasePrice = purchasePrice;
-  }
-
-  public BigDecimal getSalePrice() {
-    return salePrice;
-  }
-
-  public void setSalePrice(BigDecimal salePrice) {
-    this.salePrice = salePrice;
-  }
-
-  public List<InvoiceDtl> getInvoiceDtls() {
-    return invoiceDtls;
-  }
-
-  public void setInvoiceDtls(List<InvoiceDtl> invoiceDtls) {
-    this.invoiceDtls = invoiceDtls;
-  }
-
-  public List<ItemStock> getItemStocks() {
-    return itemStocks;
-  }
-
-  public void setItemStocks(List<ItemStock> itemStocks) {
-    this.itemStocks = itemStocks;
-  }
-
-  @Override
-  public int hashCode() {
-    int hash = 0;
-    hash += (itemCode != null ? itemCode.hashCode() : 0);
-    return hash;
-  }
-
-  @Override
-  public boolean equals(Object object) {
-    if (!(object instanceof Item)) {
-      return false;
-    }
-    Item other = (Item) object;
-    if ((this.itemCode == null && other.itemCode != null) || (this.itemCode != null
-        && !this.itemCode.equals(other.itemCode))) {
-      return false;
-    }
-    return true;
-  }
-
-  @Override
-  public String toString() {
-    return "org.zahid.apps.web.pos.entity.Item[ itemCode=" + itemCode + " & itemDesc=" + itemDesc
-        + " ]";
-  }
 }

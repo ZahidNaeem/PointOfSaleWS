@@ -2,6 +2,7 @@ package org.zahid.apps.web.pos.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -20,6 +21,10 @@ import java.util.List;
         @NamedQuery(name = "Organization.findAll", query = "SELECT p FROM Organization p"),
         @NamedQuery(name = "Organization.generateID", query = "SELECT coalesce(max(organizationCode), 0) + 1 FROM Organization p")
 })
+@Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Organization implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -55,119 +60,4 @@ public class Organization implements Serializable {
     // bi-directional many-to-one association to InvoiceMain
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "organization")
     private List<User> users;
-
-   public Organization() {
-    }
-
-    public Long getOrganizationCode() {
-        return organizationCode;
-    }
-
-    public void setOrganizationCode(Long organizationCode) {
-        this.organizationCode = organizationCode;
-    }
-
-    public String getOrganizationName() {
-        return organizationName;
-    }
-
-    public void setOrganizationName(String organizationName) {
-        this.organizationName = organizationName;
-    }
-
-    public String getOrganizationOwner() {
-        return organizationOwner;
-    }
-
-    public void setOrganizationOwner(String organizationOwner) {
-        this.organizationOwner = organizationOwner;
-    }
-
-    public String getContactPerson() {
-        return contactPerson;
-    }
-
-    public void setContactPerson(String contactPerson) {
-        this.contactPerson = contactPerson;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getCellNo() {
-        return cellNo;
-    }
-
-    public void setCellNo(String cellNo) {
-        this.cellNo = cellNo;
-    }
-
-    public String getFax() {
-        return fax;
-    }
-
-    public void setFax(String fax) {
-        this.fax = fax;
-    }
-
-    public String getWeb() {
-        return web;
-    }
-
-    public void setWeb(String web) {
-        this.web = web;
-    }
-
-    public List<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<User> users) {
-        this.users = users;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (organizationCode != null ? organizationCode.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof Organization)) {
-            return false;
-        }
-        Organization other = (Organization) object;
-        if ((this.organizationCode == null && other.organizationCode != null) || (this.organizationCode != null && !this.organizationCode.equals(other.organizationCode))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "org.zahid.apps.web.pos.entity.Organization[ organizationCode=" + organizationCode + " ]";
-    }
 }

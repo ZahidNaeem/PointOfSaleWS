@@ -1,5 +1,6 @@
 package org.zahid.apps.web.pos.entity;
 
+import lombok.*;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
@@ -18,6 +19,10 @@ import java.util.Set;
         "email"
     })
 })
+@Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class User{
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,69 +56,11 @@ public class User{
   @JoinColumn(name = "ORGANIZATION_CODE")
   private Organization organization;
 
-  public User() {}
-
   public User(String name, String username, String email, String password, Organization organization) {
     this.name = name;
     this.username = username;
     this.email = email;
     this.password = password;
-    this.organization = organization;
-  }
-
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
-
-  public String getUsername() {
-    return username;
-  }
-
-  public void setUsername(String username) {
-    this.username = username;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public String getEmail() {
-    return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
-  }
-
-  public String getPassword() {
-    return password;
-  }
-
-  public void setPassword(String password) {
-    this.password = password;
-  }
-
-  public Set<Role> getRoles() {
-    return roles;
-  }
-
-  public void setRoles(Set<Role> roles) {
-    this.roles = roles;
-  }
-
-  public Organization getOrganization() {
-    return organization;
-  }
-
-  public void setOrganization(Organization organization) {
     this.organization = organization;
   }
 }

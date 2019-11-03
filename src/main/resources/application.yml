@@ -1,12 +1,33 @@
 server:
   port: 8089
 spring:
+  #  Datasource configurations
   datasource:
-#    driver-class-name: com.mysql.cj.jdbc.Driver
+    #    driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/xxim?useSSL=false
     username: root
     password: 1234
-#    url: jdbc:mysql://localhost:3306/xxim?useSSL=false&allowPublicKeyRetrieval=true
+#    Email configurations
+  mail:
+    host: smtp.gmail.com
+    port: 25
+    username: hzahidnaeem@gmail.com
+    password: '#AbdurRahman123@'
+    properties:
+      mail:
+#        transport:
+#          protocol: smtp
+        smtp:
+          auth: true
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
+          starttls:
+            enable: true
+#          socketFactory:
+#            port: 465
+#            class: javax.net.ssl.SSLSocketFactory
+  #    url: jdbc:mysql://localhost:3306/xxim?useSSL=false&allowPublicKeyRetrieval=true
   jpa:
     hibernate:
       ddl-auto: update
