@@ -20,8 +20,11 @@ import org.zahid.apps.web.pos.security.payload.request.LoginRequest;
 import org.zahid.apps.web.pos.security.payload.request.SignUpRequest;
 import org.zahid.apps.web.pos.security.payload.response.ApiResponse;
 import org.zahid.apps.web.pos.security.payload.response.JwtAuthenticationResponse;
+import org.zahid.apps.web.pos.service.GmailService;
 
+import javax.mail.MessagingException;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.net.URI;
 import java.util.HashSet;
 import java.util.Set;
@@ -44,6 +47,9 @@ public class AuthController {
 
     @Autowired
     private JwtProvider tokenProvider;
+
+    @Autowired
+    private GmailService gmailService;
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
@@ -127,5 +133,19 @@ public class AuthController {
     @GetMapping("/checkEmailExists")
     public Boolean checkEmailExists(@RequestParam(value = "email") String email) {
         return userRepo.existsByEmail(email);
+    }
+
+    @GetMapping("/forgotPassword")
+    public Boolean forgotPassword(@RequestParam(value = "email") String email) {
+        try {
+            if (checkEmailExists(email)) {
+                return gmailService.sendMessage("Welcome to Poing of Sale Application", "To reset you account password, please click on below link:\nhttp://localhost:3000", email);
+            } else {
+                return false;
+            }
+        } catch (MessagingException | IOException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

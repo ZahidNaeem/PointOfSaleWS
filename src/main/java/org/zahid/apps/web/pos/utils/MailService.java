@@ -28,22 +28,22 @@ public class MailService {
         javaMailSender.send(msg);
     }
 
-    void sendEmailWithAttachment() throws MessagingException, IOException {
+    void sendEmailWithAttachment(final String subject, final String text, final String... to) throws MessagingException, IOException {
 
         MimeMessage msg = javaMailSender.createMimeMessage();
 
         // true = multipart message
         MimeMessageHelper helper = new MimeMessageHelper(msg, true);
 
-        helper.setTo("to_@email");
+        helper.setTo(to);
 
-        helper.setSubject("Testing from Spring Boot");
+        helper.setSubject(subject);
 
         // default = text/plain
         //helper.setText("Check attachment for image!");
 
         // true = text/html
-        helper.setText("<h1>Check attachment for image!</h1>", true);
+        helper.setText("<h1>" + text + "</h1>", true);
 
         // hard coded a file path
         //FileSystemResource file = new FileSystemResource(new File("path/android.png"));
