@@ -26,7 +26,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Party extends Auditable<String> implements Serializable {
+public class Party extends Auditable<Long> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id

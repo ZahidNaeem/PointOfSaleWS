@@ -19,7 +19,7 @@ import java.math.BigDecimal;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ExpenseDtl extends Auditable<String> implements Serializable {
+public class ExpenseDtl extends Auditable<Long> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

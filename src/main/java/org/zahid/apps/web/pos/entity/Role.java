@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Role {
+public class Role extends Auditable<Long> {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;

@@ -38,11 +38,6 @@ public class CommonConfig {
     }
 
     @Bean
-    public AuditorAware<String> auditorAware() {
-        return new AuditorAwareImpl();
-    }
-
-    @Bean
     public GmailService gmailService() throws GeneralSecurityException, IOException {
 
         final HttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
@@ -56,6 +51,11 @@ public class CommonConfig {
                 .build();
 
         return new GmailServiceImpl(httpTransport, gmailCredentials);
+    }
+
+    @Bean
+    public AuditorAware<Long> auditorAware(){
+        return new AuditorAwareImpl();
     }
 
     /*public WebMvcConfigurer corsConfigurer() {

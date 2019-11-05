@@ -20,7 +20,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class VoucherLine extends Auditable<String> implements Serializable {
+public class VoucherLine extends Auditable<Long> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id

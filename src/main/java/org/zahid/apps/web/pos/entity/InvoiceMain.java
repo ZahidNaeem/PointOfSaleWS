@@ -31,7 +31,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class InvoiceMain extends Auditable<String> implements Serializable {
+public class InvoiceMain extends Auditable<Long> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id

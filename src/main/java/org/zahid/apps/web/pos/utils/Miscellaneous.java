@@ -5,17 +5,19 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.zahid.apps.web.pos.config.ConfigProperties;
+import org.zahid.apps.web.pos.entity.Organization;
+import org.zahid.apps.web.pos.security.service.UserPrincipal;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Types;
-import java.util.HashSet;
-import java.util.MissingResourceException;
-import java.util.ResourceBundle;
-import java.util.Set;
+import java.util.*;
 
 @Component
 public class Miscellaneous {
@@ -158,5 +160,19 @@ public class Miscellaneous {
         String reportURL = SERVLET_START + repName + (params != null ? "&params=" + params.toString() : "");
         LOG.info("Report URL: " + reportURL);
         return reportURL;
+    }
+
+    public static Optional<Organization> getCurrentOrganization() {
+        final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication == null ||
+                !authentication.isAuthenticated() ||
+                authentication instanceof AnonymousAuthenticationToken) {
+            return Optional.empty();
+        }
+
+        final UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
+
+        return Optional.ofNullable(userPrincipal.getOrganization());
     }
 }

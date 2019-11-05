@@ -23,7 +23,7 @@ import java.math.BigDecimal;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class InvoiceDtl extends Auditable<String> implements Serializable {
+public class InvoiceDtl extends Auditable<Long> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id

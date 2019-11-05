@@ -30,7 +30,13 @@ public class UserController {
     @GetMapping("/user/me")
     @PreAuthorize("hasRole('USER')")
     public UserSummary getCurrentUser(@CurrentUser UserPrincipal currentUser) {
-        UserSummary userSummary = new UserSummary(currentUser.getId(), currentUser.getUsername(), currentUser.getName());
+        UserSummary userSummary = UserSummary.builder()
+                .id(currentUser.getId())
+                .name(currentUser.getName())
+                .username(currentUser.getUsername())
+                .organizationCode(currentUser.getOrganization().getOrganizationCode())
+                .organizationName(currentUser.getOrganization().getOrganizationName())
+                .build();
         return userSummary;
     }
 
@@ -49,7 +55,14 @@ public class UserController {
         final User user = userRepo.findByUsername(username)
                 .orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
 
-        final UserSummary userSummary = new UserSummary(user.getId(), user.getUsername(), user.getName());
+        final UserSummary userSummary = UserSummary.builder()
+                .id(user.getId())
+                .name(user.getName())
+                .username(user.getUsername())
+                .organizationCode(user.getOrganization().getOrganizationCode())
+                .organizationName(user.getOrganization().getOrganizationName())
+                .build();
+
         return userSummary;
     }
 

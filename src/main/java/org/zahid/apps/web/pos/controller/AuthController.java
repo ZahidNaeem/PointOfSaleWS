@@ -80,10 +80,14 @@ public class AuthController {
         }
 
         // Creating user's account
-        final User user = new User(signUpRequest.getName(), signUpRequest.getUsername(),
-                signUpRequest.getEmail(), signUpRequest.getPassword(), signUpRequest.getOrganization());
+        final User user = User.builder()
+                .name(signUpRequest.getName())
+                .username(signUpRequest.getUsername())
+                .password(passwordEncoder.encode(signUpRequest.getPassword()))
+                .email(signUpRequest.getEmail())
+                .organization(signUpRequest.getOrganization())
+                .build();
 
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
         Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();
 
@@ -135,17 +139,21 @@ public class AuthController {
         return userRepo.existsByEmail(email);
     }
 
-    @GetMapping("/forgotPassword")
-    public Boolean forgotPassword(@RequestParam(value = "email") String email) {
+    @GetMapping("/recoverPassword")
+    public String recoverPassword(@RequestParam(value = "email") String email) {
+        String message = null;
         try {
             if (checkEmailExists(email)) {
-                return gmailService.sendMessage("Welcome to Poing of Sale Application", "To reset you account password, please click on below link:\nhttp://localhost:3000", email);
+                if (gmailService.sendMessage("Welcome to Poing of Sale Application", "To reset you account password, please click on below link:\nhttp://localhost:3000", email)) {
+                    message = "Recovery email sent";
+                }
             } else {
-                return false;
+                message = "Email not registered";
             }
         } catch (MessagingException | IOException e) {
             e.printStackTrace();
-            return false;
+            message = "Arror Occured";
         }
+        return message;
     }
 }

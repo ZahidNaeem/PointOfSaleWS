@@ -10,4 +10,6 @@ public class UserSummary {
     private Long id;
     private String username;
     private String name;
+    private Long organizationCode;
+    private String organizationName;
 }

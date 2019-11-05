@@ -13,7 +13,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class InvoiceMainModel extends Auditable<String> implements Serializable {
+public class InvoiceMainModel extends Auditable<Long> implements Serializable {
 
 private static final long serialVersionUID = 1L;
 

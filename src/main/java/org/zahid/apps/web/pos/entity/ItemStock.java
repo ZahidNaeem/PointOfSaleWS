@@ -25,7 +25,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ItemStock extends Auditable<String> implements Serializable {
+public class ItemStock extends Auditable<Long> implements Serializable {
 
   private static final long serialVersionUID = 1L;
 

@@ -23,7 +23,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PartyBalance extends Auditable<String> implements Serializable {
+public class PartyBalance extends Auditable<Long> implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
