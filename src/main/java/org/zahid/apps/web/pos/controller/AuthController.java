@@ -135,25 +135,35 @@ public class AuthController {
     }
 
     @GetMapping("/checkEmailExists")
-    public Boolean checkEmailExists(@RequestParam(value = "email") String email) {
-        return userRepo.existsByEmail(email);
+    public ResponseEntity<?> checkEmailExists(@RequestParam(value = "email") String email) {
+        return ResponseEntity.ok(userRepo.existsByEmail(email));
     }
 
     @GetMapping("/recoverPassword")
-    public String recoverPassword(@RequestParam(value = "email") String email) {
-        String message = null;
-        try {
-            if (checkEmailExists(email)) {
-                if (gmailService.sendMessage("Welcome to Poing of Sale Application", "To reset you account password, please click on below link:\nhttp://localhost:3000", email)) {
-                    message = "Recovery email sent";
+    public ResponseEntity<?> recoverPassword(@RequestParam(value = "email") String email) {
+        final ResponseEntity<?> responseEntity = checkEmailExists(email);
+
+        if (responseEntity != null && responseEntity.getBody().equals(true)) {
+            try {
+                final boolean mailSent = gmailService.sendMessage("Welcome to Point of Sale Application", "To reset you account password, please click on below link:\nhttp://localhost:3000", email);
+                if (mailSent) {
+                    return ResponseEntity.ok("Recovery email sent");
+                } else {
+                    return new ResponseEntity(new ApiResponse(false, "Unknown error occurred"),
+                            HttpStatus.BAD_REQUEST);
                 }
-            } else {
-                message = "Email not registered";
+            } catch (MessagingException | IOException e) {
+                e.printStackTrace();
+                return new ResponseEntity(new ApiResponse(false, e.getMessage()),
+                        HttpStatus.INTERNAL_SERVER_ERROR);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return new ResponseEntity(new ApiResponse(false, e.getMessage()),
+                        HttpStatus.INTERNAL_SERVER_ERROR);
             }
-        } catch (MessagingException | IOException e) {
-            e.printStackTrace();
-            message = "Arror Occured";
+        } else {
+            return new ResponseEntity(new ApiResponse(false, "Email not registered"),
+                    HttpStatus.BAD_REQUEST);
         }
-        return message;
     }
 }
