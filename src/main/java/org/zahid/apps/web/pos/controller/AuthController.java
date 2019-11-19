@@ -13,6 +13,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.zahid.apps.web.pos.entity.Role;
 import org.zahid.apps.web.pos.entity.User;
 import org.zahid.apps.web.pos.enumeration.RoleName;
+import org.zahid.apps.web.pos.mapper.UserMapper;
+import org.zahid.apps.web.pos.model.UserModel;
 import org.zahid.apps.web.pos.repo.RoleRepo;
 import org.zahid.apps.web.pos.repo.UserRepo;
 import org.zahid.apps.web.pos.security.jwt.JwtProvider;
@@ -41,6 +43,9 @@ public class AuthController {
 
     @Autowired
     private RoleRepo roleRepo;
+
+    @Autowired
+    private UserMapper userMapper;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -79,8 +84,8 @@ public class AuthController {
                     HttpStatus.BAD_REQUEST);
         }
 
-        // Creating user's account
-        final User user = User.builder()
+        // Creating userModel's account
+        final UserModel userModel = UserModel.builder()
                 .name(signUpRequest.getName())
                 .username(signUpRequest.getUsername())
                 .password(passwordEncoder.encode(signUpRequest.getPassword()))
@@ -107,7 +112,7 @@ public class AuthController {
                     roles.add(pmRole);
                     break;
 
-        /*case "user":
+        /*case "userModel":
           Role userRole = roleRepo.findByName(RoleName.ROLE_USER)
               .orElseThrow(() -> new RuntimeException(
                   "Fail! -> Cause: Role " + RoleName.ROLE_USER.getValue() + " not found."));
@@ -122,9 +127,9 @@ public class AuthController {
             }
         });
 
-        user.setRoles(roles);
+        userModel.setRoles(roles);
 
-        final User result = userRepo.save(user);
+        final User result = userRepo.save(userMapper.toUser(userModel));
 
         final URI location = ServletUriComponentsBuilder
                 .fromCurrentContextPath().path("/api/users/{username}")

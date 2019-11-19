@@ -12,55 +12,47 @@ import java.util.Set;
 
 @Entity
 @Table(name = "XXIM_USERS", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {
-        "username"
-    }),
-    @UniqueConstraint(columnNames = {
-        "email"
-    })
+        @UniqueConstraint(columnNames = {
+                "username"
+        }),
+        @UniqueConstraint(columnNames = {
+                "email"
+        })
 })
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class User extends Auditable<Long>{
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+public class User extends Auditable<Long> {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-  @NotBlank
-  @Size(min=3, max = 50)
-  private String name;
+    @NotBlank
+    @Size(min = 3, max = 50)
+    private String name;
 
-  @NotBlank
-  @Size(min=3, max = 50)
-  private String username;
+    @NotBlank
+    @Size(min = 3, max = 50)
+    private String username;
 
-  @NaturalId
-  @NotBlank
-  @Size(max = 50)
-  @Email
-  private String email;
+    @NaturalId
+    @NotBlank
+    @Size(max = 50)
+    @Email
+    private String email;
 
-  @NotBlank
-  @Size(min=6, max = 100)
-  private String password;
+    @NotBlank
+    @Size(min = 6, max = 100)
+    private String password;
 
-  @ManyToMany(fetch = FetchType.LAZY)
-  @JoinTable(name = "XXIM_USER_ROLES",
-      joinColumns = @JoinColumn(name = "user_id"),
-      inverseJoinColumns = @JoinColumn(name = "role_id"))
-  private Set<Role> roles = new HashSet<>();
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "XXIM_USER_ROLES",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 
-  @ManyToOne
-  @JoinColumn(name = "ORGANIZATION_CODE")
-  private Organization organization;
-
-  public User(String name, String username, String email, String password, Organization organization) {
-    this.name = name;
-    this.username = username;
-    this.email = email;
-    this.password = password;
-    this.organization = organization;
-  }
+    @ManyToOne
+    @JoinColumn(name = "ORGANIZATION_CODE")
+    private Organization organization;
 }

@@ -44,11 +44,14 @@ public class ItemStockServiceImpl implements ItemStockService {
 
   @Override
   public ItemStock findById(Long id) {
-    final Optional<ItemStock> stock = itemStockRepo.findById(id);
+    return Optional.ofNullable(itemStockRepo.findById(id))
+            .map(stock -> stock.get())
+            .orElseThrow(() -> new ItemStockNotFoundException("Item stock with id " + id + " not found"));
+    /*final Optional<ItemStock> stock = itemStockRepo.findById(id);
     if (stock.isPresent()) {
       return stock.get();
     }
-    throw new ItemStockNotFoundException("Item stock with id " + id + " not found");
+    throw new ItemStockNotFoundException("Item stock with id " + id + " not found");*/
   }
 
   @Override

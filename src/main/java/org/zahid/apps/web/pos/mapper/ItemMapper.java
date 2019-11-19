@@ -47,12 +47,12 @@ public abstract class ItemMapper {
     return itemStockMapper.mapItemStockModelsToItemStocks(models);
   }
 
-  public List<ItemModel> mapItemsToItemModels(final List<Item> parties) {
-    if (CollectionUtils.isEmpty(parties)) {
+  public List<ItemModel> mapItemsToItemModels(final List<Item> items) {
+    if (CollectionUtils.isEmpty(items)) {
       return new ArrayList<>();
     }
     final List<ItemModel> models = new ArrayList<>();
-    parties.forEach(item -> {
+    items.forEach(item -> {
       models.add(this.fromItem(item));
     });
     return models;
@@ -62,11 +62,11 @@ public abstract class ItemMapper {
     if (CollectionUtils.isEmpty(models)) {
       return new ArrayList<>();
     }
-    final List<Item> parties = new ArrayList<>();
+    final List<Item> items = new ArrayList<>();
     models.forEach(model -> {
-      parties.add(this.toItem(model));
+      items.add(this.toItem(model));
     });
-    return parties;
+    return items;
   }
 
 }

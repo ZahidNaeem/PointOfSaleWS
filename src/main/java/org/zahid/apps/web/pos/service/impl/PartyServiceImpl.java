@@ -51,15 +51,14 @@ public class PartyServiceImpl implements PartyService {
 
   @Override
   public Party findById(Long id) {
-        /*return Optional.ofNullable(itemRepo.findById(id))
-                .map(party -> party.get())
-                .orElse(null);*/
-
-    final Optional<Party> party = partyRepo.findById(id);
+    return Optional.ofNullable(partyRepo.findById(id))
+            .map(party -> party.get())
+            .orElseThrow(() -> new PartyNotFoundException("Party with id " + id + " not found"));
+    /*final Optional<Party> party = partyRepo.findById(id);
     if (party.isPresent()) {
       return party.get();
     }
-    throw new PartyNotFoundException("Party with id " + id + " not found");
+    throw new PartyNotFoundException("Party with id " + id + " not found");*/
   }
 
   @Override

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.zahid.apps.web.pos.entity.InvoiceDtl;
 import org.zahid.apps.web.pos.exception.InvoiceDtlNotFoundException;
+import org.zahid.apps.web.pos.exception.ItemNotFoundException;
 import org.zahid.apps.web.pos.repo.InvoiceDtlRepo;
 import org.zahid.apps.web.pos.service.InvoiceDtlService;
 
@@ -29,11 +30,14 @@ public class InvoiceDtlServiceImpl implements InvoiceDtlService {
 
     @Override
     public InvoiceDtl findById(Long id) {
-        final Optional<InvoiceDtl> stock = repo.findById(id);
+        return Optional.ofNullable(repo.findById(id))
+                .map(invoiceDtl -> invoiceDtl.get())
+                .orElseThrow(() -> new InvoiceDtlNotFoundException("Invoice detail with id " + id + " not found"));
+        /*final Optional<InvoiceDtl> stock = repo.findById(id);
         if (stock.isPresent()) {
             return stock.get();
         }
-        throw new InvoiceDtlNotFoundException("Invoice detail with id " + id + " not found");
+        throw new InvoiceDtlNotFoundException("Invoice detail with id " + id + " not found");*/
     }
 
     @Override

@@ -57,11 +57,14 @@ public class PartyBalanceServiceImpl implements PartyBalanceService {
 
     @Override
     public PartyBalance findById(Long id) {
-        final Optional<PartyBalance> balance = partyBalanceRepo.findById(id);
+        return Optional.ofNullable(partyBalanceRepo.findById(id))
+                .map(balance -> balance.get())
+                .orElseThrow(() -> new PartyBalanceNotFoundException("Party balance with id " + id + " not found"));
+        /*final Optional<PartyBalance> balance = partyBalanceRepo.findById(id);
         if (balance.isPresent()) {
             return balance.get();
         }
-        throw new PartyBalanceNotFoundException("Party balance with id " + id + " not found");
+        throw new PartyBalanceNotFoundException("Party balance with id " + id + " not found");*/
     }
 
     //	@Override

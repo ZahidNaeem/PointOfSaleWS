@@ -59,11 +59,14 @@ public class InvoiceMainServiceImpl implements InvoiceMainService {
 
     @Override
     public InvoiceMain findById(Long id) {
-        final Optional<InvoiceMain> invoice = invoiceMainRepo.findById(id);
+        return Optional.ofNullable(invoiceMainRepo.findById(id))
+                .map(invoice -> invoice.get())
+                .orElseThrow(() -> new InvoiceMainNotFoundException("Invoice with id " + id + " not found"));
+        /*final Optional<InvoiceMain> invoice = invoiceMainRepo.findById(id);
         if (invoice.isPresent()) {
             return invoice.get();
         }
-        throw new InvoiceMainNotFoundException("Invoice with id " + id + " not found");
+        throw new InvoiceMainNotFoundException("Invoice with id " + id + " not found");*/
     }
 
     @Override

@@ -52,15 +52,15 @@ public class ItemServiceImpl implements ItemService {
 
   @Override
   public Item findById(Long id) {
-        /*return Optional.ofNullable(itemRepo.findById(id))
+        return Optional.ofNullable(itemRepo.findById(id))
                 .map(item -> item.get())
-                .orElse(null);*/
+                .orElseThrow(() -> new ItemNotFoundException("Item with id " + id + " not found"));
 
-    final Optional<Item> item = itemRepo.findById(id);
+   /* final Optional<Item> item = itemRepo.findById(id);
     if (item.isPresent()) {
       return item.get();
     }
-    throw new ItemNotFoundException("Item with id " + id + " not found");
+    throw new ItemNotFoundException("Item with id " + id + " not found");*/
   }
 
   @Override
