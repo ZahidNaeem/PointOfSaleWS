@@ -18,7 +18,7 @@ import java.util.List;
 public abstract class PartyMapper {
 
   @Autowired
-  public InvoiceMainMapper invoiceMainMapper;
+  protected InvoiceMainMapper invoiceMainMapper;
 
   @Autowired
   public PartyBalanceMapper partyBalanceMapper;

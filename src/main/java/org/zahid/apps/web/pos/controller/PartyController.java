@@ -19,7 +19,7 @@ import java.util.List;
 
 //@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RestController
-@RequestMapping("api/party")
+@RequestMapping("party")
 public class PartyController {
 
   private static final Logger LOG = LogManager.getLogger(PartyController.class);
@@ -149,23 +149,32 @@ public class PartyController {
     return dtl;
   }
 
-  private final PartyDTO getPartyDTO(List<PartyModel> parties, int indx) {
-    if (indx < 0 || indx > parties.size() - 1) {
+  private static final PartyDTO getPartyDTO(List<PartyModel> models, int indx) {
+    final NavigationDtl dtl = resetNavigation();
+    if (models.size() < 1) {
+      final PartyModel model = new PartyModel();
+      return PartyDTO.builder()
+              .party(model)
+              .navigationDtl(dtl)
+              .build();
+    }
+    if (indx < 0 || indx > models.size() - 1) {
+      LOG.info("models.size(): {}", models.size());
       LOG.info("Index in getPartyDTO(): {}", indx);
       throw new IndexOutOfBoundsException();
     } else {
-      final NavigationDtl dtl = resetNavigation();
-      final PartyModel party = parties.get(indx);
-      final PartyDTO partyDTO = new PartyDTO();
-      partyDTO.setParty(party);
+      final PartyModel model = models.get(indx);
       if (indx > 0) {
         dtl.setFirst(false);
       }
-      if (indx < parties.size() - 1) {
+      if (indx < models.size() - 1) {
         dtl.setLast(false);
       }
-      partyDTO.setNavigationDtl(dtl);
-      return partyDTO;
+
+      return PartyDTO.builder()
+              .party(model)
+              .navigationDtl(dtl)
+              .build();
     }
   }
 }

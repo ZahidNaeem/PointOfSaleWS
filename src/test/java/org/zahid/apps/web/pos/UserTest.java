@@ -22,6 +22,6 @@ public class UserTest {
     @DisplayName("User exists by email")
     @Test
     void existsByEmail() {
-        assertTrue(userRepo.existsByEmail("zhd.naeem@temp.com"));
+        assertTrue(userRepo.existsByEmail("abc@xyz.com"));
     }
 }

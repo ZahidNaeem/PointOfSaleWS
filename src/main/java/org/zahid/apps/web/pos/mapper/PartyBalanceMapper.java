@@ -15,7 +15,7 @@ import java.util.List;
 public abstract class PartyBalanceMapper {
 
   @Autowired
-  public PartyService partyService;
+  protected PartyService partyService;
 
   @Mapping(target = "party", expression = "java(partyBalance != null && partyBalance.getParty() != null ? partyBalance.getParty().getPartyCode() : null)")
   public abstract PartyBalanceModel fromPartyBalance(final PartyBalance partyBalance);

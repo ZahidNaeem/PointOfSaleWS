@@ -15,7 +15,7 @@ import java.util.List;
 public abstract class ItemStockMapper {
 
     @Autowired
-    public  ItemService itemService;
+    protected  ItemService itemService;
 
     @Mapping(target = "item", expression = "java(itemStock != null && itemStock.getItem() != null ? itemStock.getItem().getItemCode() : null)")
     public abstract ItemStockModel fromItemStock(final ItemStock itemStock);

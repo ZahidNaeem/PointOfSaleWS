@@ -17,7 +17,7 @@ import java.util.Set;
 
 //@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RestController
-@RequestMapping("api/stock")
+@RequestMapping("stock")
 public class ItemStockController {
 
   private static final Logger LOG = LogManager.getLogger(ItemStockController.class);

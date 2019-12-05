@@ -14,7 +14,7 @@ import java.util.List;
 public abstract class OrganizationMapper {
 
   @Autowired
-  public UserMapper userMapper;
+  protected UserMapper userMapper;
 
   @Mapping(target = "users", expression = "java(organization != null ? mapUsersToUserModels(organization.getUsers()) : null)")
   public abstract OrganizationModel fromOrganization(final Organization organization);

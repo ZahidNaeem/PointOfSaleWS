@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Set;
 
 @RestController
-@RequestMapping("api/invoiceDtl")
+@RequestMapping("invoiceDtl")
 public class InvoiceDtlController {
 
   private static final Logger LOG = LogManager.getLogger(InvoiceDtlController.class);

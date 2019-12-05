@@ -19,7 +19,7 @@ import java.util.List;
 
 //@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RestController
-@RequestMapping("api/invoice")
+@RequestMapping("invoice")
 public class InvoiceMainController {
 
   private static final Logger LOG = LogManager.getLogger(InvoiceMainController.class);
@@ -646,23 +646,32 @@ public class InvoiceMainController {
     return dtl;
   }
 
-  private final InvoiceMainDTO getInvoiceMainDTO(List<InvoiceMainModel> models, int indx) {
+  private static final InvoiceMainDTO getInvoiceMainDTO(List<InvoiceMainModel> models, int indx) {
+    final NavigationDtl dtl = resetNavigation();
+    if (models.size() < 1) {
+      final InvoiceMainModel model = new InvoiceMainModel();
+      return InvoiceMainDTO.builder()
+              .invoice(model)
+              .navigationDtl(dtl)
+              .build();
+    }
     if (indx < 0 || indx > models.size() - 1) {
+      LOG.info("models.size(): {}", models.size());
       LOG.info("Index in getInvoiceMainDTO(): {}", indx);
       throw new IndexOutOfBoundsException();
     } else {
-      final NavigationDtl dtl = resetNavigation();
       final InvoiceMainModel model = models.get(indx);
-      final InvoiceMainDTO invoiceMainDTO = new InvoiceMainDTO();
-      invoiceMainDTO.setInvoice(model);
       if (indx > 0) {
         dtl.setFirst(false);
       }
       if (indx < models.size() - 1) {
         dtl.setLast(false);
       }
-      invoiceMainDTO.setNavigationDtl(dtl);
-      return invoiceMainDTO;
+
+      return InvoiceMainDTO.builder()
+              .invoice(model)
+              .navigationDtl(dtl)
+              .build();
     }
   }
 }

@@ -20,7 +20,7 @@ import java.util.Set;
 
 //@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RestController
-@RequestMapping("api/item")
+@RequestMapping("item")
 public class ItemController {
 
   private static final Logger LOG = LogManager.getLogger(ItemController.class);
@@ -164,22 +164,31 @@ public class ItemController {
   }
 
   private static final ItemDTO getItemDTO(List<ItemModel> models, int indx) {
+    final NavigationDtl dtl = resetNavigation();
+    if (models.size() < 1) {
+      final ItemModel model = new ItemModel();
+      return ItemDTO.builder()
+              .item(model)
+              .navigationDtl(dtl)
+              .build();
+    }
     if (indx < 0 || indx > models.size() - 1) {
+      LOG.info("models.size(): {}", models.size());
       LOG.info("Index in getItemDTO(): {}", indx);
       throw new IndexOutOfBoundsException();
     } else {
-      final NavigationDtl dtl = resetNavigation();
       final ItemModel model = models.get(indx);
-      final ItemDTO itemDTO = new ItemDTO();
-      itemDTO.setItem(model);
       if (indx > 0) {
         dtl.setFirst(false);
       }
       if (indx < models.size() - 1) {
         dtl.setLast(false);
       }
-      itemDTO.setNavigationDtl(dtl);
-      return itemDTO;
+
+      return ItemDTO.builder()
+              .item(model)
+              .navigationDtl(dtl)
+              .build();
     }
   }
 }

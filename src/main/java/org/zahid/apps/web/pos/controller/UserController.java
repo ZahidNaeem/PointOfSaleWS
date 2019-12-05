@@ -16,7 +16,6 @@ import org.zahid.apps.web.pos.security.payload.request.ChangePasswordRequest;
 import org.zahid.apps.web.pos.security.service.UserPrincipal;
 
 @RestController
-@RequestMapping("/api")
 public class UserController {
 
     private static final Logger LOG = LogManager.getLogger(UserController.class);

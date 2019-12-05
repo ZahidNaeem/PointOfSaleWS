@@ -15,7 +15,7 @@ import java.util.List;
 public abstract class UserMapper {
 
     @Autowired
-    public OrganizationService organizationService;
+    protected OrganizationService organizationService;
 
     @Mapping(target = "organization", expression = "java(user != null && user.getOrganization() != null ? user.getOrganization().getOrganizationCode() : null)")
     public abstract UserModel fromUser(final User user);

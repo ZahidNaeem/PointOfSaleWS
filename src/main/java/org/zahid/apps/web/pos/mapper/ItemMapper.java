@@ -18,10 +18,10 @@ import java.util.List;
 public abstract class ItemMapper {
 
   @Autowired
-  public InvoiceDtlMapper invoiceDtlMapper;
+  protected InvoiceDtlMapper invoiceDtlMapper;
 
   @Autowired
-  public ItemStockMapper itemStockMapper;
+  protected ItemStockMapper itemStockMapper;
 
   @Mapping(target = "invoiceDtls", expression = "java(item != null ? mapInvoiceDtlsToInvoiceDtlModels(item.getInvoiceDtls()) : null)")
   @Mapping(target = "itemStocks", expression = "java(item != null ? mapItemStocksToItemStockModels(item.getItemStocks()) : null)")

@@ -31,7 +31,7 @@ private static final long serialVersionUID = 1L;
 
   private Long refInvoice;
 
-  private List<InvoiceMain> invoiceMains;
+  private List<InvoiceMainModel> invoiceMains;
 
   private List<InvoiceDtlModel> invoiceDtls;
 

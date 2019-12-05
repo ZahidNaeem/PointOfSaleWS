@@ -18,13 +18,13 @@ import java.util.List;
 public abstract class InvoiceMainMapper {
 
   @Autowired
-  public PartyService partyService;
+  protected PartyService partyService;
 
   @Autowired
-  public InvoiceMainService invoiceMainService;
+  protected InvoiceMainService invoiceMainService;
 
   @Autowired
-  public InvoiceDtlMapper invoiceDtlMapper;
+  protected InvoiceDtlMapper invoiceDtlMapper;
 
   @Mapping(target = "party", expression = "java(invoiceMain != null && invoiceMain.getParty() != null ? invoiceMain.getParty().getPartyCode() : null)")
   @Mapping(target = "refInvoice", expression = "java(invoiceMain != null && invoiceMain.getRefInvoice() != null ? invoiceMain.getRefInvoice().getInvNum() : null)")
